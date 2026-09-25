@@ -1,0 +1,696 @@
+/* =============================================================================
+   PACK ROYALE — DARK MODE (default).
+   The UI is built on --pr-* design tokens, so flipping the tokens dark carries
+   the token-driven chrome (panels, text, borders, page background). Selectors
+   use `.royaleV2Route.royaleV2Route--simplified` (0,2,0) so they out-specify the
+   base single-class token blocks in royaleStyles.css regardless of bundle order.
+   Cards, pack tier colours and the money-gold accents are intentionally kept —
+   this darkens the CHROME, not the collectibles.
+   ========================================================================== */
+
+.royaleV2Route.royaleV2Route--simplified {
+  /* PREMIUM-VAULT NEUTRAL RE-TUNE (owner: the old palette "gives vibes of a VS
+     Code IDE instead of something game related"). The tell was the neutrals: a
+     cold blue-grey slate (#171a24 panels, rgba(148,166,208,...) blue hairlines)
+     is literally the VS Code dark signature. We keep the SAME lightness so every
+     audited AA contrast ratio holds, and only shift the HUE: warm espresso
+     charcoals with faint brass-tinted hairlines, to read like the inside of a
+     lacquered card vault / auction room. Gold + mint accents unchanged. */
+  --pr-bg: #0c0a09;
+  --pr-panel: rgba(40, 35, 27, 0.9);
+  --pr-panel-solid: #1b1712;
+  --pr-ink: #f4f1ea;
+  --pr-ink-2: #b0a897;
+  --pr-line: rgba(214, 192, 140, 0.1);
+  --pr-line-2: rgba(220, 198, 150, 0.2);
+  /* Gold "ink" is #7a5c1c dark-brown in light mode — illegible on dark. Use a
+     bright gold for all gold price text / accents in dark mode. */
+  --pr-gold-ink: #eccb7e;
+  /* Win/kept mint (#0e8f63) is 4.37:1 on the dark card — just under AA. Lift it
+     so "you won"/"KEPT" verdicts clear 4.5:1 without going neon. */
+  --pr-mint: #1cb27f;
+  color: var(--pr-ink);
+  /* Deep vault ground: a gold crown glow up top, a warm bronze ambient (was a
+     cold blue glow), a soft vignette for physical depth, over a warm espresso
+     descent (was cold #10121a -> #08090e). */
+  background:
+    radial-gradient(1200px 520px at 50% -220px, rgba(224, 188, 104, 0.1), transparent 68%),
+    radial-gradient(920px 640px at 84% -40px, rgba(150, 96, 58, 0.06), transparent 72%),
+    radial-gradient(125% 125% at 50% 38%, transparent 56%, rgba(0, 0, 0, 0.34) 100%),
+    linear-gradient(180deg, #14110c 0%, #0d0b09 54%, #080706 100%);
+}
+
+/* Panels/sections that hardcode a light fill instead of the token. */
+.royaleV2Route.royaleV2Route--simplified .royaleBetRail section,
+.royaleV2Route.royaleV2Route--simplified .rwsStrip,
+.royaleV2Route.royaleV2Route--simplified .royaleV2LadderPanel,
+.royaleV2Route.royaleV2Route--simplified .royaleV2History,
+.royaleV2Route.royaleV2Route--simplified .royaleV2Catalog,
+.royaleV2Route.royaleV2Route--simplified .royaleChatPanel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 42%),
+    var(--pr-panel-solid);
+  border-color: var(--pr-line);
+  color: var(--pr-ink);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 34px rgba(0, 0, 0, 0.36);
+}
+
+/* Board tiles: the info side (You own / win chance / upgrade) was on white. */
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2,
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2 .royaleTileInfo,
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2 .royaleT2Info {
+  background: var(--pr-panel-solid);
+  color: var(--pr-ink);
+}
+
+/* Inputs / selects / buttons that assumed a light surface. */
+.royaleV2Route--simplified input,
+.royaleV2Route--simplified select,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions button,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomField {
+  background: #141210;
+  color: var(--pr-ink);
+  border-color: var(--pr-line-2);
+}
+
+/* Muted secondary text stays legible on dark. */
+.royaleV2Route--simplified small,
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2 small {
+  color: var(--pr-ink-2);
+}
+
+/* The pack-ladder pool cards used a near-white plate behind the slab. */
+.royaleV2LadderPanel .royaleV2Catalog .royaleLadderPoolCard .royaleSlab--xs {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--pr-line);
+}
+
+/* Pack-ladder rows + slab faces were a light-gray island in the dark page. */
+.royaleV2Route.royaleV2Route--simplified .royaleLadderRow,
+.royaleV2Route.royaleV2Route--simplified .royaleV2Catalog .royaleLadderRow {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--pr-line);
+  color: var(--pr-ink);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleV2LadderPanel .royaleSlab .royaleSlabFace,
+.royaleV2Route.royaleV2Route--simplified .royaleV2LadderPanel .royaleSlabImg {
+  background: #161310;
+}
+.royaleV2Route.royaleV2Route--simplified .royaleV2LadderPanel,
+.royaleV2Route.royaleV2Route--simplified .royaleV2LadderPanel .royaleV2Catalog {
+  background: var(--pr-panel-solid);
+  color: var(--pr-ink);
+}
+
+/* ============================================================================
+   DARK MODE — component fixes (from the dark-mode audit). Every rule below
+   targets an element that hard-coded a white/cream fill or dark-on-dark text.
+   ========================================================================== */
+
+/* Board tiles: a BACKED / focused tile hard-coded a pure-white card. */
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2,
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2.focused,
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2.youBacked,
+.royaleV2Route.royaleV2Route--simplified .royaleTileV2.youBacked.focused,
+.royaleV2Shell--boardv2 .royaleTileV2.youBacked,
+.royaleV2Shell--boardv2 .royaleTileV2.youBacked.focused {
+  background: var(--pr-panel-solid);
+  color: var(--pr-ink);
+}
+
+/* Per-tile pills + header/banner pills that were near-white with light text. */
+.royaleV2Route.royaleV2Route--simplified .royaleT2Label,
+.royaleV2Route.royaleV2Route--simplified .royaleT2You,
+.royaleV2Route.royaleV2Route--simplified .royaleT2Chip--heat,
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderChase,
+.royaleV2Route.royaleV2Route--simplified .royalePackLadderSource,
+.royaleV2Route.royaleV2Route--simplified .royaleConnectNudge {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--pr-ink);
+  border-color: var(--pr-line);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleT2Label { color: var(--pr-ink-2); }
+.royaleV2Route.royaleV2Route--simplified .royaleConnectNudge { background: var(--pr-panel-solid); color: var(--pr-ink-2); }
+
+/* Pack composition chips ("Collector x2 $250", "Prime $100", "+N") were a near
+   white pill with light --pr-ink text = illegible. Dark accent-tinted pill. */
+.royaleV2Route.royaleV2Route--simplified .royaleT2Chip {
+  background: color-mix(in srgb, var(--chip-accent, #8a8378) 26%, #1b1712);
+  border-color: color-mix(in srgb, var(--chip-accent, #8a8378) 50%, transparent);
+  color: var(--pr-ink);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleT2Chip--more {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--pr-line-2);
+  color: var(--pr-ink);
+}
+
+/* Buttons that assumed a white surface -> dark chrome, legible text. */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomApply,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions button,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeIncrements button,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeSettings button {
+  background: #26221a;
+  color: var(--pr-ink);
+  border-color: var(--pr-line-2);
+}
+/* SELECTED stake chip: a subtler ACTIVE state, not a money-primary. A neutral
+   raised fill + a 1px gold RING (inset) + bright gold ink reads clearly "chosen"
+   while the single gold-gradient Deposit / Enter keeps the primary lane. Wins the
+   base gold fills (royaleStyles.css .royaleStakeControlOptions > button.selected
+   at 0,3,1) via the double-route prefix (0,4,1). */
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions button.selected {
+  background: #2f2a20;
+  color: var(--pr-gold-ink);
+  border-color: var(--pr-gold);
+  box-shadow:
+    inset 0 0 0 1px rgba(230, 199, 102, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+/* Upgrade is a SECONDARY action: neutral border, no gold tint. Gold is reserved
+   for the single Deposit / Enter money-primary. */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn { border-color: var(--pr-line-2); }
+
+/* Winnings-strip title was near-black on the dark strip (invisible). */
+.royaleV2Route.royaleV2Route--simplified .rwsTitle { color: var(--pr-ink); }
+
+/* RESULTS PAGE (shares .royaleV2Route--simplified): round cards + split/alloc/
+   carousel panels + rows + arrows all hard-coded white/cream. */
+.royaleV2Route.royaleV2Route--simplified .royaleResultsRound {
+  background: var(--pr-panel-solid);
+  color: var(--pr-ink);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleResultsSplit,
+.royaleV2Route.royaleV2Route--simplified .royaleResultsAlloc,
+.royaleV2Route.royaleV2Route--simplified .royaleCardCarousel {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--pr-ink);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleResultsAlloc li {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--pr-ink);
+  border-color: var(--pr-line);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleCarouselArrow {
+  background: rgba(46, 40, 30, 0.85);
+  color: var(--pr-ink);
+  border-color: var(--pr-line);
+}
+
+/* Winnings strip owns its own --rws-* tokens (a light theme). Flip them dark +
+   override its two hard-coded white row/card fills. */
+.royaleV2Route.royaleV2Route--simplified .rwsStrip {
+  --rws-ink: #eceff5;
+  --rws-ink-2: #b0a897;
+  --rws-line: rgba(255, 255, 255, 0.1);
+  --rws-line-2: rgba(255, 255, 255, 0.17);
+  /* gold "ink" is a dark brown by default (illegible on dark) - use bright gold */
+  --rws-gold-ink: #e8c977;
+  --rws-mint: #1cb27f;
+  --rws-stage: #17130d;
+}
+/* Strip buttons hard-code a white pill (#fff); light --rws-ink text on it was
+   washed out. Dark pill for neutral buttons; Sell/Keep/Withdraw keep their own
+   semantic fills (out-specified below so they survive this generic override -
+   without a same-or-higher-specificity re-assertion per modifier, THIS rule's
+   (0,3,0) always wins over a bare `.rwsBtn--sell`/`.rwsBtn--withdraw` (0,1,0)
+   regardless of source order, and the button silently reverts to this neutral
+   pill in production, where the dark theme is the only theme that ships). */
+.royaleV2Route.royaleV2Route--simplified .rwsBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--pr-ink);
+  border-color: var(--pr-line-2);
+}
+/* SEMANTIC SELL (owner rule 2026-07-10: red = Sell). Re-assert the red fill
+   the base rule (royaleWinningsStrip.css) sets so it survives the generic
+   `.rwsBtn` override two rules up. */
+.royaleV2Route.royaleV2Route--simplified .rwsBtn--sell {
+  border-color: rgba(224, 133, 115, 0.5);
+  background: linear-gradient(180deg, #a83a2d, #8c2f24);
+  color: #ffe9e3;
+}
+.royaleV2Route.royaleV2Route--simplified .rwsBtn--sell:hover {
+  border-color: #e08573;
+  background: linear-gradient(180deg, #b84334, #a83a2d);
+}
+.royaleV2Route.royaleV2Route--simplified .rwsBtn--keep,
+.royaleV2Route.royaleV2Route--simplified .rwsBtn--keep:hover {
+  background: var(--pr-gold-active, #e6c766);
+  color: #17130d;
+  border-color: var(--pr-gold, #e6c766);
+}
+/* SEMANTIC WITHDRAW (owner rule 2026-07-10: mint = Withdraw). Same
+   out-specify-the-generic-override reasoning as Sell above. */
+.royaleV2Route.royaleV2Route--simplified .rwsBtn--withdraw {
+  border-color: rgba(28, 178, 127, 0.5);
+  background: rgba(28, 178, 127, 0.16);
+  color: var(--rws-mint, #1cb27f);
+}
+.royaleV2Route.royaleV2Route--simplified .rwsBtn--withdraw:hover {
+  border-color: var(--rws-mint, #1cb27f);
+  background: rgba(28, 178, 127, 0.26);
+}
+.royaleV2Route.royaleV2Route--simplified .rwsRound,
+.royaleV2Route.royaleV2Route--simplified .rwsCard,
+.royaleV2Route.royaleV2Route--simplified .rwsDecision {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--pr-ink);
+  border-color: var(--pr-line);
+}
+
+/* Results route shares the same route class, so it inherits the dark tokens. */
+
+/* ============================================================================
+   DARK MODE — audit pass 2 (deep sweep). Each rule flips a light island or a
+   dark-brown gold that survived pass 1 by out-specifying the base rules.
+   ========================================================================== */
+
+/* "You own $X" tile pills hard-code cream (#f7f1e2 / #f4f4f5) with brown ink in
+   royaleStyles.css at up to (0,5,0) — the pass-1 override (0,3,0) lost. Match
+   the boardv2 chain and go one class higher: a quiet gold-tinted dark pill with
+   bright gold ink (honours the "You own = quiet gold accent" intent). */
+.royaleV2Route.royaleV2Route--simplified .royaleV2Shell--boardv2 .royaleT2You[data-you],
+.royaleV2Route.royaleV2Route--simplified .royaleV2Shell--boardv2 .royaleTileV2 .royaleT2You[data-you],
+.royaleV2Route.royaleV2Route--simplified .royaleV2Shell--boardv2 .royaleTileV2.youBacked .royaleT2You[data-you] {
+  background: rgba(230, 199, 102, 0.14);
+  border: 1px solid rgba(230, 199, 102, 0.3);
+  color: var(--pr-gold-ink);
+}
+/* No stake: the un-backed personal label must NOT wear the gold pill (it read as
+   a filled chip with a dangling value). A quiet muted label only. */
+.royaleV2Route.royaleV2Route--simplified .royaleV2Shell--boardv2 .royaleTileV2 .royaleT2You:not([data-you]) {
+  background: transparent;
+  border: 1px solid transparent;
+  /* was rgba(226,229,238,0.5) ~= 4.37:1 on the #171a24 tile (just under AA).
+     A quiet muted grey that still clears AA (>=4.5:1) at ~5.4:1. */
+  color: #8b909c;
+}
+
+/* DEV TURBO badge hard-codes a pure-white pill with muted-grey ink (invisible
+   fill + low-contrast text). Shows on every ?turbo round. Dark chip. */
+.royaleV2Route.royaleV2Route--simplified .royaleDevBadge {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--pr-ink-2);
+  border-color: var(--pr-line-2);
+}
+
+/* Settlement panel (mobile sheet) + its last-result strip button hard-code a
+   white fill — a light island whenever the sheet opens. */
+.royaleV2Route.royaleV2Route--simplified .royaleSettlePanel,
+.royaleV2Route.royaleV2Route--simplified .royaleLastResultStrip {
+  background: var(--pr-panel-solid);
+  border-color: var(--pr-line);
+  color: var(--pr-ink);
+}
+
+/* Winnings-strip "How the game works" link hard-codes #8a6d1b (dark brown gold,
+   3.65:1). Use the bright gold ink so it clears AA. */
+.royaleV2Route.royaleV2Route--simplified .rwsHow {
+  color: var(--pr-gold-ink);
+  border-color: var(--pr-gold-ink);
+}
+
+/* Round-results rarity chips: rare/epic/mythic inks are saturated-but-dark
+   (2563eb / 7c3aed / b4531b = 3.1-3.5:1 on the dark card). Lift to legible
+   tints; the ring keeps the rarity hue. */
+.royaleV2Route.royaleV2Route--simplified .royaleCardWallRarity[data-rarity="rare"] { --rw-ink: #6fa8ff; }
+.royaleV2Route.royaleV2Route--simplified .royaleCardWallRarity[data-rarity="epic"] { --rw-ink: #b199f7; }
+.royaleV2Route.royaleV2Route--simplified .royaleCardWallRarity[data-rarity="mythic"] { --rw-ink: #e79463; }
+/* GRAIL band chip shares mythic's dark ember ink — same lift. */
+.royaleV2Route.royaleV2Route--simplified .royaleCardWallRarity[data-rarity="grail"] { --rw-ink: #e79463; }
+
+/* Cinema is portaled to document.body (OUTSIDE .royaleV2Route), so the route
+   tokens never reach it and the pass-1 selectors miss. Target .royaleCinema
+   directly. The bulk "Keep all" button hard-codes pure white — a jarring light
+   island next to the gold per-card Keep. Match the gold Keep / dark Sell
+   language used everywhere else (per-card actions + winnings strip). */
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button {
+  background: var(--pr-gold-active, #e6c766);
+  border-color: var(--pr-gold, #e6c766);
+  color: #17130d;
+}
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button:hover,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button:hover {
+  background: #f0d888;
+  border-color: #f0d888;
+}
+/* WAVE4-FIX (2026-07-10): this rule is Sell (the 2nd button in every
+   .royaleCoreDecision pair — "Keep all / Sell all" here, "Keep card / Sell"
+   in RoyaleRoundCore's classic panel) — this comment block's OWN stated intent
+   was "gold Keep / dark Sell", but the values below painted a GOLD tint
+   (rgba(230,199,102,...) + a warm cream #ffe9a8 label), out-specifying (0,3,2
+   beats royaleStyles.css's correct 0,2,2 "SEMANTIC SELL, red=Sell" rule at
+   :12434) and leaving the game's biggest bulk sell action gold — the same hue
+   as every primary/positive CTA — instead of the red the owner's ledger rule
+   ("red=Sell mint=Withdraw") and every per-card Sell button already use. Match
+   that red exactly so Sell reads as ONE consistent action color everywhere. */
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button + button,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button + button {
+  background: linear-gradient(180deg, #a83a2d, #8c2f24);
+  border-color: rgba(224, 133, 115, 0.5);
+  color: #ffe9e3;
+}
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button + button:hover,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button + button:hover {
+  background: linear-gradient(180deg, #b84334, #a83a2d);
+  border-color: #e08573;
+  color: #ffe9e3;
+}
+
+/* ============================================================================
+   Header "Switch account" / "Sign out" ghost button. royaleStyles.css:11543
+   hard-codes a pure-white pill (#fff) for .royaleGhostBtn at (0,2,0); with light
+   --pr-ink text that is a glaring white island (near-invisible label) in the
+   dark header. Out-specify at (0,3,0) with a dark pill + gold hover to match the
+   winnings-strip Sell buttons.
+   ========================================================================== */
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn {
+  background: var(--pr-panel-solid);
+  color: var(--pr-ink);
+  border-color: var(--pr-line-2);
+  box-shadow: none;
+}
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--pr-gold, #d8b45c);
+  color: var(--pr-ink);
+}
+
+/* ============================================================================
+   SEMANTIC SELL (owner rule 2026-07-10: red = Sell, mint = Withdraw). The
+   "Sell back" CTA is the exact same .royaleGhostBtn markup reused verbatim by
+   RoyaleRoundTheatre.tsx (classic ?boardv1 theatre), RoyaleSettlementPanel.tsx
+   (default docked panel) and RoyalePrizeModal.tsx (legacy full-screen modal),
+   so tagging it with one modifier class at all three call sites fixes every
+   surface in one rule. Solid red fill (not the quiet dark ghost pill above)
+   so it reads unmistakably as the money-out action beside the gold Keep
+   primary. Out-specifies the generic .royaleGhostBtn rule above (0,3,0) and
+   its hover (0,4,0 incl. :not) at (0,4,0)/(0,5,0) regardless of load order.
+   ========================================================================== */
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn.royaleGhostBtn--sell {
+  background: linear-gradient(180deg, #a83a2d, #8c2f24);
+  border-color: rgba(224, 133, 115, 0.45);
+  color: #ffe9e3;
+}
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn.royaleGhostBtn--sell:hover:not(:disabled) {
+  background: linear-gradient(180deg, #b84334, #a83a2d);
+  border-color: #e08573;
+  color: #ffe9e3;
+}
+
+/* =============================================================================
+   BUTTON SYSTEM — CRAFT PASS (states + tiers).
+   Composes with the palette tokens above: this layer owns MOTION + DEPTH
+   (transition, hover lift, pressed translate, focus ring, CTA gradient/shadow),
+   never the base hues. Loaded last so it wins the live simplified route.
+   Tiers:  PRIMARY (gold, money/marquee) · SECONDARY (dark filled) ·
+           GHOST (quiet outline, hue owned above) · MICRO (pill toggles).
+   ========================================================================== */
+
+/* ---- Shared transition (layout-safe: transform + shadow + colour only) ----- */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn,
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderDepositBtn,
+.royaleV2Route.royaleV2Route--simplified .royalePrimaryBtn,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions > button,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeIncrements button,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomApply,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeSettings button,
+.royaleV2Route.royaleV2Route--simplified .royaleChipBtn,
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button,
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button {
+  transition:
+    transform var(--royale-dur-1, 120ms) cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow var(--royale-dur-2, 160ms) cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color var(--royale-dur-2, 160ms) ease,
+    border-color var(--royale-dur-2, 160ms) ease;
+}
+
+/* ---- Shared pressed state: tactile translate, shadow collapses to inset ---- */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderDepositBtn:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royalePrimaryBtn:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions > button:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeIncrements button:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomApply:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeSettings button:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleChipBtn:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn:not(:disabled):active,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button:not(:disabled):active,
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button:not(:disabled):active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.28);
+}
+
+/* ---- Shared accessible focus ring (matches the replay controls' language) -- */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderDepositBtn:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royalePrimaryBtn:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions > button:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeIncrements button:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomApply:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeSettings button:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleChipBtn:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn:focus-visible,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button:focus-visible,
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button:focus-visible {
+  outline: 2px solid var(--pr-gold-active, #e6c766);
+  outline-offset: 2px;
+}
+
+/* ---- Shared disabled: inert, no depth, no motion --------------------------- */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn:disabled,
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderDepositBtn:disabled,
+.royaleV2Route.royaleV2Route--simplified .royalePrimaryBtn:disabled,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions > button:disabled,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeIncrements button:disabled,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomApply:disabled,
+.royaleV2Route.royaleV2Route--simplified .royaleChipBtn:disabled,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button:disabled {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---- PRIMARY (gold gradient CTA): the marquee money action.
+   Signed OUT -> "Enter game" (.royalePrimaryBtn) is the sole gold primary; the
+                 gradient + inset highlight + soft gold drop shadow read as THE
+                 action. Signed IN the header Deposit becomes the sole gold
+                 element, but as a gold-OUTLINE secondary (DE-GOLD block below),
+                 never a second gradient primary.
+   Deliberately NOT in this group: the header Deposit (gold-OUTLINE secondary),
+   the rail Deposit (removed), the selected stake chip, tile Upgrades and the
+   reveal toggle - all secondary/neutral so the board never shows two gold
+   gradient primaries at once. --------------------------------------------- */
+.royaleV2Route.royaleV2Route--simplified .royalePrimaryBtn,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button:first-child,
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button:first-child {
+  /* WAVE4-FIX (2026-07-10): the cinema is portaled to document.body (see the
+     comment above at :325), OUTSIDE .royaleV2Route--simplified, which is the
+     ONLY place --pr-gold/--pr-gold-active are defined (royaleStyles.css
+     :4477-4478). Every var() below was missing its fallback, so in the
+     portaled "Keep all" button (this selector's 3rd line) the custom
+     properties resolved to nothing, color-mix()/linear-gradient() became
+     invalid, and the WHOLE background+border declaration was dropped —
+     leaving a transparent fill behind the (valid, non-var) #241b06 near-black
+     text: a "Keep all" that read as an inert, near-invisible dark island
+     instead of the intended gold-primary CTA. Fallbacks make this resolve
+     identically everywhere, portaled or not. */
+  border: 1px solid color-mix(in srgb, var(--pr-gold, #d8b45c) 60%, #6f5214);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--pr-gold-active, #e6c766) 86%, #ffffff),
+      var(--pr-gold, #d8b45c));
+  color: #241b06;
+  font-variant-numeric: tabular-nums;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.40),
+    inset 0 -1px 0 rgba(111, 82, 20, 0.30),
+    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 10px 22px -12px rgba(216, 180, 92, 0.60);
+}
+.royaleV2Route.royaleV2Route--simplified .royalePrimaryBtn:not(:disabled):hover,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button:first-child:not(:disabled):hover,
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button:first-child:not(:disabled):hover {
+  transform: translateY(-1px);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--pr-gold-active, #e6c766) 94%, #ffffff),
+      var(--pr-gold-active, #e6c766));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.48),
+    0 2px 4px rgba(0, 0, 0, 0.28),
+    0 14px 28px -12px rgba(216, 180, 92, 0.72);
+}
+
+/* ---- DE-GOLD: keep exactly ONE gold-gradient primary per state. --------------
+   These out-specify the primary group above and hold the "gold text on a dark
+   fill" secondary language (never a full gold gradient). ---------------------- */
+
+/* HEADER Deposit, signed IN: the sole gold element, but a quiet gold-OUTLINE
+   secondary (dark fill, gold ink, gold border) - never a second gold gradient.
+   (0,3,0) out-specifies the base gold fills in royaleStyles.css and loads last. */
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderDepositBtn {
+  border: 1px solid color-mix(in srgb, var(--pr-gold) 45%, var(--pr-line-2));
+  background: #26221a;
+  color: var(--pr-gold-ink);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderDepositBtn:not(:disabled):hover {
+  transform: translateY(-1px);
+  background: #2f2a20;
+  border-color: var(--pr-gold);
+  color: var(--pr-gold-ink);
+}
+
+/* HEADER Deposit, signed OUT: fully NEUTRAL (no gold fill / text / border) so the
+   ONLY gold CTA pre-auth is "Enter game" (.royalePrimaryBtn keeps the gradient).
+   (0,5,0)/(0,7,0) out-specify the signed-in default above and the base
+   [data-connected="false"] gold in royaleStyles.css, and load last. */
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderAccount[data-connected="false"] .royaleHeaderDepositBtn {
+  border: 1px solid var(--pr-line-2);
+  background: #26221a;
+  color: var(--pr-ink);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleHeaderAccount[data-connected="false"] .royaleHeaderDepositBtn:not(:disabled):hover {
+  background: #2f2a20;
+  border-color: var(--pr-line-2);
+  color: var(--pr-ink);
+}
+
+/* REVEAL mode toggle (Cinema / In-place): the active pill hard-codes gold in
+   royaleStyles.css (.royaleRevealModeToggle button[aria-pressed="true"], 0,2,1).
+   Gold is reserved for the money-primary, so the active tab is a NEUTRAL raised
+   state. Also darken the container: its base fill is near-white (a light island
+   on the dark header). (0,3,0)/(0,4,1) out-specify the base and load last. */
+.royaleV2Route.royaleV2Route--simplified .royaleRevealModeToggle {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--pr-line-2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleRevealModeToggle button[aria-pressed="true"] {
+  background: #2f2a20;
+  color: var(--pr-ink);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* INVITE trigger: dropped to a NEUTRAL outline pill (no gold). Gold is reserved
+   for the money-primary, so the gift icon, the hover border and the referred
+   count badge all lose their gold and read as a quiet secondary control.
+   (0,3,x)/(0,4,0) out-specify royaleReferralPanel.css and load last. */
+.royaleV2Route.royaleV2Route--simplified .royaleReferralTrigger svg {
+  color: var(--pr-ink-2);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleReferralTrigger:hover {
+  border-color: rgba(214, 192, 140, 0.4);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleReferralTriggerCount {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--pr-ink);
+}
+
+/* (Practice-wallet note removed 2026-07-10 — owner: no dev caveats in the
+   frontend. Its .royaleRailDemoNote rule went with the markup.) */
+
+/* ---- SECONDARY (dark filled): faint top sheen at rest, lift on hover.
+   The tile Upgrade button lives HERE, not in the gold primary: a quiet
+   raised-panel fill with a soft border and bright ink - clearly clickable,
+   clearly subordinate to the one gold Deposit CTA. --------------------------- */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions > button,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeIncrements button,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomApply,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeSettings button,
+.royaleV2Route.royaleV2Route--simplified .royaleChipBtn {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+/* EvolveBtn is EXCLUDED from the hover lift: it sits flush against the tile
+   footer's clip edge, so translateY(-1px) shoved its top border under the clip
+   (owner 2026-07-15: "on hover of the upgrade button it still moves up and then
+   the upper border clips underneath"). It keeps the hue-step + shadow hover
+   below; the lift stays for rail buttons, which have headroom. */
+.royaleV2Route.royaleV2Route--simplified .royaleStakeControlOptions > button:not(.selected):not(:disabled):hover,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeIncrements button:not(:disabled):hover,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeCustomApply:not(:disabled):hover,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeSettings button:not(:disabled):hover,
+.royaleV2Route.royaleV2Route--simplified .royaleChipBtn:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 18px -12px rgba(0, 0, 0, 0.7);
+}
+/* Upgrade + gear buttons: dark-neutral hover HUE at (0,5,0)/(0,5,1) so the
+   base file's white (#f7f7f8) and gold-tint hovers can never flash through -
+   the secondary tier brightens one step, it does not change colour family. */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn:not(:disabled):hover,
+.royaleV2Route.royaleV2Route--simplified .royaleStakeSettings button:not(:disabled):hover {
+  background: #2f2a20;
+  border-color: rgba(214, 192, 140, 0.4);
+  color: var(--pr-ink);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 18px -12px rgba(0, 0, 0, 0.7);
+}
+/* Disabled Upgrade reads INERT: the old pure-pass painted a white disabled pill
+   (a light island on the dark route). Dashed hairline, no fill, muted ink -
+   and NO opacity on top of that ink (design-audit C4): `--pr-ink-2` is already
+   the de-emphasised token, so an extra multiplier only dims the glyph and its
+   ground together and costs contrast that no ink choice can win back. */
+.royaleV2Route.royaleV2Route--simplified .royaleEvolveBtn:disabled {
+  border-style: dashed;
+  border-color: var(--pr-line-2);
+  background: transparent;
+  color: var(--pr-ink-2);
+}
+
+/* ---- GHOST (quiet outline): palette pass owns the hue; we add the lift ----- */
+.royaleV2Route.royaleV2Route--simplified .royaleGhostBtn:not(:disabled):hover,
+.royaleV2Route.royaleV2Route--simplified .royaleCoreDecision button + button:not(:disabled):hover,
+.royaleCinema.royaleCinemaGrid .royaleCoreDecision button + button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+/* ---- Prize card + payout split small headers (spectator-lane flag) --------
+   The base rules paint these kickers in low-alpha warm white (54-70% of
+   #f4f1e8), which the dark route's panel wash grinds down to a murky grey —
+   hard to read on the winner view too. Lift them to the theme's ink tokens:
+   section titles get full ink, support kickers the muted-ink token. Color
+   only — compositor-neutral, no structural change. */
+.royaleV2Route.royaleV2Route--simplified .royalePayoutHead span {
+  color: var(--pr-ink);
+}
+.royaleV2Route.royaleV2Route--simplified .royalePrizeCardBody span,
+.royaleV2Route.royaleV2Route--simplified .royalePayoutHead small {
+  color: var(--pr-ink-2);
+}
+
+/* The theatre winner card + payout split hard-code LIGHT-CREAM fills
+   (rgba(250,248,242,…) / a cream-ending gold gradient) beneath token inks.
+   On dark the tokens flip to light ink while the cream wash stays — light on
+   light, the unreadable "wash" the spectator lane flagged on the winner view.
+   Repaint the fills dark (same subtle-lift language as the panel), so the
+   existing token inks read correctly. Color-only, compositor-neutral. */
+.royaleV2Route.royaleV2Route--simplified .royaleTheatreCard .royalePayoutSplit {
+  background: rgba(255, 255, 255, 0.05);
+}
+.royaleV2Route.royaleV2Route--simplified .royaleTheatreCard .royalePrizeCard {
+  background: linear-gradient(160deg, rgba(230, 199, 102, 0.1), rgba(255, 255, 255, 0.04));
+}
+
+/* Cinema PER-CARD Keep button was a cold slate-blue (#2f3646 + blue border) while
+   the rest of the theme is warm (audit MED: residual IDE-slate island). Warm it to
+   the neutral-dark button language, gold hover, so it matches everything else. Gold
+   fill stays reserved for the money chips. Loads after royaleStyles.css so it wins. */
+.royaleCinema .royaleCinemaCardActions button[data-decision="keep"] {
+  background: var(--pr-panel-solid);
+  border-color: var(--pr-line-2);
+  color: var(--pr-ink);
+}
+.royaleCinema .royaleCinemaCardActions button[data-decision="keep"]:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--pr-gold, #d8b45c);
+}

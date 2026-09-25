@@ -1,0 +1,637 @@
+/* =============================================================================
+   ROYALE CARD DOSSIER — the on-site CollectorCrypt card detail surface.
+   One component, two variants:
+     [data-variant="overlay"] — portal above the reveal cinema / collection /
+       results (z 260 > cinema 80 > hover-zoom 220), scrim + Escape close;
+     [data-variant="page"]    — the same dossier full-page at
+       /lab/royale/card/<key> for shareable links.
+   Portalled to <body>, OUTSIDE the .royaleV2Route token scope, so the vault
+   palette is carried as literals (same values as royaleDarkTheme.css):
+   espresso panel #1b1712, ink #f4f1ea / #b0a897, gold #eccb7e, brass hairline
+   rgba(220,198,150,.22). Signature element: the GRADE PLAQUE — a brass-plate
+   read of the slab's own printed cert label (grader · grade · cert number).
+   Motion: ONE orchestrated open (scrim fade + card rise), opacity/transform
+   only — compositor-safe, disabled under reduced motion.
+   ========================================================================== */
+
+.royaleCardDetailScrim[data-variant="overlay"] {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 3vmin, 32px);
+  background: rgba(8, 7, 6, 0.78);
+  animation: royaleCardDetailScrimIn 160ms ease both;
+}
+
+.royaleCardDetailScrim[data-variant="page"] {
+  display: grid;
+  place-items: start center;
+  padding: 8px 0 28px;
+}
+
+.royaleCardDetail {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  /* Owner 2026-07-22: MUCH bigger dossier - the card is the hero. */
+  width: min(1160px, 96vw);
+  max-height: min(94vh, 94dvh);
+  overflow: hidden;
+  border: 1px solid rgba(220, 198, 150, 0.22);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0) 38%),
+    #1b1712;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 34px 80px -24px rgba(0, 0, 0, 0.92),
+    0 0 0 1px rgba(0, 0, 0, 0.5);
+  color: #f4f1ea;
+}
+.royaleCardDetailScrim[data-variant="overlay"] .royaleCardDetail {
+  animation: royaleCardDetailIn 200ms cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+/* ---- art side: the slab on a velvet well ---------------------------------- */
+
+.royaleCardDetailArt {
+  flex: 0 0 clamp(300px, 46%, 520px);
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  padding: clamp(14px, 2.6vmin, 26px);
+  background:
+    radial-gradient(120% 90% at 50% 8%, rgba(236, 203, 126, 0.1), transparent 62%),
+    linear-gradient(180deg, #14110c 0%, #0d0b09 100%);
+  border-inline-end: 1px solid rgba(220, 198, 150, 0.14);
+}
+/* THE RESERVED FACE BOX — the ONLY thing in the art well with a card-sized
+   geometry. Owner 2026-08-15: "switching between front and back changes the
+   size of the component window that has the cards."
+   The two faces are stacked in ONE grid cell and neither carries a width or a
+   height source, so the well's size cannot depend on which face is showing —
+   nor on whether a face is present at all (loading, 403'd, or never offered).
+   `aspect-ratio` is what makes it RESERVED rather than merely matched: a floor
+   or a matched pair of widths both go stale the moment one face gets an
+   override the other does not, which is exactly how this shipped. */
+.royaleCardDetailFaceBox {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 5 / 7;
+}
+/* Both faces occupy the same cell. `height: 100%` is deliberate on top of the
+   aspect-ratio: it stops a face whose own intrinsic box rounds a fraction over
+   the reserved one from re-growing the box through grid's automatic minimum. */
+.royaleCardDetailFaceBox > * {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+/* The slab is 5.6px shorter than the reserved box (its own 6px padding + 1px
+   border on each axis make its face `(W - 14) * 7/5`, not `W * 7/5`), so it is
+   centred in the slack rather than pinned to the top. That 5.6px WAS the
+   desktop-1440 delta before the box existed. */
+.royaleCardDetailFrontFace {
+  width: 100%;
+  display: grid;
+  align-content: center;
+}
+.royaleCardDetailArt .royaleSlab {
+  width: 100%;
+}
+.royaleCardDetailArt .royaleSlab .royaleSlabFace {
+  height: auto;
+  aspect-ratio: 5 / 7;
+}
+/* Whole card, never cropped (same specificity trick as the hover zoom). */
+.royaleCardDetailArt .royaleSlab .royaleSlabImg,
+.royaleCardDetailArt .royaleSlab[data-slab-source="slab"] .royaleSlabImg {
+  object-fit: contain;
+  object-position: center;
+}
+/* The dossier prints its own name/set/value — the slab's caption would double. */
+.royaleCardDetailArt .royaleSlab .royaleSlabMeta {
+  display: none;
+}
+/* Same reason for the hover tooltip strip (royaleRarityGlow [data-tooltip]):
+   the dossier already states name + price; a resting cursor over the hero art
+   must not print them twice. Out-specifies the :hover::after rule (0,3,1). */
+.royaleCardDetailArt .royaleSlab[data-tooltip]:hover::after {
+  display: none;
+}
+
+/* Live CollectorCrypt photo of the slab's BACK (best-effort, most listings
+   never shipped one). It carries NO geometry of its own — `.royaleCardDetailFaceBox`
+   above reserves the box and hands it `width`/`height` — so flipping cannot
+   reflow the dossier. It used to declare its own `aspect-ratio: 5 / 7` against
+   a `width: 100%`, which read as "same box as the front slab" and was not: the
+   front slab's width was capped to 250px by the portrait arm and its 14px of
+   chrome shrank it again, so the two faces resolved to different heights.
+   Whole photo, never cropped — `contain` letterboxes any real photo aspect
+   inside the reserved box instead of resizing the box to suit it. */
+.royaleCardDetailBackImg {
+  object-fit: contain;
+  object-position: center;
+  border-radius: 5px;
+  border: 1px solid rgba(220, 198, 150, 0.14);
+  background: linear-gradient(160deg, #1f1b14, #100d09);
+}
+
+/* Front/back segmented toggle - only rendered once a live back photo has
+   actually arrived. */
+.royaleCardDetailFaceToggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid rgba(220, 198, 150, 0.22);
+  background: rgba(255, 255, 255, 0.03);
+}
+.royaleCardDetailFaceBtn {
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b0a897;
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 16px;
+  cursor: pointer;
+}
+.royaleCardDetailFaceBtn[aria-pressed="true"] {
+  color: #14110c;
+  background: linear-gradient(180deg, #f2d896, #d9b25e);
+}
+.royaleCardDetailFaceBtn:focus-visible {
+  outline: 2px solid #eccb7e;
+  outline-offset: 2px;
+}
+
+/* ---- dossier side --------------------------------------------------------- */
+
+.royaleCardDetailDossier {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(14px, 2.8vmin, 26px) clamp(16px, 3vmin, 30px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.royaleCardDetailEyebrowRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.royaleCardDetailEyebrow {
+  font-family: "RoyaleDecoCinzelDecor", "Cinzel Decorative", serif;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #eccb7e;
+}
+.royaleCardDetailAttribution {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b0a897;
+  white-space: nowrap;
+}
+
+/* Scoped .royaleCardDetail prefix (0,2,0): the PAGE variant renders inside the
+   legacy `.routeShell` shell whose `.routeShell h2 { color:#171915 }` (0,1,1)
+   would otherwise ink the name near-black on the dark panel. */
+.royaleCardDetail .royaleCardDetailName { /* scaled 2026-07-22 */
+  margin: 0;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-size: clamp(22px, 3vmin, 32px);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.12;
+  text-wrap: balance;
+  color: #f4f1ea;
+}
+.royaleCardDetailSetLine {
+  margin: 2px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #b0a897;
+}
+
+/* ---- the grade plaque (signature) ----------------------------------------- */
+
+.royaleCardDetailPlaque {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(220, 198, 150, 0.3);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(236, 203, 126, 0.09), rgba(236, 203, 126, 0.02)),
+    #14110c;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.royaleCardDetailPlaqueGrader {
+  font-family: "RoyaleDecoCinzelDecor", "Cinzel Decorative", serif;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  color: #eccb7e;
+}
+.royaleCardDetailPlaqueGrade {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.royaleCardDetailPlaqueMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-inline-start: auto;
+  text-align: end;
+}
+.royaleCardDetailPlaqueMeta small {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #b0a897;
+}
+.royaleCardDetailPlaqueMeta b {
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* ---- facts ---------------------------------------------------------------- */
+
+.royaleCardDetailValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.royaleCardDetailValue {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-size: clamp(26px, 3.4vmin, 38px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #eccb7e;
+}
+.royaleCardDetailValueLabel {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b0a897;
+}
+
+.royaleCardDetailChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.royaleCardDetailChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(220, 198, 150, 0.24);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f4f1ea;
+  background: rgba(236, 203, 126, 0.06);
+}
+.royaleCardDetailChip[data-rarity="grail"] {
+  border-color: rgba(240, 128, 86, 0.6);
+  color: #ffb08a;
+}
+.royaleCardDetailChip[data-rarity="top"],
+.royaleCardDetailChip[data-rarity="legendary"] {
+  border-color: rgba(226, 178, 74, 0.6);
+  color: #eccb7e;
+}
+.royaleCardDetailChip[data-rarity="common"] {
+  border-color: rgba(128, 141, 161, 0.5);
+  color: #c6cdd8;
+}
+.royaleCardDetailChip[data-rarity="rare"] {
+  border-color: rgba(72, 148, 240, 0.55);
+  color: #9cc4f4;
+}
+.royaleCardDetailChip[data-rarity="epic"],
+.royaleCardDetailChip[data-rarity="mythic"] {
+  border-color: rgba(162, 118, 244, 0.55);
+  color: #c9aef6;
+}
+
+.royaleCardDetailFacts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 14px;
+  margin: 0;
+  font-size: 12.5px;
+}
+.royaleCardDetailFacts dt {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b0a897;
+  align-self: baseline;
+  padding-top: 1px;
+}
+.royaleCardDetailFacts dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+.royaleCardDetailProvenance {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #b0a897;
+}
+.royaleCardDetailProvenance b {
+  color: #eccb7e;
+}
+
+/* ---- actions -------------------------------------------------------------- */
+
+.royaleCardDetailActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.royaleCardDetailActions a,
+.royaleCardDetailActions button {
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.royaleCardDetailCcLink {
+  color: #14110c;
+  background: linear-gradient(180deg, #f2d896, #d9b25e);
+  border: 1px solid rgba(220, 198, 150, 0.6);
+}
+.royaleCardDetailCcLink:hover {
+  filter: brightness(1.06);
+}
+.royaleCardDetailPageLink {
+  color: #eccb7e;
+  background: transparent;
+  border: 1px solid rgba(220, 198, 150, 0.3);
+}
+.royaleCardDetailCloseBtn {
+  margin-inline-start: auto;
+  color: #f4f1ea;
+  background: rgba(244, 241, 234, 0.06);
+  border: 1px solid rgba(220, 198, 150, 0.24);
+}
+.royaleCardDetailCloseBtn:hover,
+.royaleCardDetailPageLink:hover {
+  border-color: rgba(220, 198, 150, 0.5);
+}
+.royaleCardDetailActions a:focus-visible,
+.royaleCardDetailActions button:focus-visible {
+  outline: 2px solid #eccb7e;
+  outline-offset: 2px;
+}
+
+/* Clickable card faces (cinema rows, You-get faces, collection, results):
+   a visible keyboard focus ring, no layout change. Cursor is `alias` — the
+   OS "opens elsewhere" arrow — because every one of these opens the card
+   page in a NEW background tab (owner ask 2026-07-24: the hover must say
+   "this opens a page in a new tab", distinct from ordinary in-game
+   clickables). `pointer` first as the fallback for engines without alias. */
+.royaleCardDetailTrigger {
+  cursor: pointer;
+  cursor: alias;
+}
+/* CURSOR-ALIAS SWEEP (2026-07-25): two card surfaces declare their OWN cursor
+   at the same specificity as the rule above, so whichever stylesheet happened
+   to load last decided the hover. Both open a card page in a background tab, so
+   `alias` is the honest arrow; pinning them here (0,2,0 / a dedicated rule) makes
+   the affordance independent of CSS load order.
+   - .royaleChaseVaultCard said `zoom-in` (royaleStyles.css): the hover zoom is
+     still there, but the CLICK now opens the dossier, and the cursor must say
+     which of the two the click does.
+   - .royaleHeaderChasePopCardLink said `pointer` and was already a compliant
+     background-tab opener, just without the "opens elsewhere" cue. */
+.royaleChaseVaultCard.royaleCardDetailTrigger,
+.royaleHeaderChasePopCardLink {
+  cursor: pointer;
+  cursor: alias;
+}
+/* The "You get" face wrapper must stay layout-invisible: the decision cell's
+   grid sizes the slab via `.royaleCinemaYouCard .royaleSlab { width: 100% }`,
+   so the wrapper spans the cell exactly like the bare slab did. */
+.royaleCinemaYouCard .royaleCardDetailTrigger {
+  display: block;
+  width: 100%;
+}
+/* BG-TAB SWEEP (2026-07-30): the decision/panel prize faces gained the same
+   layout-invisible trigger wrapper (RoyaleRoundTheatre / RoyalePrizeModal /
+   RoyaleSettlementPanel). display:block so the span takes the bare slab's
+   place as the flex/grid item exactly — descendant `.royaleSlab` sizing rules
+   keep matching through it. The sell-back ticket thumb reuses its existing
+   .rsbTicketThumb span, so it needs no layout rule here. */
+.royalePrizeCardFace,
+.royalePanelPullFace {
+  display: block;
+}
+.royaleCardDetailTrigger:focus-visible {
+  outline: 2px solid #eccb7e;
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+/* VERIFIED, NOT CHANGED (mouse/keyboard reachability lane, 2026-08-11): these
+   rows now answer arrow keys and Home/End (royaleWheelHScroll.ts), so the ring
+   above was measured on the built bundle at 1440x900 with a cinema-row card
+   focused. Both card rows are `contain: layout paint style`, so the worry was
+   the +2px offset being clipped away by the scroll port. It is not: 0px clipped
+   left and right, and the top/bottom are cut only by however much the CARD
+   ITSELF overhangs the strip (15.5px on the tile measured) — the ring is cut
+   exactly where the art is cut, which reads as the card, not as a broken ring.
+   Left as is deliberately; an inset offset would only move the ring on top of
+   the art for no gain. Re-measure with scripts/royaleWheelReachability.mjs's
+   sibling probe if the row's height budget ever changes. */
+
+/* TOUCH TWO-TAP ARM STATE (owner 2026-07-31: "we should double click to open
+   the cards too"). The FIRST tap stamps data-open-armed on the face
+   (royaleCardDetail.ts, cardPageTriggerProps): the card lifts a touch — the
+   tap-scale twin of the hover-zoom cue — and a chip quotes the localized
+   "tap again to open" label carried in data-open-armed-label (attr() so the
+   dozen spread-in surfaces need zero markup). Motion: transform+opacity only,
+   ease-out, 160ms, interruptible (transition, not keyframes — a disarm
+   mid-lift retargets smoothly); chip sits INSIDE the face box so clipping
+   rails (overflow:hidden card rows) never cut it off. */
+.royaleCardDetailTrigger[data-open-armed] {
+  transform: scale(1.045);
+  transition: transform 160ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  position: relative;
+  z-index: 5;
+}
+.royaleCardDetailTrigger[data-open-armed]::after {
+  content: attr(data-open-armed-label);
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(236, 203, 126, 0.7);
+  background: rgba(9, 12, 20, 0.94);
+  color: #f4f0e2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  pointer-events: none;
+  animation: royaleCardOpenArmChipIn 160ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes royaleCardOpenArmChipIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .royaleCardDetailTrigger[data-open-armed] {
+    transform: none;
+    transition: none;
+  }
+  .royaleCardDetailTrigger[data-open-armed]::after {
+    animation: none;
+  }
+}
+
+/* ---- responsive ----------------------------------------------------------- */
+
+/* Portrait phones: stack, art capped so the dossier stays reachable. */
+@media (max-width: 640px) and (orientation: portrait) {
+  .royaleCardDetail {
+    flex-direction: column;
+    width: min(440px, 100%);
+  }
+  .royaleCardDetailArt {
+    flex: 0 0 auto;
+    border-inline-end: 0;
+    border-bottom: 1px solid rgba(220, 198, 150, 0.14);
+    padding: 12px;
+  }
+  /* THE CAP GOES ON THE BOX, NOT ON A FACE. As `.royaleCardDetailArt .royaleSlab`
+     this capped the FRONT only and left the back photo at the full column
+     width, which is the 98px (23.65%) jump the owner reported. On the box both
+     faces inherit it and the well's height is `cap * 7/5` in both states. */
+  .royaleCardDetailFaceBox {
+    width: min(46vh, 78vw); /* webkit-reality: dvh tracks iOS Safari's dynamic chrome */
+    width: min(46dvh, 78vw);
+    max-width: 250px;
+  }
+}
+
+/* Short landscape (the cinema's mobile orientation, e.g. 844x390): keep the
+   row, slim everything so the whole dossier fits the 390px height. */
+@media (max-height: 480px) {
+  .royaleCardDetailScrim[data-variant="overlay"] {
+    padding: 8px;
+  }
+  .royaleCardDetail {
+    max-height: min(96vh, 96dvh);
+  }
+  .royaleCardDetailArt {
+    flex-basis: clamp(170px, 34%, 240px);
+    padding: 10px;
+  }
+  .royaleCardDetailDossier {
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .royaleCardDetail .royaleCardDetailName { /* scaled 2026-07-22 */
+    font-size: 17px;
+  }
+  .royaleCardDetailPlaque {
+    padding: 7px 10px;
+    gap: 10px;
+  }
+  .royaleCardDetailPlaqueGrade {
+    font-size: 22px;
+  }
+  .royaleCardDetailValue {
+    font-size: 21px;
+  }
+}
+
+@keyframes royaleCardDetailScrimIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes royaleCardDetailIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .royaleCardDetailScrim[data-variant="overlay"],
+  .royaleCardDetailScrim[data-variant="overlay"] .royaleCardDetail {
+    animation: none;
+  }
+}
+
+/* Cert verification deep link (owner 2026-07-22): quiet gold, sits under the
+   cert number in the plaque. */
+.royaleCardDetailCertVerify {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--goldink, #d6b365);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.royaleCardDetailCertVerify:hover { color: #f0dCA6; }

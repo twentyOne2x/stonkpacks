@@ -1,0 +1,9 @@
+.stock-sale { display: grid; gap: .75rem; overflow-wrap: anywhere; }
+.stock-sale h3, .stock-sale p { margin: 0; }
+.stock-sale__holding { display: grid; gap: .25rem; }
+.stock-sale dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: .4rem .75rem; margin: 0; }
+.stock-sale dd { margin: 0; }
+.stock-sale__fee { display: contents; }
+.stock-sale button { min-height: 44px; }
+.stock-sale button:disabled { opacity: .55; }
+@media (max-width: 420px) { .stock-sale__actions > button { width: 100%; } }

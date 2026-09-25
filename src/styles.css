@@ -1,0 +1,5887 @@
+:root {
+  color: #171612;
+  background: #f5f1e7;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* P0 consumer launch reset: object-first pack opening surface. */
+:root,
+html,
+body {
+  background: #07090d;
+  color: #f7f1e6;
+}
+
+.siteShell {
+  min-height: 100dvh;
+  color: #f7f1e6;
+  background:
+    linear-gradient(180deg, #090b10 0%, #10141b 42%, #141114 100%);
+}
+
+.siteHeader {
+  border-bottom: 1px solid rgb(255 255 255 / 9%);
+  /* Perf: sticky header repaints backdrop-filter every scroll frame (mid-range
+     GPU FPS killer). Solid-ish fill instead of blur; near-opaque so no
+     visible change vs. the blurred version against this smooth gradient bg. */
+  background: rgb(7 9 13 / 95%);
+}
+
+.brandMark {
+  border-color: #e6c15a;
+  background: #e6c15a;
+  color: #090b10;
+}
+
+.brand small,
+.siteHeader nav,
+.sectionNote,
+.footer,
+.partnerTokens span {
+  color: #a8b2bd;
+}
+
+.siteHeader nav a {
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.siteHeader nav a:hover {
+  color: #f7f1e6;
+  transform: translateY(-1px);
+}
+
+.walletButton {
+  border-color: rgb(255 255 255 / 14%);
+  background: #141922;
+  color: #f7f1e6;
+}
+
+.walletButton.connected {
+  border-color: #62d6a4;
+  background: #0f261e;
+}
+
+.eyebrow {
+  color: #e6c15a;
+  letter-spacing: 0;
+}
+
+h1,
+h2 {
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 920;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 680px;
+  font-size: 5.5rem;
+  line-height: 0.9;
+}
+
+h2 {
+  font-size: 3.4rem;
+  line-height: 0.96;
+}
+
+.heroText {
+  max-width: 600px;
+  color: #d8dde4;
+  font-size: 1.08rem;
+}
+
+.livePoolPanel,
+.claimPreview,
+.detailModal,
+.openingModal {
+  border-color: rgb(255 255 255 / 12%);
+  background: rgb(16 21 29 / 82%);
+  box-shadow: 0 18px 58px rgb(0 0 0 / 28%);
+}
+
+.livePoolLead span,
+.livePoolPanel dt,
+.revealQuoteTerms span,
+.revealQuoteTerms dt,
+.decisionReceipt span,
+.decisionReceipt dt,
+.decisionSellbackSummary span,
+.decisionSellbackSummary dt,
+.openingProgressStep small {
+  color: #a8b2bd;
+}
+
+.turboRevealHint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #7fd49b;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.turboRevealHint p {
+  margin: 0;
+  color: #b8c1ca;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.primaryButton,
+.secondaryButton,
+.partnerCta {
+  min-height: 48px;
+  border-radius: 8px;
+}
+
+.primaryButton {
+  border-color: #f34b58;
+  background: linear-gradient(180deg, #ff6570 0%, #d9263a 100%);
+  color: #fff;
+  box-shadow: 0 16px 34px rgb(243 75 88 / 24%);
+}
+
+.primaryButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.secondaryButton,
+.partnerCta {
+  border-color: rgb(255 255 255 / 16%);
+  background: #171d27;
+  color: #f7f1e6;
+}
+
+.badge {
+  border-color: rgb(255 255 255 / 12%);
+  background: rgb(255 255 255 / 6%);
+  color: #d8dde4;
+}
+
+.packStage {
+  position: relative;
+  width: min(540px, 94vw);
+  min-height: 640px;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+}
+
+.packGlow {
+  position: absolute;
+  left: 10%;
+  right: 2%;
+  bottom: 50px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 52%);
+  filter: blur(16px);
+  transform: rotate(-6deg);
+}
+
+.premiumPackObject {
+  position: relative;
+  z-index: 1;
+  width: min(390px, 78vw);
+  aspect-ratio: 0.68;
+  padding: 42px 34px 36px;
+  display: grid;
+  align-content: space-between;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 8px;
+  color: #f7f1e6;
+  background:
+    linear-gradient(90deg, transparent 0 18%, rgb(255 255 255 / 10%) 18% 19%, transparent 19%),
+    linear-gradient(135deg, #0b1018 0%, #1a2230 38%, #390f1b 70%, #0b1018 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(230 193 90 / 24%),
+    inset 0 22px 38px rgb(255 255 255 / 6%),
+    0 42px 110px rgb(0 0 0 / 52%);
+  transform: rotate(-4deg) translateX(-22px) translateZ(0);
+}
+
+.premiumPackObject::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.52;
+  background:
+    repeating-linear-gradient(100deg, transparent 0 18px, rgb(255 255 255 / 5%) 18px 20px),
+    linear-gradient(115deg, transparent 0 48%, rgb(94 210 255 / 18%) 50%, transparent 58%);
+  pointer-events: none;
+}
+
+.packCrimp {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background:
+    repeating-linear-gradient(90deg, rgb(230 193 90 / 22%) 0 8px, rgb(255 255 255 / 4%) 8px 16px),
+    #111620;
+}
+
+.packCrimp.top {
+  top: 0;
+}
+
+.packCrimp.bottom {
+  bottom: 0;
+}
+
+.packFoilSpine {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 23%;
+  width: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f5d87d, #b77927, #55d8ff, #f5d87d);
+  box-shadow: 0 0 18px rgb(230 193 90 / 34%);
+}
+
+.packKicker,
+.packBottomBand span,
+.heroFoilCard span,
+.stageChaseChip span {
+  color: #e6c15a;
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.premiumPackObject strong {
+  position: relative;
+  max-width: 250px;
+  font-size: 4.35rem;
+  font-weight: 950;
+  line-height: 0.88;
+}
+
+.premiumPackObject small {
+  position: relative;
+  max-width: 240px;
+  color: #d8dde4;
+  font-weight: 760;
+}
+
+.packBottomBand {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.heroFoilCard {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 76px;
+  width: 196px;
+  min-height: 266px;
+  padding: 18px;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid rgb(230 193 90 / 62%);
+  border-radius: 8px;
+  background:
+    linear-gradient(140deg, rgb(255 255 255 / 16%), transparent 38%),
+    linear-gradient(180deg, #f7f1e6, #dfe8ee);
+  color: #10141b;
+  box-shadow:
+    0 18px 46px rgb(0 0 0 / 36%),
+    inset 0 0 0 5px rgb(230 193 90 / 18%);
+  transform: rotate(8deg) translateZ(0);
+}
+
+.heroFoilCard strong {
+  color: #10141b;
+  font-size: 2.55rem;
+  font-weight: 950;
+  line-height: 0.92;
+}
+
+.heroFoilCard small {
+  color: #344052;
+  font-size: 0.82rem;
+  font-weight: 780;
+}
+
+.stageChaseChip {
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  bottom: 84px;
+  min-width: 150px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgb(230 193 90 / 44%);
+  border-radius: 8px;
+  background: rgb(9 11 16 / 88%);
+  box-shadow: 0 16px 38px rgb(0 0 0 / 36%);
+}
+
+.stageChaseChip strong {
+  color: #f7f1e6;
+  font-size: 1.18rem;
+}
+
+.contentBand {
+  border-bottom-color: rgb(255 255 255 / 9%);
+  background: #0f131a;
+}
+
+.contentBand:nth-of-type(even) {
+  background: #121820;
+}
+
+.claimPreview,
+.customerClaimCard,
+.customerClaimEmpty,
+.internalStatCard,
+.internalList div,
+.routeStats div {
+  border-color: rgb(255 255 255 / 12%);
+  background: #151b24;
+  color: #f7f1e6;
+}
+
+.claimPreview dl dt,
+.customerClaimCard dt,
+.routeStats span {
+  color: #a8b2bd;
+}
+
+.claimPreview dl dd,
+.customerClaimCard dd,
+.routeStats strong {
+  color: #f7f1e6;
+}
+
+.routeHero {
+  border-color: rgb(255 255 255 / 9%);
+  background:
+    linear-gradient(115deg, rgb(230 193 90 / 10%), transparent 42%),
+    #0d1218;
+}
+
+.routeHero p {
+  color: #d8dde4;
+}
+
+.chaseAmount {
+  background: #090d13;
+  color: #f7f1e6;
+}
+
+.openingModal {
+  border: 1px solid rgb(255 255 255 / 12%);
+  background: #0b0f15;
+  box-shadow: 0 28px 96px rgb(0 0 0 / 62%);
+}
+
+.modalBackdrop {
+  /* Perf: full-viewport backdrop-filter is expensive every frame the modal is
+     open (and during its own fade-in). A darker solid-ish scrim reads the
+     same without the per-frame re-blur cost. */
+  background: rgb(0 0 0 / 86%);
+}
+
+.closeButton {
+  border-color: rgb(255 255 255 / 18%);
+  background: #151b24;
+  color: #f7f1e6;
+}
+
+.packScene {
+  border-color: rgb(255 255 255 / 10%);
+  background:
+    linear-gradient(180deg, #101721 0%, #080b10 100%);
+}
+
+/* L41 motion proof: tactile pressure seam and torn foil lips over the rendered pack. */
+.siteShell .packScene .packPressureSeam {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.siteShell .packScene .packPressureSeam span {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.siteShell .packScene .pressureCore {
+  top: 13%;
+  bottom: 15%;
+  left: 50%;
+  width: 5px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, transparent, rgb(255 101 112 / 82%) 22%, rgb(255 229 154 / 62%) 52%, rgb(29 14 13 / 68%) 82%, transparent),
+    linear-gradient(90deg, rgb(0 0 0 / 62%), rgb(255 255 255 / 26%), rgb(0 0 0 / 54%));
+  box-shadow:
+    0 0 28px rgb(255 101 112 / 30%),
+    0 0 44px rgb(230 193 90 / 18%);
+  opacity: 0.5;
+  transform: translate3d(-50%, 0, 0) scaleY(0.78);
+  transform-origin: 50% 50%;
+  transition:
+    opacity 220ms ease,
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.siteShell .packScene .pressureLip {
+  top: 17%;
+  bottom: 17%;
+  width: 18px;
+  border: 1px solid rgb(255 232 151 / 58%);
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 34%), rgb(230 193 90 / 76%) 36%, rgb(86 214 255 / 18%) 58%, rgb(56 30 17 / 72%)),
+    repeating-linear-gradient(180deg, rgb(255 255 255 / 10%) 0 2px, transparent 2px 14px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 30%),
+    inset 0 -18px 32px rgb(35 18 9 / 26%),
+    0 18px 42px rgb(0 0 0 / 30%);
+  opacity: 0.36;
+  transition:
+    opacity 240ms ease,
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.siteShell .packScene .pressureLipLeft {
+  left: calc(50% - 24px);
+  transform: translate3d(0, 0, 0) rotate(-8deg) scaleX(0.72);
+  transform-origin: 100% 48%;
+}
+
+.siteShell .packScene .pressureLipRight {
+  right: calc(50% - 24px);
+  transform: translate3d(0, 0, 0) rotate(8deg) scaleX(0.72);
+  transform-origin: 0 48%;
+}
+
+.siteShell .packScene .pressureShadow {
+  top: 18%;
+  bottom: 18%;
+  left: 50%;
+  width: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgb(0 0 0 / 64%), transparent);
+  filter: blur(5px);
+  opacity: 0.24;
+  transform: translate3d(-50%, 0, 0) scaleX(0.52);
+  transform-origin: 50% 50%;
+  transition:
+    opacity 240ms ease,
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.siteShell .packScene--tear .pressureCore,
+.siteShell .packScene--unwrap .pressureCore,
+.siteShell .packScene--reveal .pressureCore,
+.siteShell .packScene--settle .pressureCore,
+.siteShell .packScene--post_reveal .pressureCore {
+  opacity: 0.9;
+  transform: translate3d(-50%, 0, 0) scaleY(1);
+}
+
+.siteShell .packScene--tear .pressureLipLeft,
+.siteShell .packScene--unwrap .pressureLipLeft,
+.siteShell .packScene--reveal .pressureLipLeft,
+.siteShell .packScene--settle .pressureLipLeft,
+.siteShell .packScene--post_reveal .pressureLipLeft {
+  opacity: 0.88;
+  transform: translate3d(-34px, -5px, 0) rotate(-26deg) scaleX(1);
+}
+
+.siteShell .packScene--tear .pressureLipRight,
+.siteShell .packScene--unwrap .pressureLipRight,
+.siteShell .packScene--reveal .pressureLipRight,
+.siteShell .packScene--settle .pressureLipRight,
+.siteShell .packScene--post_reveal .pressureLipRight {
+  opacity: 0.88;
+  transform: translate3d(34px, -5px, 0) rotate(26deg) scaleX(1);
+}
+
+.siteShell .packScene--unwrap .pressureShadow,
+.siteShell .packScene--reveal .pressureShadow,
+.siteShell .packScene--settle .pressureShadow,
+.siteShell .packScene--post_reveal .pressureShadow {
+  opacity: 0.55;
+  transform: translate3d(-50%, 0, 0) scaleX(1.55);
+}
+
+.decisionPanel {
+  background: #0f141c;
+}
+
+.decisionPanel h2 {
+  color: #f7f1e6;
+  font-size: 3.5rem;
+}
+
+.decisionPanel p {
+  color: #d8dde4;
+}
+
+.openingProgressStep {
+  border-color: rgb(255 255 255 / 12%);
+  background: #151b24;
+  color: #f7f1e6;
+}
+
+.openingProgressStep.complete {
+  border-color: rgb(98 214 164 / 42%);
+  background: rgb(98 214 164 / 10%);
+}
+
+.openingProgressStep.active {
+  border-color: #e6c15a;
+  background: rgb(230 193 90 / 12%);
+}
+
+.openingMotionStrip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.8fr) auto;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 8px;
+  padding: 12px;
+  background:
+    linear-gradient(135deg, rgb(230 193 90 / 10%), rgb(21 27 36 / 88%)),
+    #151b24;
+}
+
+.openingMotionStrip.turbo {
+  border-color: rgb(98 214 164 / 28%);
+  background:
+    linear-gradient(135deg, rgb(98 214 164 / 12%), rgb(21 27 36 / 88%)),
+    #151b24;
+}
+
+.openingMotionStrip.rare {
+  border-color: rgb(85 216 255 / 24%);
+  background:
+    linear-gradient(135deg, rgb(85 216 255 / 12%), rgb(21 27 36 / 88%)),
+    #151b24;
+}
+
+.openingMotionStrip.legendary {
+  border-color: rgb(246 218 131 / 36%);
+  background:
+    radial-gradient(circle at 14% 22%, rgb(246 218 131 / 17%), transparent 36%),
+    linear-gradient(135deg, rgb(230 193 90 / 16%), rgb(21 27 36 / 90%)),
+    #151b24;
+}
+
+.openingMotionLead {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.openingMotionLead span,
+.openingBeatRail span {
+  color: #e6c15a;
+  font-size: 0.68rem;
+  font-weight: 920;
+  text-transform: uppercase;
+}
+
+.openingMotionLead strong {
+  color: #f7f1e6;
+  font-size: 1rem;
+  font-weight: 920;
+}
+
+.openingMotionLead small {
+  color: #b8c1ca;
+  line-height: 1.25;
+}
+
+.openingBeatRail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.openingBeatRail span {
+  min-height: 30px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 5%);
+  color: #d8dde4;
+  text-align: center;
+}
+
+.openingBeatRail span.active {
+  border-color: rgb(230 193 90 / 42%);
+  background: linear-gradient(180deg, #f6da83, #e6c15a);
+  color: #080b10;
+}
+
+.openingBeatRail span.complete {
+  border-color: rgb(98 214 164 / 26%);
+  background: rgb(98 214 164 / 12%);
+  color: #62d6a4;
+}
+
+.openingBeatRail span.loopReady {
+  border-color: rgb(246 218 131 / 34%);
+  background: rgb(246 218 131 / 12%);
+  color: #f6da83;
+}
+
+.openingLoopHint {
+  grid-column: 1 / span 2;
+  color: #a8b2bd;
+  font-size: 0.72rem;
+  font-weight: 760;
+}
+
+.skipRevealButton {
+  min-height: 38px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgb(246 218 131 / 46%);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #f6da83, #c7922e);
+  color: #080b10;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.revealQuoteTerms,
+.decisionReceipt {
+  border-color: rgb(255 255 255 / 12%);
+  background: #151b24;
+}
+
+.turboRevealHint {
+  border: 1px solid rgb(127 212 155 / 28%);
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  gap: 5px;
+  background:
+    linear-gradient(135deg, rgb(127 212 155 / 13%), rgb(21 27 36 / 94%));
+  color: #f7f1e6;
+}
+
+.revealQuoteTerms strong,
+.revealQuoteTerms dd,
+.decisionReceipt strong,
+.decisionReceipt dd {
+  color: #f7f1e6;
+}
+
+.quoteRefreshButton {
+  border-color: #e6c15a;
+  background: #e6c15a;
+  color: #080b10;
+}
+
+.decisionActions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.decisionActions button,
+.secondaryDecisionActions button {
+  min-height: 46px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 8px;
+  background: #1a2230;
+  color: #f7f1e6;
+  font-weight: 860;
+}
+
+.decisionActions button:nth-child(1) {
+  border-color: #62d6a4;
+  background: linear-gradient(180deg, #62d6a4, #188b63);
+  color: #06100c;
+}
+
+.decisionActions button:nth-child(2) {
+  border-color: #f34b58;
+  background: linear-gradient(180deg, #ff6570, #d9263a);
+  color: #fff;
+}
+
+.decisionActions button:nth-child(3) {
+  border-color: #e6c15a;
+  background: linear-gradient(180deg, #f5d87d, #c7922e);
+  color: #0b0f15;
+}
+
+.secondaryDecisionActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.secondaryDecisionActions button {
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.resultShareMoment {
+  align-items: center;
+  border: 1px solid rgb(230 193 90 / 18%);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgb(230 193 90 / 7%), rgb(21 29 42 / 78%));
+}
+
+.resultShareMoment div {
+  display: grid;
+  gap: 2px;
+}
+
+.resultShareMoment span {
+  color: #f7f1e6;
+  font-size: 0.85rem;
+  font-weight: 880;
+}
+
+.resultShareMoment small {
+  color: #a8b2bd;
+  font-size: 0.76rem;
+  font-weight: 720;
+}
+
+.resultShareMoment button,
+.secondaryDecisionActions button:first-child {
+  border-color: rgb(230 193 90 / 34%);
+  background: linear-gradient(180deg, #253146, #151d2a);
+  color: #f7f1e6;
+}
+
+.decisionActions button:disabled,
+.secondaryDecisionActions button:disabled,
+.primaryButton:disabled {
+  opacity: 0.58;
+}
+
+.decisionClaimCard {
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  display: grid;
+  gap: 4px;
+  padding-top: 9px;
+}
+
+.decisionClaimCard small {
+  color: #a8b2bd;
+  font-size: 0.78rem;
+  font-weight: 720;
+  overflow-wrap: anywhere;
+}
+
+.decisionShareCard {
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgb(230 193 90 / 28%);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 10% 0%, rgb(230 193 90 / 16%), transparent 36%),
+    linear-gradient(145deg, rgb(21 27 36 / 94%), rgb(12 16 23 / 96%));
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 5%);
+  padding: 12px;
+}
+
+.decisionShareCard > div:first-child {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.decisionShareCard span,
+.decisionShareCard dt {
+  color: #e6c15a;
+  font-size: 0.72rem;
+  font-weight: 860;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.decisionShareCard strong,
+.decisionShareCard dd {
+  color: #fffaf0;
+}
+
+.decisionShareCard p,
+.decisionShareCard small {
+  color: #c7d0d9;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.decisionShareCard blockquote {
+  border-left: 2px solid #e6c15a;
+  color: #f7f1e6;
+  font-size: 0.92rem;
+  font-weight: 760;
+  line-height: 1.45;
+  margin: 0;
+  overflow-wrap: anywhere;
+  padding: 8px 0 8px 12px;
+}
+
+.decisionShareCard dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.decisionShareCard dl div {
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 4%);
+  min-width: 0;
+  padding: 8px;
+}
+
+.decisionShareCard button {
+  border: 0;
+  border-radius: 8px;
+  background: #e6c15a;
+  color: #090b10;
+  cursor: pointer;
+  font-weight: 900;
+  min-height: 42px;
+}
+
+.decisionShareCard button:active {
+  transform: translateY(1px);
+}
+
+.decisionReceiptActions a {
+  border-color: rgb(255 255 255 / 14%);
+  background: #1a2230;
+  color: #f7f1e6;
+}
+
+.decisionReceiptActions a:first-child {
+  border-color: #e6c15a;
+  background: #e6c15a;
+  color: #090b10;
+}
+
+.footer {
+  border-top-color: rgb(255 255 255 / 9%);
+  background: #090b10;
+}
+
+@media (max-width: 1120px) {
+  h1 {
+    font-size: 4.4rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  
+
+  
+}
+
+@media (max-width: 720px) {
+  .siteHeader {
+    position: relative;
+  }
+
+  .siteHeader nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  .packStage {
+    width: min(330px, 94vw);
+    min-height: 304px;
+  }
+
+  .premiumPackObject {
+    width: 210px;
+    padding: 28px 22px 24px;
+  }
+
+  .premiumPackObject strong {
+    font-size: 2.34rem;
+  }
+
+  .heroFoilCard {
+    right: 16px;
+    bottom: 38px;
+    width: 132px;
+    min-height: 178px;
+    padding: 12px;
+  }
+
+  .heroFoilCard strong {
+    font-size: 1.55rem;
+  }
+
+  .stageChaseChip {
+    left: 18px;
+    bottom: 40px;
+    min-width: 112px;
+  }
+
+  h1 {
+    font-size: 3rem;
+    line-height: 0.94;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  .heroText {
+    font-size: 0.98rem;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  .sceneFallback,
+  .packScene {
+    min-height: 320px;
+  }
+
+  .openingMotionStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .openingBeatRail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .openingLoopHint {
+    grid-column: auto;
+  }
+
+  .skipRevealButton {
+    width: 100%;
+  }
+
+  .decisionPanel h2 {
+    font-size: 2.18rem;
+  }
+
+  .decisionActions {
+    grid-template-columns: 1fr;
+  }
+
+  .decisionShareCard dl,
+  .secondaryDecisionActions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.siteShell .decisionReceipt.claimRequested {
+  border-color: rgb(93 232 167 / 34%);
+  background:
+    radial-gradient(circle at 18% 0%, rgb(93 232 167 / 18%), transparent 34%),
+    linear-gradient(180deg, rgb(12 22 22 / 96%), rgb(7 10 15 / 98%));
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 8%),
+    0 18px 52px rgb(0 0 0 / 32%);
+}
+
+.siteShell .decisionReceipt.claimRequested > div:first-child {
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  padding-bottom: 8px;
+}
+
+.siteShell .decisionReceipt.claimRequested span,
+.siteShell .decisionReceipt.claimRequested dt {
+  color: #85e9bf;
+}
+
+.siteShell .decisionReceipt.claimRequested p,
+.siteShell .decisionReceipt.claimRequested small {
+  color: #c8d4d0;
+}
+
+.siteShell .decisionReceipt.claimRequested strong,
+.siteShell .decisionReceipt.claimRequested dd {
+  color: #fffaf0;
+}
+
+.siteShell .decisionReceiptActions button {
+  align-items: center;
+  background: #171612;
+  border: 1px solid #171612;
+  border-radius: 999px;
+  color: #fffaf0;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 840;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 12px;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.siteShell .decisionReceiptActions button:hover {
+  background: #2d2618;
+  border-color: #e6c15a;
+}
+
+.siteShell .decisionReceiptActions button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.claimRequestSummary {
+  border: 1px solid rgb(133 233 191 / 24%);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgb(133 233 191 / 12%), rgb(255 255 255 / 3%)),
+    rgb(255 255 255 / 4%);
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+
+.claimRequestSummary > div:first-child {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.claimRequestSummary dl {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.claimRequestSummary dl div {
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.claimRequestSummary small {
+  line-height: 1.35;
+}
+
+@media (max-width: 720px) {
+  .claimRequestSummary dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L30 product-quality slice: tactile pack object and consumer reveal decision surface. */
+.siteShell .packStage {
+  perspective: 1200px;
+}
+
+.siteShell .premiumPackObject {
+  isolation: isolate;
+  border-color: rgb(230 193 90 / 38%);
+  background:
+    radial-gradient(circle at 62% 20%, rgb(255 255 255 / 16%), transparent 26%),
+    linear-gradient(90deg, transparent 0 17%, rgb(230 193 90 / 24%) 17% 18%, transparent 18%),
+    linear-gradient(135deg, #090d14 0%, #192233 36%, #4a1222 72%, #0a0e15 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 10%),
+    inset 0 26px 44px rgb(255 255 255 / 7%),
+    inset 0 -28px 60px rgb(0 0 0 / 34%),
+    0 36px 94px rgb(0 0 0 / 58%);
+}
+
+.siteShell .foilShine {
+  position: absolute;
+  inset: -32% -18%;
+  z-index: -1;
+  background:
+    linear-gradient(112deg, transparent 0 43%, rgb(255 255 255 / 22%) 47%, rgb(92 213 255 / 12%) 51%, transparent 58%),
+    repeating-linear-gradient(76deg, rgb(255 255 255 / 4%) 0 2px, transparent 2px 15px);
+  transform: rotate(7deg);
+  animation: foilDrift 5.4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* Perf: pause the infinite foil-shine animation once the hero pack object has
+   scrolled out of view (toggled by an IntersectionObserver on .packStage) so
+   the compositor isn't kept busy on an element nobody can see. */
+.packStage[data-offscreen="true"] .foilShine {
+  animation-play-state: paused;
+}
+
+.siteShell .packTearLine {
+  position: absolute;
+  z-index: 2;
+  top: 34px;
+  right: 22px;
+  left: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.siteShell .packTearLine span {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgb(230 193 90 / 18%), rgb(247 241 230 / 64%), rgb(230 193 90 / 18%));
+  box-shadow: 0 0 16px rgb(230 193 90 / 20%);
+}
+
+.siteShell .packSpecularBloom {
+  position: absolute;
+  z-index: 0;
+  inset: -18% -22% auto auto;
+  width: 66%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 42%), rgb(85 216 255 / 18%) 34%, transparent 68%);
+  filter: blur(4px);
+  opacity: 0.72;
+  pointer-events: none;
+  transform: rotate(18deg);
+}
+
+.siteShell .packEdgeStack {
+  position: absolute;
+  z-index: 1;
+  top: 42px;
+  right: 15px;
+  bottom: 42px;
+  width: 15px;
+  display: grid;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.siteShell .packEdgeStack span {
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 42%), rgb(230 193 90 / 28%) 48%, rgb(0 0 0 / 20%));
+  box-shadow:
+    0 0 16px rgb(230 193 90 / 20%),
+    inset 0 0 0 1px rgb(255 255 255 / 12%);
+}
+
+.siteShell .premiumPackObject::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgb(230 193 90 / 18%);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.siteShell .heroFoilCard {
+  border-color: rgb(255 231 155 / 82%);
+  background:
+    radial-gradient(circle at 25% 18%, rgb(255 255 255 / 92%), transparent 24%),
+    linear-gradient(128deg, #fff8df 0%, #e7eff6 42%, #fff2bd 67%, #f4f0e7 100%);
+  box-shadow:
+    0 24px 58px rgb(0 0 0 / 44%),
+    inset 0 0 0 5px rgb(230 193 90 / 18%),
+    inset 0 0 0 11px rgb(16 20 28 / 8%);
+}
+
+.siteShell .heroFoilStats {
+  margin: 10px 0 0;
+  display: grid;
+  gap: 5px;
+}
+
+.siteShell .heroFoilStats div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid rgb(16 20 28 / 18%);
+  padding-top: 5px;
+}
+
+.siteShell .heroFoilStats dt,
+.siteShell .heroFoilStats dd {
+  margin: 0;
+  color: #253041;
+  font-size: 0.64rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.siteShell .heroRevealRail {
+  position: absolute;
+  z-index: 4;
+  right: 12px;
+  bottom: 18px;
+  left: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.siteShell .heroRevealRail span {
+  min-height: 31px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgb(230 193 90 / 34%);
+  border-radius: 999px;
+  background: rgb(7 9 13 / 82%);
+  color: #f7f1e6;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0 12px 26px rgb(0 0 0 / 26%);
+}
+
+.siteShell .resultShowcase {
+  display: grid;
+  grid-template-columns: minmax(148px, 0.72fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.siteShell .resultMomentHeader {
+  position: relative;
+  overflow: hidden;
+  padding: 14px;
+  display: grid;
+  gap: 9px;
+  border: 1px solid rgb(230 193 90 / 36%);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 12% 0%, rgb(230 193 90 / 24%), transparent 34%),
+    radial-gradient(circle at 92% 12%, rgb(98 214 164 / 14%), transparent 30%),
+    linear-gradient(135deg, rgb(255 255 255 / 6%), rgb(7 11 17 / 88%)),
+    #090d14;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 9%),
+    0 18px 46px rgb(0 0 0 / 22%);
+}
+
+.siteShell .resultMomentHeader::before {
+  content: "";
+  position: absolute;
+  inset: -80% -18%;
+  background:
+    linear-gradient(115deg, transparent 0 45%, rgb(255 255 255 / 12%) 49%, transparent 54%),
+    repeating-linear-gradient(92deg, rgb(255 255 255 / 3%) 0 1px, transparent 1px 13px);
+  opacity: 0.9;
+  transform: translateX(-8%) rotate(8deg);
+  animation: resultFoilSweep 5.8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.siteShell .resultMomentHeader > * {
+  position: relative;
+}
+
+.siteShell .resultMomentHeader.chaseHit {
+  border-color: rgb(230 193 90 / 58%);
+  background:
+    radial-gradient(circle at 12% 0%, rgb(230 193 90 / 36%), transparent 36%),
+    radial-gradient(circle at 88% 8%, rgb(255 255 255 / 18%), transparent 24%),
+    linear-gradient(135deg, rgb(230 193 90 / 18%), rgb(7 11 17 / 92%)),
+    #0b0f15;
+}
+
+.siteShell .resultMomentKicker {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #e6c15a;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.siteShell .resultMomentHeader strong {
+  color: #fffaf0;
+  font-size: clamp(1.75rem, 3.5vw, 2.55rem);
+  font-weight: 950;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+}
+
+.siteShell .resultMomentHeader p {
+  max-width: 64ch;
+  color: #cbd3db;
+  font-size: 0.96rem;
+  font-weight: 730;
+  line-height: 1.38;
+}
+
+.siteShell .resultMomentPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.siteShell .resultMomentPills span {
+  min-height: 32px;
+  padding: 7px 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgb(255 255 255 / 9%);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 6%);
+  color: #f7f1e6;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.siteShell .motionDecisionRail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.35fr) minmax(0, 0.95fr);
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgb(230 193 90 / 11%), rgb(9 13 20 / 72%)),
+    #0b1119;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 7%);
+}
+
+.siteShell .motionDecisionRail div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 7px;
+  row-gap: 2px;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 4%);
+}
+
+.siteShell .motionDecisionRail svg {
+  color: #e6c15a;
+}
+
+.siteShell .motionDecisionRail span {
+  color: #a8b2bd;
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.siteShell .motionDecisionRail strong {
+  grid-column: 1 / -1;
+  color: #fffaf0;
+  font-size: 0.85rem;
+  font-weight: 900;
+  line-height: 1.16;
+  overflow-wrap: anywhere;
+}
+
+.siteShell .resultHitCard {
+  position: relative;
+  min-height: 230px;
+  padding: 18px;
+  display: grid;
+  align-content: space-between;
+  overflow: hidden;
+  border: 1px solid rgb(230 193 90 / 58%);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 26% 18%, rgb(255 255 255 / 22%), transparent 24%),
+    linear-gradient(150deg, #fff8e7 0%, #f1f6fb 45%, #ebc768 72%, #fff4d4 100%);
+  color: #0f141c;
+  box-shadow:
+    inset 0 0 0 8px rgb(230 193 90 / 18%),
+    0 22px 58px rgb(0 0 0 / 34%);
+}
+
+.siteShell .resultHitCard::before {
+  content: "";
+  position: absolute;
+  inset: -35% -12%;
+  background:
+    linear-gradient(115deg, transparent 0 45%, rgb(255 255 255 / 38%) 49%, transparent 56%),
+    repeating-linear-gradient(80deg, rgb(0 0 0 / 4%) 0 1px, transparent 1px 11px);
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.siteShell .resultHitCard > * {
+  position: relative;
+}
+
+.siteShell .resultHitCard > span,
+.siteShell .resultHitCard small,
+.siteShell .resultHitCard div span {
+  color: #8b6822;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.siteShell .resultHitCard strong {
+  color: #10141b;
+  max-width: 100%;
+  font-size: clamp(1.95rem, 4vw, 2.7rem);
+  font-weight: 950;
+  line-height: 0.92;
+  overflow-wrap: anywhere;
+}
+
+.siteShell .resultHitCard div {
+  display: grid;
+  gap: 4px;
+  border-top: 1px solid rgb(16 20 28 / 18%);
+  padding-top: 10px;
+}
+
+.siteShell .resultHitCard b {
+  color: #10141b;
+  font-size: 1.05rem;
+}
+
+.siteShell .resultDecisionStack {
+  display: grid;
+  gap: 10px;
+}
+
+.siteShell .resultPayoutHero {
+  min-height: 104px;
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  border: 1px solid rgb(98 214 164 / 34%);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgb(98 214 164 / 16%), rgb(16 21 29 / 92%)),
+    #101721;
+}
+
+.siteShell .resultPayoutHero span {
+  color: #62d6a4;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.siteShell .resultPayoutHero strong {
+  color: #f7f1e6;
+  font-size: 2.15rem;
+  font-weight: 950;
+  line-height: 0.95;
+}
+
+.siteShell .resultPayoutHero small {
+  color: #b8c1ca;
+  font-weight: 760;
+}
+
+.siteShell .resultDecisionStack .resultStats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.siteShell .resultDecisionStack .resultStats div {
+  background: rgb(255 255 255 / 4%);
+}
+
+.siteShell .resultDecisionStack .resultStats dt {
+  color: #b8c1ca;
+}
+
+.siteShell .resultDecisionStack .resultStats dd {
+  color: #fffaf0;
+  overflow-wrap: anywhere;
+}
+
+.siteShell .resultChaseMomentum {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgb(230 193 90 / 38%);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 16% 0%, rgb(230 193 90 / 28%), transparent 34%),
+    linear-gradient(135deg, rgb(230 193 90 / 13%), rgb(16 21 29 / 94%)),
+    #101721;
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 6%),
+    0 16px 42px rgb(0 0 0 / 24%);
+}
+
+.siteShell .resultChaseMomentum::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 0 42%, rgb(255 255 255 / 12%) 48%, transparent 54%),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 4%) 0 1px, transparent 1px 12px);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.siteShell .resultChaseMomentum > * {
+  position: relative;
+}
+
+.siteShell .resultChaseMomentum > span {
+  color: #e6c15a;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.siteShell .resultChaseMomentum strong {
+  color: #fffaf0;
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  font-weight: 950;
+  line-height: 0.95;
+}
+
+.siteShell .resultChaseMomentum div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.siteShell .resultChaseMomentum p {
+  min-width: 0;
+  margin: 0;
+  padding: 9px;
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 5%);
+}
+
+.siteShell .resultChaseMomentum b {
+  color: #b8c1ca;
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.siteShell .resultChaseMomentum em {
+  color: #fffaf0;
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.siteShell .resultChaseMomentum.hit_reset {
+  border-color: rgb(230 193 90 / 64%);
+  background:
+    radial-gradient(circle at 16% 0%, rgb(230 193 90 / 38%), transparent 36%),
+    radial-gradient(circle at 90% 10%, rgb(255 255 255 / 12%), transparent 26%),
+    linear-gradient(135deg, rgb(230 193 90 / 18%), rgb(16 21 29 / 94%)),
+    #101721;
+}
+
+.siteShell .decisionActions button {
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.siteShell .decisionActions button:hover:not(:disabled) {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.siteShell .decisionActions button:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+}
+
+@keyframes foilDrift {
+  from {
+    transform: translateX(-5%) rotate(7deg);
+  }
+
+  to {
+    transform: translateX(5%) rotate(7deg);
+  }
+}
+
+@keyframes resultFoilSweep {
+  from {
+    transform: translateX(-8%) rotate(8deg);
+  }
+
+  to {
+    transform: translateX(8%) rotate(8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siteShell .foilShine,
+  .siteShell .resultMomentHeader::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .siteShell .heroRevealRail {
+    right: 24px;
+    bottom: 8px;
+    left: 24px;
+  }
+
+  .siteShell .heroRevealRail span {
+    min-height: 28px;
+    font-size: 0.64rem;
+  }
+
+  .siteShell .heroFoilStats {
+    display: none;
+  }
+
+  .siteShell .resultShowcase {
+    grid-template-columns: 1fr;
+  }
+
+  .siteShell .resultMomentHeader {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .siteShell .resultMomentHeader strong {
+    font-size: clamp(1.48rem, 8vw, 2.05rem);
+  }
+
+  .siteShell .resultMomentHeader p {
+    font-size: 0.88rem;
+  }
+
+  .siteShell .resultMomentPills {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .siteShell .motionDecisionRail {
+    grid-template-columns: 1fr;
+    padding: 8px;
+  }
+
+  .siteShell .resultHitCard {
+    min-height: 150px;
+    padding: 14px;
+  }
+
+  .siteShell .resultHitCard strong {
+    font-size: 2.25rem;
+  }
+
+  .siteShell .resultDecisionStack .resultStats {
+    grid-template-columns: 1fr;
+  }
+
+  .siteShell .resultChaseMomentum {
+    padding: 12px;
+  }
+
+  .siteShell .resultChaseMomentum div {
+    grid-template-columns: 1fr;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .resultPayoutHero {
+    min-height: auto;
+    padding: 12px;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .resultPayoutHero strong {
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 721px) {
+  .openingModal[data-opening-stage="revealed"] {
+    align-items: start;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .sceneFallback,
+  .openingModal[data-opening-stage="revealed"] .packScene {
+    position: sticky;
+    top: 0;
+    height: min(560px, calc(100dvh - 42px));
+    min-height: min(560px, calc(100dvh - 42px));
+  }
+}
+
+@media (max-width: 720px) {
+  .openingModal[data-opening-stage="revealed"] {
+    max-height: calc(100dvh - 16px);
+    overflow-y: auto;
+    grid-template-rows: minmax(210px, 31dvh) auto;
+    overscroll-behavior: contain;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .sceneFallback,
+  .openingModal[data-opening-stage="revealed"] .packScene {
+    min-height: 210px;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .decisionPanel {
+    gap: 10px;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .openingProgressRail {
+    display: none;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .resultStats {
+    gap: 8px;
+  }
+
+  .openingModal[data-opening-stage="revealed"] .decisionActions {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    grid-template-columns: 1fr;
+    gap: 7px;
+    margin: 2px -2px -2px;
+    padding: 8px 2px calc(8px + env(safe-area-inset-bottom));
+    /* Perf: no backdrop-filter — the gradient already reaches near-opaque by
+       18%, so dropping the blur is not visible against it. */
+    background:
+      linear-gradient(180deg, rgb(15 20 28 / 0%) 0%, rgb(15 20 28 / 98%) 14%, #0f141c 100%);
+  }
+
+  .openingModal[data-opening-stage="revealed"] .decisionActions button {
+    min-height: 42px;
+  }
+}
+
+/* Opening visual guard: let the pack/card own the moment while retaining proof hooks. */
+.siteShell .openingModal[data-opening-stage="opening"],
+.siteShell .openingModal[data-opening-stage="revealed"] {
+  background:
+    radial-gradient(circle at 28% 24%, rgb(230 193 90 / 16%), transparent 34%),
+    linear-gradient(115deg, #070a10 0%, #101722 52%, #0a0d12 100%);
+}
+
+.siteShell .openingModal[data-opening-stage="opening"] .packScene,
+.siteShell .openingModal[data-opening-stage="revealed"] .packScene {
+  border-right-color: rgb(230 193 90 / 16%);
+  background:
+    radial-gradient(circle at 52% 42%, rgb(230 193 90 / 20%), transparent 34%),
+    radial-gradient(circle at 50% 78%, rgb(98 214 164 / 10%), transparent 30%),
+    linear-gradient(180deg, #0d141d 0%, #05070b 100%);
+  box-shadow:
+    inset -1px 0 0 rgb(255 255 255 / 6%),
+    inset 0 0 72px rgb(230 193 90 / 7%);
+}
+
+.siteShell .openingModal[data-opening-stage="opening"] .decisionPanel {
+  background:
+    linear-gradient(180deg, rgb(12 18 26 / 82%), rgb(8 11 16 / 92%));
+}
+
+.siteShell .openingModal[data-opening-stage="opening"] .openingProgressRail {
+  opacity: 0.36;
+  transform: translateY(-2px) scale(0.985);
+}
+
+.siteShell .openingModal[data-opening-stage="opening"] .openingMotionStrip {
+  border-color: rgb(255 255 255 / 8%);
+  background:
+    linear-gradient(135deg, rgb(230 193 90 / 7%), rgb(9 13 20 / 54%)),
+    rgb(9 13 20 / 54%);
+  box-shadow: none;
+  opacity: 0.72;
+}
+
+.siteShell .openingModal[data-opening-stage="opening"] .openingBeatRail span:not(.active),
+.siteShell .openingModal[data-opening-stage="opening"] .openingLoopHint {
+  opacity: 0.52;
+}
+
+.siteShell .openingModal[data-opening-stage="revealed"] .openingMotionStrip {
+  padding: 9px;
+  background: rgb(9 13 20 / 50%);
+}
+
+.siteShell .openingModal[data-opening-stage="revealed"] .openingBeatRail,
+.siteShell .openingModal[data-opening-stage="revealed"] .openingLoopHint {
+  opacity: 0.66;
+}
+
+.siteShell .openingModal[data-opening-stage="revealed"] .resultShowcase {
+  align-items: stretch;
+}
+
+.siteShell .openingModal[data-opening-stage="revealed"] .resultPayoutHero {
+  border: 1px solid rgb(230 193 90 / 30%);
+  background:
+    linear-gradient(135deg, rgb(230 193 90 / 15%), rgb(255 255 255 / 5%)),
+    rgb(7 11 17 / 78%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 8%),
+    0 14px 38px rgb(0 0 0 / 22%);
+}
+
+.siteShell .openingModal[data-opening-stage="revealed"] .decisionActions {
+  grid-template-columns: 1.05fr 1.05fr 1.14fr;
+}
+
+.siteShell .openingModal[data-opening-stage="revealed"] .decisionActions button {
+  min-height: 52px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 9%),
+    0 12px 28px rgb(0 0 0 / 20%);
+}
+
+.siteShell .openingModal[data-opening-stage="revealed"] .decisionActions button:nth-child(3) {
+  transform-origin: center;
+}
+
+@media (max-width: 720px) {
+  .siteShell .openingModal[data-opening-stage="opening"] {
+    grid-template-rows: minmax(340px, 46dvh) auto;
+  }
+
+  .siteShell .openingModal[data-opening-stage="opening"] .packScene,
+  .siteShell .openingModal[data-opening-stage="opening"] .sceneFallback {
+    min-height: 340px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="opening"] .openingProgressRail {
+    display: none;
+  }
+
+  .siteShell .openingModal[data-opening-stage="opening"] .openingMotionStrip {
+    padding: 9px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .decisionActions {
+    grid-template-columns: 1fr;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  background: #f5f1e7;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  background: #f5f1e7;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+/* THE focus ring. One colour, one width, one offset — see royaleTokens.css's
+   FOCUS RING block for the Tab walk that measured seven ring styles across five
+   offsets on a single board (design-audit B12).
+   `summary` is in the list because it was NOT: a <summary> is focusable, so the
+   three disclosure stops on the board fell through to Chromium's default blue,
+   which is off-palette and measures 2.98:1 — under the 3:1 WCAG 2.4.11 floor.
+   The literals are var() fallbacks because this rule also serves the legacy
+   landing page, which never loads royaleTokens.css. */
+button:focus-visible,
+summary:focus-visible,
+a:focus-visible {
+  outline: var(--royale-focus-width, 2px) solid var(--royale-focus-color, #e6c766);
+  outline-offset: var(--royale-focus-offset, 2px);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+dl,
+dd {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.siteShell {
+  min-height: 100dvh;
+  color: #171612;
+}
+
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 68px;
+  padding: 14px clamp(18px, 4vw, 52px);
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) auto minmax(170px, 1fr);
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid #ddd5c3;
+  /* Perf: no backdrop-filter on the sticky header, see note above. */
+  background: rgb(245 241 231 / 92%);
+}
+
+.brand,
+.brand span:last-child,
+.claimTop,
+.badge,
+.walletButton,
+.primaryButton,
+.secondaryButton,
+.partnerCta,
+.decisionActions,
+.partnerTokens div {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand {
+  gap: 10px;
+  justify-self: start;
+}
+
+.brandMark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #171612;
+  border-radius: 7px;
+  background: #171612;
+  color: #f8f4e8;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+.brand span:last-child {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.brand strong,
+.claimPreview strong,
+.partnerTokens strong {
+  font-weight: 850;
+}
+
+.brand small,
+.sectionNote,
+.footer,
+.partnerTokens span {
+  color: #6d6659;
+}
+
+.siteHeader nav {
+  display: flex;
+  gap: clamp(12px, 2vw, 28px);
+  justify-content: center;
+  color: #514b40;
+  font-size: 0.9rem;
+  font-weight: 720;
+}
+
+.walletButton {
+  justify-self: end;
+  min-height: 40px;
+  gap: 8px;
+  border: 1px solid #cfc4ae;
+  border-radius: 7px;
+  padding: 0 14px;
+  background: #fffaf0;
+  color: #171612;
+  font-weight: 760;
+}
+
+.walletButton.connected {
+  border-color: #658456;
+  background: #f1f7eb;
+}
+
+.walletButton em {
+  color: #9d372f;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.eyebrow {
+  color: #7b642d;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 520;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 760px;
+  font-size: clamp(4rem, 10vw, 8.8rem);
+  line-height: 0.84;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 4.3rem);
+  line-height: 0.92;
+}
+
+h3 {
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.heroText {
+  max-width: 620px;
+  color: #4b463b;
+  font-size: clamp(1rem, 1.8vw, 1.28rem);
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.livePoolPanel {
+  border: 1px solid #d8ceb9;
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: minmax(160px, 0.72fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  background: #fffaf0;
+}
+
+.heroPoolPanel {
+  max-width: 660px;
+}
+
+.livePoolLead {
+  display: grid;
+  align-content: center;
+  gap: 5px;
+}
+
+.livePoolLead span,
+.livePoolPanel dt {
+  color: #756d5f;
+  font-size: 0.7rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.livePoolLead strong {
+  font-size: clamp(1.05rem, 2vw, 1.42rem);
+  line-height: 1.04;
+}
+
+.livePoolLead small {
+  color: #4b463b;
+  font-size: 0.82rem;
+  font-weight: 720;
+}
+
+.livePoolPanel dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.livePoolPanel dl div {
+  border: 1px solid #e1d7c3;
+  border-radius: 7px;
+  padding: 10px;
+  display: grid;
+  align-content: space-between;
+  gap: 8px;
+}
+
+.livePoolPanel dd {
+  margin: 0;
+  font-size: clamp(0.98rem, 1.7vw, 1.18rem);
+  font-weight: 880;
+  overflow-wrap: anywhere;
+}
+
+.primaryButton,
+.secondaryButton,
+.partnerCta {
+  min-height: 46px;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 7px;
+  padding: 0 18px;
+  font-weight: 820;
+}
+
+.primaryButton {
+  border: 1px solid #171612;
+  background: #171612;
+  color: #fffaf0;
+}
+
+.secondaryButton,
+.partnerCta {
+  border: 1px solid #cfc4ae;
+  background: #fffaf0;
+  color: #171612;
+}
+
+.badge {
+  min-height: 32px;
+  gap: 7px;
+  border: 1px solid #d8ceb9;
+  border-radius: 999px;
+  padding: 0 11px;
+  background: #fbf6ea;
+  color: #5f5749;
+  font-size: 0.82rem;
+  font-weight: 720;
+}
+
+.claimPreview,
+.partnersBand,
+.detailModal,
+.openingModal,
+.walletDepositPanel,
+.statusBanner,
+.partnerGrid article,
+.packScene {
+  border: 1px solid #ddd5c3;
+  border-radius: 8px;
+  background: #fffaf0;
+  box-shadow: 0 14px 40px rgb(23 22 18 / 6%);
+}
+
+.walletDepositPanel {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.walletDepositPanel.compact {
+  padding: 12px;
+  box-shadow: none;
+}
+
+.walletDepositPanelLead {
+  display: grid;
+  gap: 4px;
+}
+
+.walletDepositPanelLead span,
+.walletDepositPanelLead small {
+  color: #756d5f;
+  font-size: 0.74rem;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.walletDepositPanelLead span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.walletDepositPanelLead strong {
+  color: #1f1d18;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  line-height: 1;
+}
+
+.walletDepositActions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr) 38px;
+  gap: 8px;
+}
+
+.walletDepositActions button {
+  min-height: 38px;
+  border: 1px solid #d1d8c9;
+  border-radius: 7px;
+  background: #fffdf7;
+  color: #1f1d18;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.walletDepositActions button:first-child {
+  border-color: #203d31;
+  background: #203d31;
+  color: #fffef8;
+}
+
+.walletDepositActions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.walletDepositPanel dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.walletDepositPanel dl div {
+  border: 1px solid #e2e4d9;
+  border-radius: 7px;
+  padding: 8px;
+  background: #fffdf7;
+}
+
+.walletDepositPanel dt {
+  color: #756d5f;
+  font-size: 0.7rem;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.walletDepositPanel dd {
+  margin: 3px 0 0;
+  color: #1f1d18;
+  font-weight: 850;
+}
+
+.walletDepositPanel p {
+  color: #5f5749;
+  font-size: 0.8rem;
+  line-height: 1.38;
+}
+
+.contentBand,
+.partnersBand {
+  padding: clamp(38px, 7vw, 78px) clamp(18px, 4vw, 52px);
+  display: grid;
+  gap: 24px;
+}
+
+/* The band's intro paragraph had NO measure at all, so the section's own width
+   set the line length: 86.0ch at 1440 and unchanged all the way out to 2560,
+   because the container is padding-clamped rather than measure-capped. It is
+   the longest line in the product (design-audit C6). The card copy inside
+   .partnerGrid article already sits at ~37ch and is untouched by this - the
+   child combinator keeps it to the intro. */
+.partnersBand > div > p {
+  max-width: var(--measure);
+}
+
+.contentBand {
+  border-bottom: 1px solid #ddd5c3;
+}
+
+.routeHero {
+  min-height: calc(100dvh - 148px);
+  padding: clamp(42px, 7vw, 84px) clamp(18px, 4vw, 52px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+  gap: clamp(18px, 4vw, 42px);
+  align-items: center;
+  border-bottom: 1px solid #ddd5c3;
+}
+
+.compactRoute {
+  min-height: 54dvh;
+}
+
+.routeHero > div:first-child {
+  display: grid;
+  gap: 18px;
+}
+
+/* PROSE MEASURE IS TYPOGRAPHIC, NOT LAYOUT (design-audit C6).
+   `max-width: 760px` was a layout number: it caps the COLUMN, so the line
+   length it produces drifts with every font-size change and is only accidental
+   at any given one. Measured at 1440 with the shipping 16px body it yielded
+   74.0ch here and 75.8ch on /inventory - just past the comfortable 45-75
+   range, and unanchored. `--measure` states the intent directly in the unit
+   the eye actually reads in, so the line length holds if the type scale moves.
+   66ch at 16px is ~645px, i.e. this visibly narrows the paragraph. */
+:root {
+  --measure: 66ch;
+}
+
+.routeHero p {
+  max-width: var(--measure);
+  color: #4b463b;
+  line-height: 1.6;
+}
+
+.routeHero > .livePoolPanel {
+  grid-column: 1 / -1;
+}
+
+.routeStats {
+  display: grid;
+  gap: 12px;
+}
+
+.routeStats div {
+  border: 1px solid #ddd5c3;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fffaf0;
+  box-shadow: 0 14px 40px rgb(23 22 18 / 6%);
+}
+
+.routeStats span {
+  color: #756d5f;
+  font-size: 0.78rem;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.routeStats strong {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  line-height: 1;
+}
+
+.soloPackLoopReadback {
+  grid-column: 1 / -1;
+  border: 1px solid #ddd5c3;
+  border-radius: 8px;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+  background: #fffaf0;
+  box-shadow: 0 14px 40px rgb(23 22 18 / 6%);
+}
+
+.soloPackLoopReadback > span,
+.soloPackLoopReadback dt {
+  color: #756d5f;
+  font-size: 0.78rem;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.soloPackLoopReadback strong {
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  line-height: 1.1;
+}
+
+.soloPackLoopReadback dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.soloPackLoopReadback dd {
+  margin-top: 4px;
+  font-weight: 820;
+}
+
+.inlineOdds {
+  padding: 12px;
+}
+
+.inventoryFlow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.inventoryFlow div {
+  min-height: 116px;
+  border: 1px solid #ddd5c3;
+  border-radius: 8px;
+  padding: 16px;
+  display: grid;
+  align-content: space-between;
+  background: #fffaf0;
+  font-weight: 780;
+}
+
+.customerClaimGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.customerClaimCard,
+.customerClaimEmpty {
+  background: #fffaf0;
+  border: 1px solid #ddd5c3;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding: 16px;
+}
+
+.customerClaimCard > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.customerClaimCard span,
+.customerClaimCard dt,
+.customerClaimEmpty span {
+  color: #756d5f;
+  font-size: 0.76rem;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.customerClaimCard strong {
+  color: #171612;
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.customerClaimCard dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.customerClaimCard dl div {
+  align-items: baseline;
+  border-top: 1px solid #e7decb;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.customerClaimCard dd {
+  color: #171612;
+  font-weight: 820;
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.customerClaimActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.customerClaimActions a,
+.customerClaimEmpty a {
+  align-items: center;
+  border: 1px solid #171612;
+  border-radius: 999px;
+  color: #171612;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 840;
+  min-height: 34px;
+  padding: 0 12px;
+  text-decoration: none;
+}
+
+.customerClaimActions a:first-child,
+.customerClaimEmpty a {
+  background: #171612;
+  color: #fffaf0;
+}
+
+.customerClaimEmpty {
+  align-items: center;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.internalAuthForm {
+  max-width: 680px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.internalAuthForm input {
+  min-height: 46px;
+  width: 100%;
+  border: 1px solid #cfc4ae;
+  border-radius: 7px;
+  padding: 0 14px;
+  background: #fffaf0;
+  color: #171612;
+  font: inherit;
+}
+
+.ownerPerformanceBand {
+  gap: 18px;
+}
+
+.ownerPerformanceHeader,
+.ownerPerformanceBadgeRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.ownerPerformanceBadgeRow {
+  justify-content: flex-end;
+}
+
+.ownerPerformanceBadge {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 999px;
+  padding: 0 10px;
+  background: rgb(255 255 255 / 6%);
+  color: #d8dde4;
+  font-size: 0.72rem;
+  font-weight: 860;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ownerMetricGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ownerMetricCard,
+.ownerProofBox {
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 8px;
+  background: rgb(16 21 29 / 82%);
+  color: #f7f1e6;
+  box-shadow: 0 18px 58px rgb(0 0 0 / 22%);
+}
+
+.ownerMetricCard {
+  min-height: 122px;
+  padding: 15px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.ownerMetricCard span,
+.ownerProofBox span,
+.ownerProofBox small,
+.ownerProofList {
+  color: #a8b2bd;
+}
+
+.ownerMetricCard span,
+.ownerProofBox span {
+  font-size: 0.72rem;
+  font-weight: 860;
+  text-transform: uppercase;
+}
+
+.ownerMetricCard strong {
+  color: #f7f1e6;
+  font-size: clamp(1.12rem, 2vw, 1.72rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.ownerMetricCard small {
+  color: #d8dde4;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.ownerPerformanceColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.ownerHealthList {
+  margin-bottom: 0;
+}
+
+.ownerProofGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.ownerProofBox {
+  min-height: 104px;
+  padding: 15px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.ownerProofBox.locked {
+  min-height: 128px;
+  align-content: center;
+}
+
+.ownerProofBox p {
+  margin: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.ownerProofBox strong {
+  color: #f7f1e6;
+  font-weight: 860;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.ownerProofBox small {
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.ownerResupplyDecisionBox {
+  gap: 12px;
+}
+
+.ownerDecisionRows {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ownerDecisionRows small {
+  min-height: 58px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 7px;
+  padding: 9px;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  background: rgb(255 255 255 / 5%);
+}
+
+.ownerDecisionRows b {
+  color: #e6c15a;
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.ownerProofList {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.ownerProofList li + li {
+  margin-top: 5px;
+}
+
+.errorText {
+  color: #9d372f;
+  font-weight: 760;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 8px;
+}
+
+.sectionHeading h2 {
+  max-width: 780px;
+}
+
+.partnerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.claimPreview {
+  min-height: 248px;
+  padding: 18px;
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+}
+
+.claimPreview.common {
+  border-color: #cfd8c0;
+}
+
+.claimPreview.rare {
+  border-color: #cbbd91;
+}
+
+.claimPreview.epic {
+  border-color: #bda56b;
+}
+
+.claimPreview.mythic {
+  border-color: #9d7d34;
+}
+
+.claimPreview.empty {
+  min-height: 160px;
+}
+
+.claimTop {
+  gap: 11px;
+}
+
+.claimTop div {
+  display: grid;
+  gap: 4px;
+}
+
+.claimTop span,
+.claimPreview dt,
+.resultStats dt {
+  color: #756d5f;
+  font-size: 0.76rem;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.claimPreview strong {
+  font-size: 1.32rem;
+}
+
+.claimPreview dl,
+.resultStats {
+  display: grid;
+  gap: 10px;
+}
+
+.claimPreview dl div,
+.resultStats div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid #e7decb;
+  padding-top: 9px;
+}
+
+.claimPreview dd,
+.resultStats dd {
+  color: #171612;
+  font-weight: 780;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.tokenAvatar {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid #171612;
+  border-radius: 50%;
+  background: #171612;
+  color: #fffaf0;
+  font-weight: 850;
+  overflow: hidden;
+}
+
+.tokenAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.token-troll {
+  background: #2a2924;
+}
+
+.token-neet {
+  background: #6d704b;
+}
+
+.token-claw {
+  background: #80633a;
+}
+
+.token-attn {
+  background: #1f3c35;
+}
+
+.decisionActions {
+  gap: 8px;
+}
+
+.decisionActions button {
+  min-height: 36px;
+  border: 1px solid #cfc4ae;
+  border-radius: 7px;
+  background: #f8f4e8;
+  color: #171612;
+  padding: 0 10px;
+  font-size: 0.82rem;
+  font-weight: 780;
+}
+
+.chaseAmount {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #665a3e;
+  border-radius: 8px;
+  padding: 18px;
+  background: #211f19;
+}
+
+.chaseAmount span,
+.chaseAmount small {
+  color: #d7bb6d;
+  font-size: 0.82rem;
+  font-weight: 780;
+}
+
+.chaseAmount strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  font-weight: 520;
+  line-height: 0.9;
+}
+
+.twoColumn {
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  align-items: start;
+}
+
+.secondaryButton.compact {
+  min-height: 40px;
+  padding: 10px 12px;
+  white-space: nowrap;
+}
+
+.partnersBand {
+  margin: clamp(34px, 6vw, 72px) clamp(18px, 4vw, 52px);
+  padding: clamp(28px, 5vw, 48px);
+}
+
+.partnersBand > div:first-child {
+  max-width: 860px;
+  display: grid;
+  gap: 14px;
+}
+
+.partnersBand p {
+  color: #4b463b;
+  line-height: 1.55;
+}
+
+.partnerGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.partnerGrid article {
+  min-height: 180px;
+  padding: 18px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.partnerTokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.partnerTokens div {
+  gap: 8px;
+  border: 1px solid #ddd5c3;
+  border-radius: 999px;
+  padding: 8px 12px 8px 8px;
+  background: #fbf6ea;
+}
+
+.partnerCta {
+  justify-self: start;
+}
+
+.disabledCta {
+  color: #7b7468;
+  cursor: not-allowed;
+  opacity: 0.78;
+}
+
+.footer {
+  min-height: 80px;
+  padding: 22px clamp(18px, 4vw, 52px);
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid #ddd5c3;
+  font-size: 0.86rem;
+}
+
+.statusBanner {
+  margin: 0 clamp(18px, 4vw, 52px);
+  min-height: 46px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #fff6dc;
+  color: #684a0f;
+  font-weight: 760;
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  background: rgb(23 22 18 / 52%);
+}
+
+.openingModal,
+.detailModal {
+  position: relative;
+  width: min(1040px, 100%);
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+}
+
+.openingModal {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 0.84fr);
+  gap: 0;
+}
+
+.detailModal {
+  padding: 26px;
+  display: grid;
+  gap: 22px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #cfc4ae;
+  border-radius: 50%;
+  background: #fffaf0;
+  color: #171612;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.sceneFallback,
+.packScene {
+  min-height: 560px;
+}
+
+.sceneFallback {
+  display: grid;
+  place-items: center;
+  color: #6d6659;
+}
+
+.packScene {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-right: 1px solid #ddd5c3;
+  border-radius: 8px 0 0 8px;
+  background:
+    radial-gradient(circle at center, rgb(199 166 91 / 12%), transparent 38%),
+    #f8f4e8;
+  perspective: 900px;
+}
+
+.scenePack,
+.sceneCard {
+  position: absolute;
+  width: min(260px, 58vw);
+  aspect-ratio: 0.72;
+  padding: 24px;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid #171612;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  box-shadow: 0 24px 70px rgb(23 22 18 / 14%);
+}
+
+.scenePack {
+  background: linear-gradient(135deg, #171612, #272319);
+  color: #fffaf0;
+  transform: rotateY(0deg) rotate(-2deg);
+}
+
+.sceneCard {
+  background: #fffaf0;
+  color: #171612;
+  opacity: 0;
+  transform: translateY(24px) rotateY(120deg);
+}
+
+.sceneCard::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgb(230 193 90 / 55%);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, rgb(10 14 20 / 92%), rgb(17 22 30 / 82%)),
+    radial-gradient(circle at 50% 28%, rgb(230 193 90 / 18%), transparent 44%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 8%),
+    0 16px 42px rgb(0 0 0 / 26%);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.94) rotate(-1deg);
+  transition:
+    opacity 180ms ease,
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.packScene.opening .scenePack {
+  animation: packRip 1.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.packScene.opening .sceneCard,
+.packScene.revealed .sceneCard {
+  animation: cardReveal 1.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.packScene.packScene--tear .scenePack,
+.packScene.packScene--unwrap .scenePack,
+.packScene.packScene--reveal .scenePack,
+.packScene.packScene--settle .scenePack,
+.packScene.packScene--post_reveal .scenePack {
+  animation: none;
+}
+
+.packScene.packScene--tear .scenePack {
+  transform: translate3d(-8px, -5px, 0) rotateY(-7deg) rotate(-5deg) scale(1.02);
+}
+
+.packScene.packScene--unwrap .scenePack {
+  opacity: 0.72;
+  transform: translate3d(-38px, -2px, 0) rotateY(-24deg) rotate(-7deg) scale(0.96);
+}
+
+.packScene.packScene--reveal .scenePack {
+  opacity: 0.28;
+  transform: translate3d(-68px, 8px, 0) rotateY(-42deg) rotate(-10deg) scale(0.88);
+}
+
+.packScene.packScene--settle .scenePack,
+.packScene.packScene--post_reveal .scenePack {
+  opacity: 0.16;
+  transform: translate3d(-92px, 20px, 0) rotateY(-54deg) rotate(-14deg) scale(0.82);
+}
+
+.packScene.packScene--tear .sceneCard,
+.packScene.packScene--unwrap .sceneCard,
+.packScene.packScene--reveal .sceneCard,
+.packScene.packScene--settle .sceneCard,
+.packScene.packScene--post_reveal .sceneCard {
+  animation: none;
+}
+
+.packScene.packScene--tear .sceneCard {
+  opacity: 0.22;
+  transform: translate3d(30px, 26px, 0) rotateY(74deg) rotate(6deg) scale(0.84);
+}
+
+.packScene.packScene--unwrap .sceneCard {
+  opacity: 0.56;
+  transform: translate3d(20px, 12px, 0) rotateY(42deg) rotate(4deg) scale(0.9);
+}
+
+.packScene.packScene--reveal .sceneCard {
+  opacity: 0.9;
+  transform: translate3d(10px, 0, 0) rotateY(16deg) rotate(-2deg) scale(0.96);
+}
+
+.packScene.packScene--reveal .sceneCard::after {
+  opacity: 0.88;
+  transform: scale(1) rotate(0deg);
+}
+
+.packScene.packScene--settle .sceneCard,
+.packScene.packScene--post_reveal .sceneCard {
+  opacity: 1;
+  transform: translate3d(0, -6px, 0) rotateY(0deg) rotate(1deg) scale(1.04);
+}
+
+.scenePack span,
+.sceneCard span {
+  color: #8a6f2b;
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.scenePack strong,
+.sceneCard strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.7rem, 7vw, 5.2rem);
+  line-height: 0.86;
+  font-weight: 520;
+}
+
+.scenePack small,
+.sceneCard small {
+  color: #6d6659;
+}
+
+.openingProgressRail {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  list-style: none;
+}
+
+.openingProgressStep {
+  position: relative;
+  min-height: 66px;
+  padding: 10px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  overflow: hidden;
+  border: 1px solid #ddd5c3;
+  border-radius: 8px;
+  background: #fbf6ea;
+  color: #171612;
+}
+
+.openingProgressStep::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c7b98f;
+}
+
+.openingProgressStep span {
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.openingProgressStep small {
+  color: #756d5f;
+  font-size: 0.78rem;
+  font-weight: 720;
+  line-height: 1.2;
+}
+
+.openingProgressStep.complete {
+  background: #f1ead9;
+  border-color: #c9b983;
+}
+
+.openingProgressStep.complete::before {
+  background: #6d704b;
+}
+
+.openingProgressStep.active {
+  border-color: #171612;
+  background: #fffaf0;
+  box-shadow: 0 12px 28px rgb(23 22 18 / 9%);
+}
+
+.openingProgressStep.active::before {
+  background: #171612;
+}
+
+.openingProgressStep.active::after {
+  content: "";
+  position: absolute;
+  inset: auto -18% 0 -18%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #8a6f2b, transparent);
+  animation: progressSweep 1.8s ease-in-out infinite;
+}
+
+.decisionPanel {
+  min-height: 560px;
+  padding: clamp(24px, 4vw, 42px);
+  display: grid;
+  align-content: center;
+  gap: 20px;
+}
+
+.decisionPanel h2 {
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+}
+
+.decisionPanel p {
+  color: #4b463b;
+  line-height: 1.55;
+}
+
+.revealQuoteTerms {
+  border: 1px solid #d8ceb9;
+  border-radius: 8px;
+  padding: 13px;
+  display: grid;
+  gap: 11px;
+  background: #fffdf7;
+}
+
+.economicReceiptPanel {
+  border: 1px solid #d8ceb9;
+  border-radius: 8px;
+  padding: 13px;
+  display: grid;
+  gap: 11px;
+  background: #f8fbf7;
+}
+
+.quoteRuntimePanel {
+  border: 1px solid #d8ceb9;
+  border-radius: 8px;
+  padding: 13px;
+  display: grid;
+  gap: 10px;
+  background: #fbfdf8;
+}
+
+.quoteRuntimeHeader {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.quoteRuntimePanel span,
+.quoteRuntimePanel dt {
+  color: #756d5f;
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.quoteRuntimePanel strong,
+.quoteRuntimePanel dd {
+  color: #171612;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.quoteRuntimePanel strong {
+  font-size: 1.12rem;
+  line-height: 1.05;
+  text-align: right;
+}
+
+.quoteRuntimePanel p,
+.quoteRuntimePanel small {
+  color: #5f5749;
+  font-size: 0.82rem;
+  line-height: 1.38;
+}
+
+.quoteRuntimePanel dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.quoteRuntimePanel dl div {
+  min-width: 0;
+  border-top: 1px solid #dfe7d5;
+  padding-top: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.economicReceiptHeader {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.economicReceiptPanel span,
+.economicReceiptPanel dt {
+  color: #756d5f;
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.economicReceiptPanel strong {
+  color: #171612;
+  font-size: 1.14rem;
+  font-weight: 850;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.economicReceiptPanel dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.economicReceiptPanel dl div {
+  min-width: 0;
+  border-top: 1px solid #dfe7d5;
+  padding-top: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.economicReceiptPanel dd {
+  color: #171612;
+  font-size: 0.88rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.economicReceiptPanel p {
+  color: #5f5749;
+  font-size: 0.82rem;
+  line-height: 1.38;
+}
+
+.revealQuoteTerms.expired {
+  border-color: #caa67c;
+  background: #fff7eb;
+}
+
+.revealQuoteTerms > div:first-child {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.revealQuoteTerms span,
+.revealQuoteTerms dt {
+  color: #756d5f;
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.revealQuoteTerms strong {
+  color: #171612;
+  font-size: 1.28rem;
+  font-weight: 850;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.revealQuoteTerms dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.revealQuoteTerms dl div {
+  min-width: 0;
+  border-top: 1px solid #e7decb;
+  padding-top: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.revealQuoteTerms dd {
+  color: #171612;
+  font-size: 0.9rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.revealQuoteTerms p {
+  color: #5f5749;
+  font-size: 0.84rem;
+  line-height: 1.38;
+}
+
+.quoteStatusRow {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.quoteRefreshButton {
+  border: 1px solid #1e1b16;
+  border-radius: 8px;
+  background: #1e1b16;
+  color: #fffdf8;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  font-weight: 850;
+  min-height: 34px;
+  padding: 0 12px;
+}
+
+.decisionActions {
+  flex-wrap: wrap;
+}
+
+.decisionActions button {
+  min-height: 44px;
+  padding: 0 14px;
+}
+
+.decisionActions button:nth-child(2) {
+  border-color: #171612;
+  background: #171612;
+  color: #fffaf0;
+}
+
+.decisionReceipt {
+  border: 1px solid #d9cfbd;
+  border-radius: 8px;
+  background: #f8f4e8;
+  display: grid;
+  gap: 10px;
+  padding: 13px;
+}
+
+.decisionReceipt > div:first-child {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.decisionReceipt span,
+.decisionReceipt dt {
+  color: #756d5f;
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.decisionReceipt strong,
+.decisionReceipt dd {
+  color: #171612;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.decisionReceipt p {
+  color: #4b463b;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.decisionReceipt dl {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.decisionReceipt dl div {
+  border-top: 1px solid #e4dac8;
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.decisionInventoryImpact {
+  border-top: 1px solid #e4dac8;
+  display: grid;
+  gap: 4px;
+  padding-top: 9px;
+}
+
+.decisionInventoryImpact > div:first-child {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.decisionInventoryImpact small {
+  color: #756d5f;
+  font-size: 0.78rem;
+  font-weight: 720;
+  overflow-wrap: anywhere;
+}
+
+.decisionSellbackSummary {
+  border-top: 1px solid #e4dac8;
+  display: grid;
+  gap: 9px;
+  padding-top: 10px;
+}
+
+.decisionSellbackSummary > div:first-child {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.decisionSellbackSummary dl {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.decisionSellbackSummary dl div {
+  border-top: 1px solid #e8decc;
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.decisionSellbackSummary small {
+  color: #756d5f;
+  font-size: 0.78rem;
+  font-weight: 720;
+  line-height: 1.35;
+}
+
+.decisionRoyaleBridge {
+  border-top: 1px solid #e4dac8;
+  display: grid;
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.decisionRoyaleBridge > div:first-child {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.decisionRoyaleBridge a {
+  align-items: center;
+  background: #171612;
+  border-radius: 999px;
+  color: #fffaf0;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 850;
+  justify-self: start;
+  min-height: 34px;
+  padding: 0 13px;
+  text-decoration: none;
+}
+
+.decisionReceiptActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.decisionReceiptActions a {
+  align-items: center;
+  background: #fffaf0;
+  border: 1px solid #d6ccb9;
+  border-radius: 999px;
+  color: #171612;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 840;
+  min-height: 34px;
+  padding: 0 12px;
+  text-decoration: none;
+}
+
+.decisionReceiptActions a:first-child {
+  background: #171612;
+  border-color: #171612;
+  color: #fffaf0;
+}
+
+.modalPaymentPlan {
+  display: grid;
+  gap: 14px;
+}
+
+.modalPaymentPlan .primaryButton {
+  justify-self: start;
+}
+
+.confirmationLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.84rem;
+}
+
+.detailColumns {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1.22fr);
+  gap: 20px;
+}
+
+.oddsList {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.oddsList div {
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #e7decb;
+}
+
+.oddsList small {
+  grid-column: 1 / -1;
+  color: #6d6659;
+}
+
+.topHits {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.internalGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.affiliateRemediationBand {
+  display: grid;
+  gap: 18px;
+}
+
+.affiliateRemediationGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.affiliateRemediationBox {
+  grid-column: span 3;
+}
+
+.affiliateRemediationRows {
+  grid-column: span 3;
+  margin: 0;
+}
+
+.internalStatCard,
+.internalList div {
+  border: 1px solid #ddd5c3;
+  border-radius: 8px;
+  background: #fffaf0;
+}
+
+.internalStatCard {
+  min-height: 128px;
+  padding: 16px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.internalStatCard span,
+.internalList span,
+.internalList small {
+  color: #6d6659;
+}
+
+.internalStatCard strong,
+.internalList strong {
+  font-weight: 800;
+}
+
+.internalList {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.internalList div {
+  min-height: 74px;
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+}
+
+@keyframes packRip {
+  0% {
+    transform: rotateY(0deg) rotate(-2deg) translateX(0);
+  }
+  55% {
+    transform: rotateY(-28deg) rotate(-4deg) translateX(-18px);
+  }
+  100% {
+    transform: rotateY(-48deg) rotate(-7deg) translateX(-46px);
+    opacity: 0.18;
+  }
+}
+
+@keyframes cardReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) rotateY(120deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-6px) rotateY(16deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateY(0deg);
+  }
+}
+
+@keyframes progressSweep {
+  0% {
+    transform: translateX(-42%);
+  }
+  50% {
+    transform: translateX(42%);
+  }
+  100% {
+    transform: translateX(-42%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media (max-width: 1120px) {
+  .siteHeader {
+    gap: 10px 16px;
+    grid-template-columns: 1fr auto;
+  }
+
+  .siteHeader nav {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 2px 0 4px;
+    scrollbar-width: thin;
+    white-space: nowrap;
+  }
+
+  
+
+  
+
+  .livePoolPanel dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .twoColumn,
+.openingModal,
+.detailColumns,
+.routeHero,
+.ownerPerformanceColumns {
+    grid-template-columns: 1fr;
+  }
+
+  .inventoryFlow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .customerClaimGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .internalGrid,
+  .ownerMetricGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .packScene {
+    border-right: 0;
+    border-bottom: 1px solid #ddd5c3;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .openingProgressRail {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .siteHeader {
+    padding: 12px 16px;
+  }
+
+  .siteHeader nav {
+    gap: 10px 14px;
+    flex-wrap: wrap;
+    white-space: normal;
+    font-size: 0.78rem;
+  }
+
+  .walletButton span {
+    max-width: 96px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .contentBand,
+.partnersBand {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  .livePoolPanel,
+.livePoolPanel dl,
+.partnerGrid,
+.topHits,
+.inventoryFlow,
+.customerClaimGrid,
+.internalGrid,
+.internalAuthForm,
+.ownerMetricGrid,
+.ownerDecisionRows,
+.ownerPerformanceColumns {
+    grid-template-columns: 1fr;
+  }
+
+  .ownerPerformanceHeader,
+  .ownerPerformanceBadgeRow {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .livePoolPanel {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  .footer {
+    flex-direction: column;
+    padding: 18px 16px;
+  }
+
+  .modalBackdrop {
+    padding: 10px;
+  }
+
+  .openingModal {
+    max-height: calc(100dvh - 20px);
+  }
+
+  .sceneFallback,
+  .packScene {
+    min-height: 300px;
+  }
+
+  .decisionPanel {
+    min-height: auto;
+    align-content: start;
+    gap: 14px;
+  }
+
+  .decisionPanel h2 {
+    font-size: 2.25rem;
+  }
+
+  .openingProgressRail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .openingProgressStep {
+    min-height: 58px;
+  }
+
+  .decisionActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .decisionActions button {
+    width: 100%;
+    min-height: 40px;
+  }
+
+  .revealQuoteTerms > div:first-child {
+    display: grid;
+    gap: 4px;
+  }
+
+  .quoteRuntimeHeader,
+  .economicReceiptHeader {
+    display: grid;
+    gap: 4px;
+  }
+
+  .revealQuoteTerms strong,
+  .quoteRuntimePanel strong {
+    text-align: left;
+  }
+
+  .economicReceiptPanel strong {
+    text-align: left;
+  }
+
+  .revealQuoteTerms dl {
+    grid-template-columns: 1fr;
+  }
+
+  .quoteRuntimePanel dl,
+  .economicReceiptPanel dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quoteStatusRow {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .decisionReceipt > div:first-child,
+  .decisionInventoryImpact > div:first-child,
+  .decisionReceipt dl,
+  .decisionSellbackSummary > div:first-child,
+  .decisionSellbackSummary dl {
+    display: grid;
+    gap: 6px;
+    grid-template-columns: 1fr;
+  }
+
+  .decisionReceiptActions,
+  .customerClaimActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .decisionReceiptActions a,
+  .customerClaimActions a,
+  .customerClaimEmpty a {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .customerClaimEmpty {
+    grid-template-columns: 1fr;
+  }
+
+  .customerClaimCard dl div {
+    align-items: start;
+    display: grid;
+    gap: 3px;
+  }
+
+  .customerClaimCard dd {
+    text-align: left;
+  }
+
+  .decisionActions button:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Final P0 consumer launch overrides. Keep after legacy rules. */
+:root,
+html,
+body {
+  background: #07090d;
+  color: #f7f1e6;
+}
+
+.siteShell {
+  color: #f7f1e6;
+  background:
+    linear-gradient(180deg, #090b10 0%, #10141b 42%, #141114 100%);
+}
+
+.siteHeader {
+  border-bottom-color: rgb(255 255 255 / 9%);
+  /* Perf: bumped opacity compensates for backdrop-filter removal above. */
+  background: rgb(7 9 13 / 96%);
+}
+
+.brandMark {
+  border-color: #e6c15a;
+  background: #e6c15a;
+  color: #090b10;
+}
+
+.brand small,
+.siteHeader nav,
+.sectionNote,
+.footer,
+.partnerTokens span {
+  color: #a8b2bd;
+}
+
+.walletButton {
+  border-color: rgb(255 255 255 / 14%);
+  background: #141922;
+  color: #f7f1e6;
+}
+
+.walletButton.connected {
+  border-color: #62d6a4;
+  background: #0f261e;
+}
+
+.eyebrow {
+  color: #e6c15a;
+  letter-spacing: 0;
+}
+
+h1,
+h2 {
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 920;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 680px;
+  font-size: 5.5rem;
+  line-height: 0.9;
+}
+
+h2 {
+  font-size: 3.4rem;
+  line-height: 0.96;
+}
+
+.heroText {
+  max-width: 600px;
+  color: #d8dde4;
+  font-size: 1.08rem;
+}
+
+.claimPreview,
+.detailModal,
+.openingModal,
+.customerClaimCard,
+.customerClaimEmpty,
+.internalStatCard,
+.internalList div,
+.routeStats div {
+  border-color: rgb(255 255 255 / 12%);
+  background: rgb(16 21 29 / 82%);
+  color: #f7f1e6;
+  box-shadow: 0 18px 58px rgb(0 0 0 / 28%);
+}
+
+.revealQuoteTerms span,
+.revealQuoteTerms dt,
+.decisionReceipt span,
+.decisionReceipt dt,
+.decisionSellbackSummary span,
+.decisionSellbackSummary dt,
+.openingProgressStep small,
+.claimPreview dl dt,
+.customerClaimCard dt,
+.routeStats span,
+.openingProgressStep small {
+  color: #a8b2bd;
+}
+
+.livePoolLead strong,
+.livePoolPanel dd,
+.claimPreview dl dd,
+.customerClaimCard dd,
+.routeStats strong {
+  color: #f7f1e6;
+  font-weight: 880;
+  overflow-wrap: anywhere;
+}
+
+.authReferralPanel {
+  max-width: 660px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.authReferralPanel.compact {
+  max-width: 760px;
+}
+
+.authReferralPanel > div {
+  min-width: 0;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 4px;
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 6%), rgb(16 21 29 / 84%)),
+    rgb(16 21 29 / 82%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 7%),
+    0 14px 36px rgb(0 0 0 / 18%);
+}
+
+.authReferralPanel .hostedAuthPreviewCard {
+  border-color: rgb(114 172 255 / 24%);
+  background:
+    linear-gradient(135deg, rgb(66 117 176 / 20%), rgb(16 21 29 / 86%)),
+    rgb(16 21 29 / 82%);
+}
+
+.authReferralPanel[data-hosted-auth-status="authenticated"] .hostedAuthPreviewCard,
+.authReferralPanel[data-hosted-auth-status="ready_for_login"] .hostedAuthPreviewCard {
+  border-color: rgb(80 210 154 / 38%);
+}
+
+.authReferralPanel span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #a8b2bd;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.authReferralPanel strong {
+  color: #f7f1e6;
+  font-size: 1rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.authReferralPanel small {
+  color: #c7d0d8;
+  line-height: 1.35;
+}
+
+.authReferralActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+
+.authReferralButton {
+  min-height: 34px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 8px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #171d27;
+  color: #f7f1e6;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.authReferralButton.primary {
+  justify-self: start;
+  border-color: rgb(243 75 88 / 62%);
+  background: linear-gradient(180deg, #ff6570, #d9263a);
+  color: #fff;
+}
+
+.authReferralButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.authReferralButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.inviteCodeLine {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+
+.livePoolPanel {
+  border-color: rgb(230 193 90 / 26%);
+  background:
+    linear-gradient(135deg, rgb(230 193 90 / 12%), rgb(16 21 29 / 78%)),
+    rgb(16 21 29 / 82%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 9%),
+    0 18px 58px rgb(0 0 0 / 28%);
+}
+
+.livePoolPanel dl div {
+  border-color: rgb(255 255 255 / 11%);
+  background: rgb(255 255 255 / 4%);
+}
+
+.livePoolLead small {
+  color: #c7d0d8;
+}
+
+.primaryButton,
+.secondaryButton,
+.partnerCta {
+  min-height: 48px;
+  border-radius: 8px;
+}
+
+.primaryButton {
+  border-color: #f34b58;
+  background: linear-gradient(180deg, #ff6570 0%, #d9263a 100%);
+  color: #fff;
+  box-shadow: 0 16px 34px rgb(243 75 88 / 24%);
+}
+
+.secondaryButton,
+.partnerCta {
+  border-color: rgb(255 255 255 / 16%);
+  background: #171d27;
+  color: #f7f1e6;
+}
+
+.badge {
+  border-color: rgb(255 255 255 / 12%);
+  background: rgb(255 255 255 / 6%);
+  color: #d8dde4;
+}
+
+.packStage {
+  position: relative;
+  width: min(540px, 94vw);
+  min-height: 640px;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+}
+
+.packGlow {
+  position: absolute;
+  left: 10%;
+  right: 2%;
+  bottom: 50px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 52%);
+  filter: blur(16px);
+  transform: rotate(-6deg);
+}
+
+.premiumPackObject {
+  position: relative;
+  z-index: 1;
+  width: min(390px, 78vw);
+  aspect-ratio: 0.68;
+  padding: 42px 34px 36px;
+  display: grid;
+  align-content: space-between;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 8px;
+  color: #f7f1e6;
+  background:
+    linear-gradient(90deg, transparent 0 18%, rgb(255 255 255 / 10%) 18% 19%, transparent 19%),
+    linear-gradient(135deg, #0b1018 0%, #1a2230 38%, #390f1b 70%, #0b1018 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(230 193 90 / 24%),
+    inset 0 22px 38px rgb(255 255 255 / 6%),
+    0 42px 110px rgb(0 0 0 / 52%);
+  transform: rotate(-4deg) translateX(-22px) translateZ(0);
+}
+
+.premiumPackObject::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.52;
+  background:
+    repeating-linear-gradient(100deg, transparent 0 18px, rgb(255 255 255 / 5%) 18px 20px),
+    linear-gradient(115deg, transparent 0 48%, rgb(94 210 255 / 18%) 50%, transparent 58%);
+  pointer-events: none;
+}
+
+.packCrimp {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background:
+    repeating-linear-gradient(90deg, rgb(230 193 90 / 22%) 0 8px, rgb(255 255 255 / 4%) 8px 16px),
+    #111620;
+}
+
+.packCrimp.top {
+  top: 0;
+}
+
+.packCrimp.bottom {
+  bottom: 0;
+}
+
+.packFoilSpine {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 23%;
+  width: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f5d87d, #b77927, #55d8ff, #f5d87d);
+  box-shadow: 0 0 18px rgb(230 193 90 / 34%);
+}
+
+.packKicker,
+.packBottomBand span,
+.heroFoilCard span,
+.stageChaseChip span {
+  color: #e6c15a;
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.premiumPackObject strong {
+  position: relative;
+  max-width: 250px;
+  font-size: 4.35rem;
+  font-weight: 950;
+  line-height: 0.88;
+}
+
+.premiumPackObject small {
+  position: relative;
+  max-width: 240px;
+  color: #d8dde4;
+  font-weight: 760;
+}
+
+.packBottomBand {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  /* .premiumPackObject renders nearly as tall as .packStage at both the
+     mobile (390) and desktop-console (>=981px) breakpoints, so this LAST row
+     ("$20 USDC" / "The Chase") sits right at the pack's bottom edge - almost
+     exactly where .heroRevealRail (Open/Reveal/Hit) is separately anchored
+     via packStage's own bottom offset. The two collide ("The Chase"/"Hit"
+     textOverlap, F5) at those breakpoints. .premiumPackObject's grid uses
+     align-content:space-between, so margin-bottom on the last row borrows
+     from that distributed gap - it lifts this label clear of the overlay
+     without changing the pack's own height or the reveal rail's position. */
+  margin-bottom: 20px;
+}
+
+.heroFoilCard {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 76px;
+  width: 196px;
+  min-height: 266px;
+  padding: 18px;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid rgb(230 193 90 / 62%);
+  border-radius: 8px;
+  background:
+    linear-gradient(140deg, rgb(255 255 255 / 16%), transparent 38%),
+    linear-gradient(180deg, #f7f1e6, #dfe8ee);
+  color: #10141b;
+  box-shadow:
+    0 18px 46px rgb(0 0 0 / 36%),
+    inset 0 0 0 5px rgb(230 193 90 / 18%);
+  transform: rotate(8deg) translateZ(0);
+}
+
+.heroFoilCard strong {
+  color: #10141b;
+  font-size: 2.55rem;
+  font-weight: 950;
+  line-height: 0.92;
+}
+
+.heroFoilCard small {
+  color: #344052;
+  font-size: 0.82rem;
+  font-weight: 780;
+}
+
+.stageChaseChip {
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  bottom: 84px;
+  min-width: 150px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgb(230 193 90 / 44%);
+  border-radius: 8px;
+  background: rgb(9 11 16 / 88%);
+  box-shadow: 0 16px 38px rgb(0 0 0 / 36%);
+}
+
+.stageChaseChip strong {
+  color: #f7f1e6;
+  font-size: 1.18rem;
+}
+
+.contentBand {
+  border-bottom-color: rgb(255 255 255 / 9%);
+  background: #0f131a;
+}
+
+.contentBand:nth-of-type(even) {
+  background: #121820;
+}
+
+.routeHero {
+  border-color: rgb(255 255 255 / 9%);
+  background:
+    linear-gradient(115deg, rgb(230 193 90 / 10%), transparent 42%),
+    #0d1218;
+}
+
+.routeHero p {
+  color: #d8dde4;
+}
+
+.chaseAmount {
+  background: #090d13;
+  color: #f7f1e6;
+}
+
+.modalBackdrop {
+  /* Perf: full-viewport backdrop-filter is expensive every frame the modal is
+     open (and during its own fade-in). A darker solid-ish scrim reads the
+     same without the per-frame re-blur cost. */
+  background: rgb(0 0 0 / 86%);
+}
+
+.openingModal {
+  border: 1px solid rgb(255 255 255 / 12%);
+  background: #0b0f15;
+  box-shadow: 0 28px 96px rgb(0 0 0 / 62%);
+}
+
+.closeButton {
+  border-color: rgb(255 255 255 / 18%);
+  background: #151b24;
+  color: #f7f1e6;
+}
+
+.packScene {
+  border-color: rgb(255 255 255 / 10%);
+  background:
+    linear-gradient(180deg, #101721 0%, #080b10 100%);
+}
+
+.decisionPanel {
+  background: #0f141c;
+}
+
+.decisionPanel h2 {
+  color: #f7f1e6;
+  font-size: 3.5rem;
+}
+
+.decisionPanel p {
+  color: #d8dde4;
+}
+
+.openingProgressStep {
+  border-color: rgb(255 255 255 / 12%);
+  background: #151b24;
+  color: #f7f1e6;
+}
+
+.openingProgressStep.complete {
+  border-color: rgb(98 214 164 / 42%);
+  background: rgb(98 214 164 / 10%);
+}
+
+.openingProgressStep.active {
+  border-color: #e6c15a;
+  background: rgb(230 193 90 / 12%);
+}
+
+.revealQuoteTerms,
+.decisionReceipt {
+  border-color: rgb(255 255 255 / 12%);
+  background: #151b24;
+}
+
+.revealQuoteTerms strong,
+.revealQuoteTerms dd,
+.decisionReceipt strong,
+.decisionReceipt dd {
+  color: #f7f1e6;
+}
+
+.quoteRefreshButton {
+  border-color: #e6c15a;
+  background: #e6c15a;
+  color: #080b10;
+}
+
+.decisionActions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.decisionActions button,
+.secondaryDecisionActions button {
+  min-height: 46px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 8px;
+  background: #1a2230;
+  color: #f7f1e6;
+  font-weight: 860;
+}
+
+.decisionActions button:nth-child(1) {
+  border-color: #62d6a4;
+  background: linear-gradient(180deg, #62d6a4, #188b63);
+  color: #06100c;
+}
+
+.decisionActions button:nth-child(2) {
+  border-color: #f34b58;
+  background: linear-gradient(180deg, #ff6570, #d9263a);
+  color: #fff;
+}
+
+.decisionActions button:nth-child(3) {
+  border-color: #e6c15a;
+  background: linear-gradient(180deg, #f5d87d, #c7922e);
+  color: #0b0f15;
+}
+
+.secondaryDecisionActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.secondaryDecisionActions button {
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.resultShareMoment {
+  align-items: center;
+  border: 1px solid rgb(230 193 90 / 18%);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgb(230 193 90 / 7%), rgb(21 29 42 / 78%));
+}
+
+.resultShareMoment div {
+  display: grid;
+  gap: 2px;
+}
+
+.resultShareMoment span {
+  color: #f7f1e6;
+  font-size: 0.85rem;
+  font-weight: 880;
+}
+
+.resultShareMoment small {
+  color: #a8b2bd;
+  font-size: 0.76rem;
+  font-weight: 720;
+}
+
+.resultShareMoment button,
+.secondaryDecisionActions button:first-child {
+  border-color: rgb(230 193 90 / 34%);
+  background: linear-gradient(180deg, #253146, #151d2a);
+  color: #f7f1e6;
+}
+
+.decisionActions button:disabled,
+.secondaryDecisionActions button:disabled,
+.primaryButton:disabled {
+  opacity: 0.58;
+}
+
+.decisionClaimCard {
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  display: grid;
+  gap: 4px;
+  padding-top: 9px;
+}
+
+.decisionClaimCard small {
+  color: #a8b2bd;
+  font-size: 0.78rem;
+  font-weight: 720;
+  overflow-wrap: anywhere;
+}
+
+.decisionReceiptActions a {
+  border-color: rgb(255 255 255 / 14%);
+  background: #1a2230;
+  color: #f7f1e6;
+}
+
+.decisionReceiptActions a:first-child {
+  border-color: #e6c15a;
+  background: #e6c15a;
+  color: #090b10;
+}
+
+.footer {
+  border-top-color: rgb(255 255 255 / 9%);
+  background: #090b10;
+}
+
+@media (max-width: 1120px) {
+  h1 {
+    font-size: 4.4rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  
+
+  /* Grid-blowout guard: .heroCopy's own track shrinks correctly here (the
+     "minmax(0, 1fr)" column), but a plain block child defaults to
+     min-width:auto, which sizes it to its CONTENT's min-content width - for
+     .heroChaseReadback's nested 2-col grid (min 180px + a 3-stat dl) that is
+     wider than the shrunk track, so it overflowed past .heroCopy's right edge
+     into .packHeroVisual's column (textOverlap: "What's Inside"/"Pro", F5).
+     min-width:0 on every hero panel lets each one actually shrink to fit.
+
+     RESTORED 2026-08-08 (design-audit C7). BOTH comment delimiters were lost
+     here, so the middle lines of this comment were being parsed as a selector
+     and the `.heroCopy > *` prelude was swallowed into that prose. Because the
+     opener and the closer went together the file still read "balanced", which
+     is why scripts/checkBlockComments.mjs could not see it; that guard now has
+     a CSS prelude check that does. Verified inert before AND after: the
+     mangled prelude was an invalid selector list (an unmatched paren plus an
+     unknown `:auto` pseudo-class, which drops the whole rule), and .heroCopy /
+     .heroChaseReadback / .packHeroVisual no longer exist anywhere in apps/web
+     — the legacy landing hero this guarded was pruned. Kept rather than
+     deleted so the repair stays a pure syntax restore. */
+  .heroCopy > * {
+    min-width: 0;
+  }
+
+  
+}
+
+@media (max-width: 720px) {
+  .siteHeader {
+    position: relative;
+  }
+
+  .siteHeader nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  
+
+  
+
+  .packStage {
+    width: min(360px, 94vw);
+    min-height: 360px;
+  }
+
+  .premiumPackObject {
+    width: 240px;
+    padding: 28px 22px 24px;
+  }
+
+  .premiumPackObject strong {
+    font-size: 2.34rem;
+  }
+
+  .heroFoilCard {
+    right: 10px;
+    bottom: 46px;
+    width: 144px;
+    min-height: 192px;
+    padding: 12px;
+  }
+
+  .heroFoilCard strong {
+    font-size: 1.55rem;
+  }
+
+  .stageChaseChip {
+    left: 12px;
+    bottom: 50px;
+    min-width: 112px;
+  }
+
+  h1 {
+    font-size: 3rem;
+    line-height: 0.94;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  .heroText {
+    font-size: 0.98rem;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  .authReferralPanel,
+  .authReferralPanel.compact {
+    max-width: none;
+    grid-template-columns: 1fr;
+  }
+
+  .authReferralActions,
+  .authReferralButton {
+    width: 100%;
+  }
+
+  
+
+  
+
+  .sceneFallback,
+  .packScene {
+    min-height: 320px;
+  }
+
+  .decisionPanel h2 {
+    font-size: 2.18rem;
+  }
+
+  .decisionActions {
+    grid-template-columns: 1fr;
+  }
+
+  .secondaryDecisionActions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .resultShareMoment {
+    grid-template-columns: 1fr;
+  }
+
+  .resultShareMoment button {
+    min-height: 40px;
+    width: 100%;
+  }
+}
+
+/* UI + Motion benchmark slice: route-scoped neutral product surfaces.
+ *
+ * NOT THE GAME (root-entry wave, 2026-07-28). Every royale surface renders as
+ * `<main class="siteShell routeShell royaleLabShell">`, so this LIGHT legacy
+ * gradient (#f6f8f3 -> #eef2ea) was the shell painting under the whole game.
+ * It is normally hidden by the board's own opaque section, but the board is a
+ * LAZY chunk behind `<Suspense fallback={null}identical),
+i.e. a pre-existing legacy-CSS bleed onto the game
+ * shell,
+not a root-entry regression — but the bare domain is now the game's
+ * front door,
+so it is the first thing a cold visitor sees.
+ *
+ * `:not(.royaleLabShell)` keeps the benchmark surface for the legacy single-pack
+ * route and drops the royale shell back to the dark `.siteShell` surface below.
+ */
+.routeShell.siteShell:not(.royaleLabShell) {
+  background:
+    radial-gradient(circle at 52% 12%, rgb(47 91 72 / 12%), transparent 34%),
+    linear-gradient(180deg, #f6f8f3 0%, #eef2ea 100%);
+  color: #171915;
+}
+
+/* Explicit dark shell for every royale surface, so the pre-board frames paint
+ * the app background instead of a UA/legacy light one regardless of which CSS
+ * chunk has landed. Mirrors `.siteShell` in the "Final P0 consumer launch
+ * overrides" block. */
+.routeShell.siteShell.royaleLabShell {
+  background: linear-gradient(180deg, #090b10 0%, #10141b 42%, #141114 100%);
+  color: #f7f1e6;
+}
+
+.routeShell .siteHeader {
+  background: rgb(255 255 255 / 92%);
+  border-bottom-color: #dce2d8;
+  color: #171915;
+}
+
+.routeShell .brandMark {
+  width: auto;
+  min-width: 42px;
+  padding: 0 9px;
+  border-color: #203d31;
+  background: #203d31;
+  color: #fffef8;
+  font-size: 0.72rem;
+}
+
+.routeShell .brand strong,
+.routeShell .siteHeader nav a,
+.routeShell .walletButton,
+.routeShell h1,
+.routeShell h2,
+.routeShell h3 {
+  color: #171915;
+}
+
+.routeShell .brand small,
+.routeShell .sectionNote,
+.routeShell .footer,
+.routeShell .routeHero p,
+.routeShell .heroText {
+  color: #566158;
+}
+
+.routeShell .siteHeader nav {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.routeShell .siteHeader nav::-webkit-scrollbar {
+  display: none;
+}
+
+.routeShell .walletButton,
+.routeShell .secondaryButton,
+.routeShell .partnerCta {
+  border-color: #ccd5c9;
+  background: #fffef8;
+  color: #171915;
+  box-shadow: none;
+}
+
+.routeShell .primaryButton {
+  border-color: #203d31;
+  background: #203d31;
+  color: #fffef8;
+  box-shadow: 0 12px 30px rgb(32 61 49 / 14%);
+}
+
+.routeShell .primaryButton:hover:not(:disabled),
+.routeShell .secondaryButton:hover:not(:disabled),
+.routeShell .walletButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.routeShell .primaryButton:active:not(:disabled),
+.routeShell .secondaryButton:active:not(:disabled),
+.routeShell .walletButton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.routeShell .walletDepositPanel {
+  border-color: #d6ded1;
+  background: #fffef8;
+  box-shadow: 0 14px 34px rgb(32 61 49 / 7%);
+}
+
+.routeShell .walletDepositActions button:first-child {
+  border-color: #203d31;
+  background: #203d31;
+}
+
+.routeShell .eyebrow,
+.routeShell .routeStats span,
+.routeShell .soloPackLoopReadback > span,
+.routeShell .soloPackLoopReadback dt,
+.routeShell .livePoolLead span,
+.routeShell .livePoolPanel dt,
+.routeShell .claimPreview dt,
+.routeShell .claimTop span,
+.routeShell .oddsList span,
+.routeShell .sectionHeading .eyebrow {
+  color: #3f5f4e;
+  letter-spacing: 0;
+}
+
+.singlePackShell .singlePackHero {
+  grid-template-columns: minmax(280px, 0.76fr) minmax(330px, 0.9fr) minmax(260px, 0.48fr);
+  gap: 30px;
+  align-items: center;
+  min-height: calc(100dvh - 68px);
+  border-bottom-color: #dce2d8;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 66%), rgb(255 255 255 / 34%)),
+    radial-gradient(circle at 52% 42%, rgb(47 91 72 / 10%), transparent 38%);
+}
+
+.singlePackShell .singlePackHero > div:first-child {
+  display: grid;
+  gap: 18px;
+  align-self: center;
+}
+
+.singlePackShell .singlePackHero h1 {
+  color: #171915;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 5.6rem;
+  font-weight: 880;
+  line-height: 0.9;
+}
+
+.singlePackShell .singlePackHero p {
+  max-width: 50ch;
+  font-size: 1rem;
+}
+
+.singlePackObjectColumn {
+  display: grid;
+  gap: 14px;
+  align-self: center;
+  min-width: 0;
+}
+
+.singlePackObjectColumn .packStage {
+  width: min(390px, 88vw);
+  min-height: 500px;
+}
+
+.singlePackObjectColumn .packGlow {
+  background: rgb(32 61 49 / 18%);
+  filter: blur(18px);
+}
+
+.singlePackObjectColumn .premiumPackObject {
+  width: min(286px, 72vw);
+  border-color: #405c4e;
+  background:
+    linear-gradient(90deg, transparent 0 16%, rgb(255 255 255 / 10%) 16% 17%, transparent 17%),
+    repeating-linear-gradient(102deg, rgb(255 255 255 / 5%) 0 2px, transparent 2px 18px),
+    linear-gradient(135deg, #17211c 0%, #263c31 54%, #111612 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 10%),
+    inset 0 22px 42px rgb(255 255 255 / 8%),
+    0 28px 70px rgb(32 61 49 / 24%);
+  transform: rotate(-2deg) translateZ(0);
+}
+
+.singlePackObjectColumn .packFoilSpine {
+  background: linear-gradient(180deg, #d8dfd2, #789281, #d8dfd2);
+  box-shadow: none;
+}
+
+.singlePackObjectColumn .packCrimp {
+  background:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 18%) 0 8px, rgb(0 0 0 / 7%) 8px 16px),
+    #1c2b23;
+}
+
+.singlePackObjectColumn .packKicker,
+.singlePackObjectColumn .packBottomBand span,
+.singlePackObjectColumn .heroFoilCard span,
+.singlePackObjectColumn .stageChaseChip span {
+  color: #d8dfd2;
+  letter-spacing: 0;
+}
+
+.singlePackObjectColumn .packKicker {
+  text-transform: none;
+}
+
+.singlePackObjectColumn .premiumPackObject strong {
+  color: #fffef8;
+  font-size: 3.45rem;
+  font-weight: 880;
+}
+
+.singlePackObjectColumn .premiumPackObject small {
+  color: rgb(255 254 248 / 76%);
+}
+
+.singlePackObjectColumn .heroFoilCard {
+  right: 10px;
+  bottom: 54px;
+  width: 168px;
+  min-height: 224px;
+  border-color: #d6ded1;
+  background: #fffef8;
+  color: #171915;
+  box-shadow: 0 18px 42px rgb(32 61 49 / 16%);
+}
+
+.singlePackObjectColumn .heroFoilCard strong,
+.singlePackObjectColumn .heroFoilStats,
+.singlePackObjectColumn .heroFoilStats dd {
+  color: #171915;
+}
+
+.singlePackObjectColumn .heroFoilCard small {
+  color: #566158;
+}
+
+.singlePackObjectColumn .stageChaseChip {
+  left: 2px;
+  bottom: 64px;
+  border-color: #d6ded1;
+  background: #fffef8;
+  color: #171915;
+  box-shadow: 0 14px 34px rgb(32 61 49 / 12%);
+}
+
+.singlePackObjectColumn .stageChaseChip strong {
+  color: #171915;
+}
+
+.singlePackObjectColumn .livePoolPanel,
+.singlePackShell .routeStats div,
+.singlePackShell .soloPackLoopReadback,
+.singlePackShell .claimPreview,
+.singlePackShell .oddsList,
+.singlePackShell .topHits .claimPreview {
+  border-color: #d6ded1;
+  background: #fffef8;
+  color: #171915;
+  box-shadow: 0 14px 38px rgb(32 61 49 / 8%);
+}
+
+.singlePackShell .routeStats strong,
+.singlePackShell .soloPackLoopReadback strong,
+.singlePackShell .soloPackLoopReadback dd,
+.singlePackShell .livePoolLead strong,
+.singlePackShell .livePoolPanel dd,
+.singlePackShell .claimPreview strong,
+.singlePackShell .claimPreview dd,
+.singlePackShell .oddsList strong,
+.singlePackShell .oddsList small {
+  color: #171915;
+}
+
+.singlePackShell .soloPackLoopReadback p,
+.singlePackShell .livePoolLead small,
+.singlePackShell .claimPreview small {
+  color: #566158;
+}
+
+.singlePackShell .soloPackLoopReadback {
+  grid-column: 1 / -1;
+}
+
+.singlePackShell .soloPackLoopReadback dl {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.royaleLabShell .walletDepositPanel {
+  border-color: #d9e1d6;
+  background: #f6f8f3;
+  color: #171915;
+}
+
+.royaleLabShell .walletDepositPanelLead span,
+.royaleLabShell .walletDepositPanelLead small,
+.royaleLabShell .walletDepositPanel dt,
+.royaleLabShell .walletDepositPanel p {
+  color: #566158;
+}
+
+.royaleLabShell .walletDepositPanelLead strong,
+.royaleLabShell .walletDepositPanel dd {
+  color: #171915;
+}
+
+.royaleLabShell .walletDepositPanel dl div,
+.royaleLabShell .walletDepositActions button {
+  border-color: #d9e1d6;
+  background: #fffef8;
+  color: #171915;
+}
+
+.royaleLabShell .walletDepositActions button:first-child {
+  border-color: #203d31;
+  background: #203d31;
+  color: #fffef8;
+}
+
+/* Pack Royale route: player-first room replacing the proof dashboard as the default view. */
+
+.royaleLabShell .siteHeader {
+  grid-template-columns: minmax(170px, 1fr) auto;
+  min-height: 50px;
+  padding: 8px clamp(14px, 3vw, 36px);
+}
+
+.royaleLabShell .siteHeader nav {
+  display: none;
+}
+
+.royaleLabShell .brand {
+  gap: 8px;
+}
+
+.routeShell.royaleLabShell .brandMark {
+  min-width: 34px;
+  height: 30px;
+  padding: 0 7px;
+  border-radius: 6px;
+  font-size: 0.66rem;
+}
+
+.royaleLabShell .brand strong {
+  font-size: 0.86rem;
+  line-height: 1;
+}
+
+.royaleLabShell .walletButton {
+  min-height: 34px;
+  padding: 0 11px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.royaleLabShell .brand small {
+  display: none;
+}
+
+.royalePackStack {
+  position: relative;
+  display: block;
+  height: 112px;
+  margin-bottom: 3px;
+}
+
+.royalePackStack i {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 72px;
+  height: 96px;
+  border: 1px solid rgb(16 20 17 / 16%);
+  border-radius: 7px;
+  background:
+    linear-gradient(160deg, rgb(255 255 255 / 56%), transparent 32%),
+    linear-gradient(180deg, #153d2c 0%, #24523f 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 22%),
+    0 12px 24px rgb(16 20 17 / 15%);
+  transform: translateX(-50%) rotate(-7deg);
+}
+
+.royalePackStack i::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 5px;
+}
+
+.royalePackStack i:nth-child(2) {
+  background:
+    linear-gradient(160deg, rgb(255 255 255 / 58%), transparent 32%),
+    linear-gradient(180deg, #f0c85a 0%, #d9a92f 100%);
+  transform: translateX(-50%) translateY(-3px) rotate(3deg);
+}
+
+.royalePackStack i:nth-child(3) {
+  background:
+    linear-gradient(160deg, rgb(255 255 255 / 54%), transparent 32%),
+    linear-gradient(180deg, #fbfbf8 0%, #e7ece6 100%);
+  transform: translateX(-50%) translateY(2px) rotate(10deg);
+}
+
+@media (max-width: 1180px) {
+  .singlePackShell .singlePackHero {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr);
+  }
+
+  .singlePackShell .routeStats {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .royalePackStack {
+    height: 104px;
+  }
+
+  .royalePackStack i {
+    width: 68px;
+    height: 92px;
+  }
+}
+
+@media (max-width: 780px) {
+  .routeShell .siteHeader {
+    align-items: start;
+  }
+
+  .singlePackShell .singlePackHero {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    min-height: auto;
+    padding-top: 34px;
+  }
+
+  .singlePackShell .singlePackHero h1 {
+    font-size: 3.4rem;
+  }
+
+  .singlePackObjectColumn {
+    order: -1;
+  }
+
+  .singlePackObjectColumn .packStage {
+    min-height: 430px;
+  }
+
+  .singlePackShell .routeStats,
+  .singlePackShell .soloPackLoopReadback dl {
+    grid-template-columns: 1fr;
+  }
+
+  .singlePackObjectColumn .livePoolPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .royalePackStack {
+    height: 86px;
+  }
+
+  .royalePackStack i {
+    top: 8px;
+    width: 58px;
+    height: 78px;
+  }
+}
+
+/* UI + Motion benchmark slice: neutral route-scoped opening modal. */
+.routeShell .modalBackdrop {
+  /* Perf: no backdrop-filter, see .modalBackdrop above. Opacity bumped well
+     past the old 34% since there's no blur left to soften what's behind it. */
+  background: rgb(23 29 24 / 74%);
+}
+
+.routeShell .openingModal,
+.routeShell .openingModal[data-opening-stage="opening"],
+.routeShell .openingModal[data-opening-stage="revealed"] {
+  border-color: #d6ded1;
+  background:
+    radial-gradient(circle at 28% 18%, rgb(47 91 72 / 10%), transparent 32%),
+    linear-gradient(180deg, #fffef8 0%, #f1f5ef 100%);
+  color: #171915;
+  box-shadow: 0 30px 90px rgb(32 61 49 / 18%);
+}
+
+.routeShell .openingModal .closeButton {
+  border-color: #ccd5c9;
+  background: #fffef8;
+  color: #171915;
+  box-shadow: 0 10px 28px rgb(32 61 49 / 12%);
+}
+
+.routeShell .openingModal .packScene,
+.routeShell .openingModal[data-opening-stage="opening"] .packScene,
+.routeShell .openingModal[data-opening-stage="revealed"] .packScene {
+  border-right-color: #d6ded1;
+  background:
+    radial-gradient(circle at 50% 32%, rgb(47 91 72 / 12%), transparent 36%),
+    linear-gradient(180deg, #f7faf4 0%, #edf2e9 100%);
+  box-shadow:
+    inset -1px 0 0 rgb(32 61 49 / 8%),
+    inset 0 0 52px rgb(32 61 49 / 8%);
+}
+
+.routeShell .openingModal .decisionPanel,
+.routeShell .openingModal[data-opening-stage="opening"] .decisionPanel {
+  background: #fffef8;
+  color: #171915;
+}
+
+.routeShell .openingModal .decisionPanel h2 {
+  color: #171915;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 880;
+  letter-spacing: 0;
+}
+
+.routeShell .openingModal .decisionPanel p,
+.routeShell .openingModal .openingMotionLead small,
+.routeShell .openingModal .openingLoopHint,
+.routeShell .openingModal .confirmationLine,
+.routeShell .openingModal .resultPayoutHero small,
+.routeShell .openingModal .resultShareMoment small,
+.routeShell .openingModal .resultChaseMomentum b,
+.routeShell .openingModal .revealQuoteTerms p,
+.routeShell .openingModal .quoteRuntimePanel p,
+.routeShell .openingModal .quoteRuntimePanel small {
+  color: #566158;
+}
+
+.routeShell .openingModal .eyebrow,
+.routeShell .openingModal .openingMotionLead span,
+.routeShell .openingModal .resultMomentKicker,
+.routeShell .openingModal .resultPayoutHero span,
+.routeShell .openingModal .resultChaseMomentum > span,
+.routeShell .openingModal .resultHitCard > span,
+.routeShell .openingModal .resultHitCard small,
+.routeShell .openingModal .resultHitCard div span,
+.routeShell .openingModal .revealQuoteTerms span,
+.routeShell .openingModal .revealQuoteTerms dt,
+.routeShell .openingModal .quoteRuntimePanel span,
+.routeShell .openingModal .quoteRuntimePanel dt,
+.routeShell .openingModal .resultShareMoment span {
+  color: #3f5f4e;
+  letter-spacing: 0;
+}
+
+.routeShell .openingModal .openingProgressStep {
+  border-color: #d9e1d6;
+  background: #f7faf4;
+  color: #171915;
+}
+
+.routeShell .openingModal .openingProgressStep small {
+  color: #566158;
+}
+
+.routeShell .openingModal .openingProgressStep.complete {
+  border-color: #b8c9b9;
+  background: #e9f2e8;
+}
+
+.routeShell .openingModal .openingProgressStep.complete::before,
+.routeShell .openingModal .openingProgressStep.active::before {
+  background: #203d31;
+}
+
+.routeShell .openingModal .openingProgressStep.active {
+  border-color: #203d31;
+  background: #fffef8;
+  box-shadow: 0 12px 30px rgb(32 61 49 / 10%);
+}
+
+.routeShell .openingModal .openingProgressStep.active::after {
+  background: linear-gradient(90deg, transparent, #203d31, transparent);
+}
+
+.routeShell .openingModal .openingMotionStrip,
+.routeShell .openingModal .openingMotionStrip.turbo,
+.routeShell .openingModal .openingMotionStrip.rare,
+.routeShell .openingModal .openingMotionStrip.legendary,
+.routeShell .openingModal[data-opening-stage="opening"] .openingMotionStrip,
+.routeShell .openingModal[data-opening-stage="revealed"] .openingMotionStrip {
+  border-color: #d6ded1;
+  background: #f7faf4;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.routeShell .openingModal .openingMotionLead strong {
+  color: #171915;
+}
+
+.routeShell .openingModal .openingBeatRail span {
+  border-color: #d9e1d6;
+  background: #fffef8;
+  color: #566158;
+}
+
+.routeShell .openingModal .openingBeatRail span.active,
+.routeShell .openingModal .openingBeatRail span.loopReady {
+  border-color: #203d31;
+  background: #203d31;
+  color: #fffef8;
+}
+
+.routeShell .openingModal .openingBeatRail span.complete {
+  border-color: #b8c9b9;
+  background: #e9f2e8;
+  color: #203d31;
+}
+
+.routeShell .openingModal .resultMomentHeader,
+.routeShell .openingModal .resultMomentHeader.chaseHit,
+.routeShell .openingModal .resultPayoutHero,
+.routeShell .openingModal[data-opening-stage="revealed"] .resultPayoutHero,
+.routeShell .openingModal .resultChaseMomentum,
+.routeShell .openingModal .resultChaseMomentum.hit_reset,
+.routeShell .openingModal .revealQuoteTerms,
+.routeShell .openingModal .quoteRuntimePanel,
+.routeShell .openingModal .resultShareMoment {
+  border-color: #d6ded1;
+  background: #fffef8;
+  color: #171915;
+  box-shadow: 0 14px 34px rgb(32 61 49 / 8%);
+}
+
+.routeShell .openingModal .resultMomentHeader::before,
+.routeShell .openingModal .resultChaseMomentum::before {
+  opacity: 0.18;
+}
+
+.routeShell .openingModal .resultMomentHeader strong,
+.routeShell .openingModal .resultPayoutHero strong,
+.routeShell .openingModal .resultChaseMomentum strong,
+.routeShell .openingModal .resultChaseMomentum em,
+.routeShell .openingModal .revealQuoteTerms strong,
+.routeShell .openingModal .revealQuoteTerms dd,
+.routeShell .openingModal .quoteRuntimePanel strong,
+.routeShell .openingModal .quoteRuntimePanel dd {
+  color: #171915;
+}
+
+.routeShell .openingModal .resultMomentHeader p {
+  color: #424b43;
+}
+
+.routeShell .openingModal .resultMomentPills span,
+.routeShell .openingModal .resultDecisionStack .resultStats div,
+.routeShell .openingModal .resultChaseMomentum p,
+.routeShell .openingModal .revealQuoteTerms dl div,
+.routeShell .openingModal .quoteRuntimePanel dl div {
+  border-color: #d9e1d6;
+  background: #f7faf4;
+  color: #171915;
+}
+
+.routeShell .openingModal .motionDecisionRail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.35fr) minmax(0, 0.95fr);
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #d6ded1;
+  border-radius: 8px;
+  background: #f7faf4;
+  box-shadow: 0 14px 34px rgb(32 61 49 / 8%);
+}
+
+.routeShell .openingModal .motionDecisionRail div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 7px;
+  row-gap: 2px;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #d9e1d6;
+  border-radius: 8px;
+  background: #fffef8;
+}
+
+.routeShell .openingModal .motionDecisionRail svg {
+  color: #203d31;
+}
+
+.routeShell .openingModal .motionDecisionRail span {
+  color: #3f5f4e;
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.routeShell .openingModal .motionDecisionRail strong {
+  grid-column: 1 / -1;
+  color: #171915;
+  font-size: 0.85rem;
+  font-weight: 900;
+  line-height: 1.16;
+  overflow-wrap: anywhere;
+}
+
+.routeShell .openingModal .resultDecisionStack .resultStats dt {
+  color: #566158;
+}
+
+.routeShell .openingModal .resultDecisionStack .resultStats dd {
+  color: #171915;
+}
+
+.routeShell .openingModal .resultHitCard {
+  border-color: #d6ded1;
+  background:
+    radial-gradient(circle at 24% 18%, rgb(255 255 255 / 88%), transparent 24%),
+    linear-gradient(150deg, #fffef8 0%, #f0f5ec 58%, #dce8da 100%);
+  color: #171915;
+  box-shadow:
+    inset 0 0 0 6px rgb(32 61 49 / 7%),
+    0 16px 40px rgb(32 61 49 / 11%);
+}
+
+.routeShell .openingModal .resultHitCard strong,
+.routeShell .openingModal .resultHitCard b {
+  color: #171915;
+}
+
+.routeShell .openingModal .resultShareMoment {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.routeShell .openingModal .resultShareMoment button,
+.routeShell .openingModal .secondaryDecisionActions button,
+.routeShell .openingModal .decisionActions button {
+  border-color: #ccd5c9;
+  background: #fffef8;
+  color: #171915;
+  box-shadow: none;
+}
+
+.routeShell .openingModal .decisionActions button:nth-child(1) {
+  border-color: #203d31;
+  background: #203d31;
+  color: #fffef8;
+}
+
+.routeShell .openingModal .decisionActions button:nth-child(2) {
+  border-color: #b9c6b7;
+  background: #edf4eb;
+  color: #171915;
+}
+
+.routeShell .openingModal .decisionActions button:nth-child(3),
+.routeShell .openingModal .resultShareMoment button,
+.routeShell .openingModal .secondaryDecisionActions button:first-child {
+  border-color: #203d31;
+  background: #fffef8;
+  color: #203d31;
+}
+
+.routeShell .openingModal .decisionActions button:disabled,
+.routeShell .openingModal .secondaryDecisionActions button:disabled,
+.routeShell .openingModal .resultShareMoment button:disabled {
+  border-color: #d9e1d6;
+  background: #eef2ea;
+  color: #8b958c;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .packSceneChoicePills {
+  display: none;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .decisionActions {
+  order: 4;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .resultShowcase {
+  order: 1;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .revealQuoteTerms {
+  order: 2;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .quoteRuntimePanel {
+  order: 3;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .turboRevealHint {
+  order: 5;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .resultShareMoment {
+  order: 6;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .secondaryDecisionActions {
+  order: 7;
+}
+
+.routeShell .openingModal[data-opening-stage="revealed"] .confirmationLine {
+  order: 8;
+}
+
+@media (min-width: 721px) {
+  .routeShell .openingModal[data-opening-stage="revealed"] .packScene,
+  .routeShell .openingModal[data-opening-stage="revealed"] .sceneFallback {
+    height: calc(100dvh - 42px);
+    min-height: calc(100dvh - 42px);
+  }
+}
+
+@media (max-width: 720px) {
+  .siteShell .openingModal[data-opening-stage="revealed"],
+  .routeShell .openingModal[data-opening-stage="revealed"] {
+    grid-template-rows: minmax(132px, 18dvh) auto;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .sceneFallback,
+  .siteShell .openingModal[data-opening-stage="revealed"] .packScene,
+  .routeShell .openingModal[data-opening-stage="revealed"] .sceneFallback,
+  .routeShell .openingModal[data-opening-stage="revealed"] .packScene {
+    min-height: 132px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .decisionPanel,
+  .routeShell .openingModal[data-opening-stage="revealed"] .decisionPanel {
+    gap: 7px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .openingMotionStrip,
+  .routeShell .openingModal[data-opening-stage="revealed"] .openingMotionStrip {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding: 7px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .openingMotionLead,
+  .routeShell .openingModal[data-opening-stage="revealed"] .openingMotionLead {
+    gap: 1px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .openingMotionLead strong,
+  .routeShell .openingModal[data-opening-stage="revealed"] .openingMotionLead strong {
+    font-size: 0.84rem;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail,
+  .routeShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail div,
+  .routeShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail div {
+    padding: 6px;
+    row-gap: 1px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail svg,
+  .routeShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail span,
+  .routeShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail span {
+    font-size: 0.56rem;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail strong,
+  .routeShell .openingModal[data-opening-stage="revealed"] .motionDecisionRail strong {
+    font-size: 0.62rem;
+    line-height: 1.1;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .decisionActions[data-motion-primary-actions="ready"],
+  .routeShell .openingModal[data-opening-stage="revealed"] .decisionActions[data-motion-primary-actions="ready"] {
+    position: static;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .siteShell .openingModal[data-opening-stage="revealed"] .decisionActions[data-motion-primary-actions="ready"] button,
+  .routeShell .openingModal[data-opening-stage="revealed"] .decisionActions[data-motion-primary-actions="ready"] button {
+    min-height: 39px;
+    padding: 7px 5px;
+    font-size: 0.68rem;
+  }
+
+  .routeShell .openingModal[data-opening-stage="revealed"] .decisionActions {
+    /* Perf: no backdrop-filter, see the .siteShell equivalent above. */
+    background:
+      linear-gradient(180deg, rgb(255 254 248 / 0%) 0%, rgb(255 254 248 / 98%) 14%, #fffef8 100%);
+  }
+
+  .routeShell .openingModal .resultShowcase {
+    grid-template-columns: 1fr;
+  }
+
+  .routeShell .openingModal .resultShareMoment {
+    grid-template-columns: 1fr;
+  }
+}
+
+.siteHeader {
+  min-height: 50px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 8px clamp(16px, 3vw, 28px);
+}
+
+.siteHeader nav {
+  display: none;
+}
+
+.brand small {
+  display: none;
+}
+
+.brandMark {
+  width: 30px;
+  height: 30px;
+}
+
+.walletButton {
+  min-height: 34px;
+  padding: 0 12px;
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">STONKPACKS</title>
+  <desc id="desc">Rip a $25 pack. Pull one real xStock token per pack, sent to your wallet.</desc>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10232a"/>
+      <stop offset=".55" stop-color="#071013"/>
+      <stop offset="1" stop-color="#0b171b"/>
+    </linearGradient>
+    <linearGradient id="pack" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17343c"/>
+      <stop offset=".52" stop-color="#0b1c21"/>
+      <stop offset="1" stop-color="#071013"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3ce3ab"/>
+      <stop offset="1" stop-color="#69aac1"/>
+    </linearGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#69aac1" stroke-opacity=".09" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#3ce3ab" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#3ce3ab" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#wash)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <ellipse cx="922" cy="308" rx="300" ry="295" fill="url(#glow)"/>
+  <path d="M0 512H1200" stroke="#69aac1" stroke-opacity=".18"/>
+  <g font-family="STONKPACKS Space Grotesk, Arial, sans-serif">
+    <text x="82" y="94" fill="#a8c0c4" font-size="25" font-weight="700" letter-spacing="5">STONKPACKS</text>
+    <rect x="82" y="126" width="151" height="32" rx="16" fill="#3ce3ab" fill-opacity=".1" stroke="#3ce3ab" stroke-opacity=".48"/>
+    <text x="101" y="148" fill="#3ce3ab" font-size="13" font-weight="700" letter-spacing="2">PULL ONLY</text>
+    <text x="80" y="253" fill="#f3f8f8" font-size="76" font-weight="700" letter-spacing="-3">Rip a $25</text>
+    <text x="80" y="335" fill="#f3f8f8" font-size="76" font-weight="700" letter-spacing="-3">pack.</text>
+    <text x="84" y="403" fill="#d5e3e3" font-size="27" font-weight="500">Pull one real xStock token per pack.</text>
+    <text x="84" y="446" fill="#9fb8bd" font-size="25" font-weight="500">Sent to your wallet.</text>
+    <text x="84" y="565" fill="#69aac1" font-size="15" font-weight="700" letter-spacing="3">ONE REWARD PER PACK</text>
+  </g>
+  <g transform="rotate(-7 918 316)">
+    <rect x="742" y="107" width="357" height="416" rx="28" fill="#3ce3ab" fill-opacity=".06" transform="translate(16 14)"/>
+    <rect x="742" y="107" width="357" height="416" rx="28" fill="url(#pack)" stroke="#69aac1" stroke-opacity=".52" stroke-width="2"/>
+    <path d="M742 158H1099" stroke="url(#edge)" stroke-width="4"/>
+    <path d="M782 433H1058" stroke="#69aac1" stroke-opacity=".3" stroke-width="2"/>
+    <g transform="translate(664 154) scale(.29)">
+      <path d="M94 357 194 257l76 67 140-156" fill="none" stroke="#69aac1" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M333 168h77v77" fill="none" stroke="#3ce3ab" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="784" y="476" fill="#f3f8f8" font-family="STONKPACKS Space Grotesk, Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="4">ONE TOKEN INSIDE</text>
+  </g>
+</svg>

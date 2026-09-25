@@ -1,0 +1,65 @@
+/* Full USD readouts stay measurable and selectable at every supported width. */
+
+:where(
+  .royaleT2FloatAmt,
+  .royaleT2TotalInline,
+  .royaleTileBetConfirmAmount,
+  .royaleResultsPayoutPool,
+  .royaleResultsPayoutUsd,
+  .royaleResultsPlayerStat b,
+  .royaleResultsStatValue,
+  .royaleResultsStatValue > small,
+  .lbWagered,
+  .rnspVal,
+  .stageChaseChip strong,
+  .walletDepositPanelLead strong,
+  .royaleWinPreviewGrid strong,
+  .revealQuoteTerms dd,
+  .resultMomentPills span,
+  .packBottomBand span:first-child,
+  .heroFoilStats dd,
+  .packHeroLabHead strong,
+  .packStackLabCell figcaption b,
+  .packStackLabCell figcaption small,
+  .packStackLabCell figcaption em,
+  .royaleLadderXNames b,
+  .rppStatValue,
+  .arenaRailCard .royaleSlab .royaleSlabMeta em,
+  .arenaHubPot,
+  .arenaWheelSectorStake,
+  .arenaPotValue b,
+  .arenaResultsSmallPot,
+  .royaleRefWinAmt,
+  .royaleRefTierNext,
+  .royaleRefWinAside dd,
+  .royaleRefTierNote,
+  .royaleRefRuleList li,
+  .arenaRailHead > span
+) {
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(
+  .royaleResultsStatValue--split,
+  .royaleResultsPayoutMain,
+  .royaleResultsPlayerStat,
+  .royaleWinPreviewGrid > div,
+  .walletDepositPanelLead,
+  .stageChaseChip,
+  .resultMomentPills span
+) {
+  min-width: 0;
+  overflow: visible;
+}
+
+@media (max-width: 900px) {
+  :where(.royaleResultsStatValue--split, .royaleResultsPayoutMain, .royaleResultsPlayerStat) {
+    white-space: normal;
+  }
+}

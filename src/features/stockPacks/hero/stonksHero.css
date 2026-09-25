@@ -1,0 +1,240 @@
+/* STONKPACKS direction F hero: the living blue board band and the 3D pack.
+   Every class here renders only on the Stock host with VITE_STOCK_PACKS_THEME=stonks. */
+
+.stockPacksPlayerOpening .royaleNormalPackOpening__sealedResult:has(> .stonksBand) {
+  width: 100%;
+  row-gap: 26px;
+}
+
+.stonksBand {
+  --stonks-board-font: "STONKPACKS Sora", Sora, Inter, system-ui, sans-serif;
+  position: relative;
+  width: 100%;
+  height: clamp(440px, 46vw, 560px);
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 24px;
+  background: radial-gradient(90% 85% at 50% 42%, #1a45d6 0%, #0b2687 45%, #04103f 100%);
+  box-shadow: 0 0 0 1px rgb(105 170 193 / 30%), 0 40px 80px -40px rgb(10 40 160 / 55%);
+}
+
+.stonksBand__plane {
+  position: absolute;
+  top: -30%;
+  right: -25%;
+  left: -25%;
+  height: 160%;
+  transform: perspective(900px) rotateX(20deg);
+  transform-origin: 50% 100%;
+  pointer-events: none;
+}
+
+.stonksBand__layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  background-repeat: repeat;
+  will-change: transform;
+}
+
+.stonksBand__layer--far { opacity: 0.7; }
+
+.stonksBand__tick {
+  position: absolute;
+  color: #f1f7ff;
+  font: 600 16px/1 var(--stonks-board-font);
+  white-space: nowrap;
+  text-shadow: 0 0 6px rgb(160 205 255 / 95%), 0 0 18px rgb(80 140 255 / 90%);
+  pointer-events: none;
+  animation: stonksBandTick 1.5s ease-out forwards;
+}
+
+@keyframes stonksBandTick {
+  0% { opacity: 0; }
+  18% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.stonksBand__fog {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 46% at 50% 50%, rgb(3 12 50 / 45%), transparent 80%),
+    radial-gradient(120% 100% at 50% 50%, transparent 55%, rgb(2 8 34 / 78%) 100%),
+    linear-gradient(180deg, rgb(2 8 34 / 50%), transparent 22%, transparent 78%, rgb(2 8 34 / 55%));
+}
+
+.stonksBand__arrow {
+  position: absolute;
+  top: 9%;
+  left: 5%;
+  width: 90%;
+  height: auto;
+  aspect-ratio: 900 / 460;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 16px rgb(255 110 40 / 60%)) drop-shadow(0 0 44px rgb(255 90 30 / 35%));
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.stonksBand[data-motion="full"] .stonksBand__arrow path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: stonksArrowDraw 1.1s cubic-bezier(0.55, 0.05, 0.25, 1) 0.7s forwards;
+}
+
+.stonksBand[data-motion="full"] .stonksBand__arrow polygon {
+  opacity: 0;
+  animation: stonksArrowHead 0.25s ease 1.7s forwards;
+}
+
+@keyframes stonksArrowDraw { to { stroke-dashoffset: 0; } }
+@keyframes stonksArrowHead { to { opacity: 1; } }
+
+/* RIP hover or keyboard focus heats the arrow. */
+.stockPacksPlayerOpening:has(.stockPacksPlayer__primary:not(:disabled):is(:hover, :focus-visible)) .stonksBand__arrow {
+  opacity: 1;
+  filter: drop-shadow(0 0 22px rgb(255 120 40 / 85%)) drop-shadow(0 0 70px rgb(255 90 30 / 55%));
+}
+
+.stonksBand__floor {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  width: 34%;
+  height: 7%;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgb(0 4 24 / 75%), transparent);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.stonksBand__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.stonksBand .normalPackStage3D--stonks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-block-size: 0;
+}
+
+.stonksBand__chip,
+.stonkPackHero__hint {
+  position: absolute;
+  z-index: 3;
+  padding: 8px 11px;
+  color: #dcebff;
+  font: 700 10.5px/1 var(--stonks-board-font, "STONKPACKS Sora", Sora, Inter, system-ui, sans-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgb(120 170 255 / 60%);
+  background: rgb(3 12 50 / 62%);
+  border: 1px solid rgb(160 200 255 / 30%);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.stonksBand__chip--start { top: 18px; left: 18px; }
+.stonksBand__chip--end { top: 18px; right: 18px; }
+
+.stonkPackHero,
+.stonkPackHero__still {
+  position: absolute;
+  inset: 0;
+}
+
+.stonkPackHero__still { pointer-events: none; }
+
+.stonkPackHero__poster,
+.stonkPackHero__video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.stonkPackHero__poster {
+  height: 88%;
+  aspect-ratio: 1000 / 1400;
+  transition: opacity 0.6s ease;
+}
+
+.stonkPackHero__video {
+  height: 92%;
+  aspect-ratio: 720 / 1008;
+}
+
+.stonkPackHero[data-ready] .stonkPackHero__poster,
+.stonkPackHero[data-renderer="video"] .stonkPackHero__poster {
+  opacity: 0;
+}
+
+.stonkPackHero__canvasHost {
+  position: absolute;
+  inset: 0;
+}
+
+.stonkPackHero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  outline: none;
+  touch-action: pan-y;
+}
+
+.stonkPackHero__canvas:active { cursor: grabbing; }
+
+.stonkPackHero__canvas:focus-visible {
+  outline: 2px solid #3ce3ab;
+  outline-offset: -4px;
+  border-radius: 24px;
+}
+
+.stonkPackHero__hint {
+  right: 18px;
+  bottom: 18px;
+  color: #9fb7e8;
+  text-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .stonksBand {
+    height: 470px;
+    border-radius: 20px;
+  }
+
+  .stonksBand__chip--end { display: none; }
+
+  .stonksBand__arrow {
+    top: 20%;
+    left: -32%;
+    width: 164%;
+  }
+
+  .stonkPackHero__canvas:focus-visible { border-radius: 20px; }
+}
+
+/* The route passes the OS reduced-motion setting as data-motion="reduced", which
+   already drops the arrow draw-in, the board drift and the flashes. */
+@media (prefers-reduced-motion: reduce) {
+  .stonksBand__tick { animation: none; }
+  .stonksBand__arrow,
+  .stonkPackHero__poster { transition: none; }
+}

@@ -1,0 +1,280 @@
+/* =============================================================================
+   royaleTokens.css — the primitive scales, derived from this product's own
+   histograms rather than invented.
+
+   READ THIS BEFORE ADDING A VALUE HERE
+   ------------------------------------
+   The design audit's through-line was: "the unit of change in this frontend is
+   a new CSS layer, never an edit to an existing rule — so the product has 81
+   button classes, 116 font sizes and 463 shadows instead of a system."
+
+   This file is NOT a 30th append-only layer. It declares nothing about any
+   component, overrides nothing, and — by construction — cannot win a cascade
+   fight with anything already in the product. See THE @layer CONTRACT below.
+
+   Every number in this file was derived by `scripts/royaleTokenDerive.mjs` from
+   the 114 shipped stylesheets. The full collapse mapping — which raw value goes
+   to which token, and what that costs in px — is published at
+   `docs/reports/design-system/TOKEN-COLLAPSE.md`. Re-run the script to check it.
+   Nothing here is a taste judgement that a reviewer has to take on trust.
+
+   THE @layer CONTRACT — why adding this file is safe
+   --------------------------------------------------
+   `@layer` was used 0 times in 110 stylesheets before this file (an honest zero
+   in the audit, and itself one of the findings). Unlayered styles beat ALL
+   layered styles, regardless of source order or specificity. So every rule in
+   here loses to every rule already in the product. It is not possible for this
+   file to change how anything currently renders. That property is what makes it
+   safe to land alongside four in-flight PRs, and it is asserted by
+   `scripts/royaleCssSystemGate.mjs`, not merely claimed here.
+
+   The custom-property DECLARATIONS still apply, because nothing else in the
+   product declares these names — `--royale-fs-*`, `--royale-space-*`,
+   `--royale-radius-*`, `--royale-dur-*`, `--royale-elev-*`, `--royale-fw-*` are
+   all new. Consumers read them with var() as normal.
+
+   HOW TO USE THEM
+   ---------------
+   Do NOT bulk-migrate. Adopt per surface, and verify the surface's computed
+   styles before and after. A token whose value equals the raw value it replaces
+   is a pixel-neutral edit; anything else is a design change and needs its own
+   measurement. The mapping doc gives you the shift for every raw value.
+
+   RELATIONSHIP TO --pr-*
+   ----------------------
+   The existing `--pr-*` colour tokens (1,385 usages on the six top names) are
+   the half of a token system this product already did well — the audit lists
+   their reach under "what is good". This file deliberately does NOT touch
+   colour and does not start a rival vocabulary; it adds the primitives that
+   were missing (size, space, radius, duration, elevation, weight).
+   ============================================================================= */
+
+@layer royale.tokens {
+  :root {
+    /* ---------------------------------------------------------------- TYPE
+       114 distinct px-equivalents over 2,132 declarations collapse to 17 rungs.
+       95.2% of occurrences land within 1px of a rung; occurrence-weighted mean
+       shift 0.40px.
+
+       Why 1px steps through 7–13px: the audit established that an 11px -> 11.5px
+       step is 4.5%, "below the size difference a reader can perceive as
+       hierarchy". Integer steps here are therefore the finest PERCEPTIBLE
+       granularity — every step up the ramp is >=8.3% (a real level a reader can
+       see) while every snap ONTO the ramp is <=0.5px (a change a reader cannot).
+       That is the whole argument for this ramp, and it is falsifiable: if a
+       0.5px snap turns out to be visible, the ramp is wrong.
+
+       There is deliberately NO rung below 7px. A2 measured a 6.5px floor on the
+       phone and filed it as a defect; a token for 6.5px would legitimise it.
+       The 8 occurrences at 6/6.5px are meant to collapse UPWARD. */
+    --royale-fs-100: 7px;
+    --royale-fs-200: 8px;
+    --royale-fs-300: 9px;
+    --royale-fs-400: 10px;
+    --royale-fs-500: 11px;
+    --royale-fs-600: 12px;
+    --royale-fs-700: 13px;
+    --royale-fs-800: 15px;
+    --royale-fs-900: 18px;
+    --royale-fs-1000: 22px;
+    --royale-fs-1100: 26px;
+    --royale-fs-1200: 32px;
+    /* Display tier. Above 32px the product has 22 distinct values over ~40
+       occurrences — essentially all one-offs (brand, hero, cinema numerals).
+       Five coarse rungs; the residual is reported in the mapping doc, not
+       pretended away. */
+    --royale-fs-1300: 40px;
+    --royale-fs-1400: 48px;
+    --royale-fs-1500: 56px;
+    --royale-fs-1600: 72px;
+    --royale-fs-1700: 96px;
+
+    /* -------------------------------------------------------------- WEIGHT
+       23 distinct weights over 1,305 declarations collapse to 7. 800/900/850/700
+       alone are 82.6% of every weight declaration in the product.
+       850 is kept as a real rung rather than folded into 800 or 900 because it
+       carries 214 declarations (16.4%) on its own. */
+    --royale-fw-400: 400;
+    --royale-fw-500: 500;
+    --royale-fw-600: 600;
+    --royale-fw-700: 700;
+    --royale-fw-800: 800;
+    --royale-fw-850: 850;
+    --royale-fw-900: 900;
+
+    /* --------------------------------------------------------------- SPACE
+       62 distinct positive px values over 5,457 declarations collapse to 14.
+       77.3% already land exactly on a rung; 94.8% within 1px.
+
+       Why a 2px ladder and not 4/8: the audit measured that 2-multiples cover
+       75.4% of spacing declarations but 4-multiples only 38.1% — "there is no
+       4/8 rhythm to violate". Imposing a 4/8 scale would move ~37% of all
+       spacing in the product for no reason a player could see. The rhythm this
+       product actually has is 2px, so that is the rhythm the tokens encode.
+       1px is kept because hairline gaps are real. */
+    --royale-space-0: 0px;
+    --royale-space-1: 1px;
+    --royale-space-2: 2px;
+    --royale-space-3: 4px;
+    --royale-space-4: 6px;
+    --royale-space-5: 8px;
+    --royale-space-6: 10px;
+    --royale-space-7: 12px;
+    --royale-space-8: 14px;
+    --royale-space-9: 16px;
+    --royale-space-10: 20px;
+    --royale-space-11: 24px;
+    --royale-space-12: 32px;
+    --royale-space-13: 40px;
+
+    /* -------------------------------------------------------------- RADIUS
+       27 distinct values over 1,152 declarations collapse to 11. 79.3% land
+       exactly on a rung, 93.1% within 1px.
+       999px (pill, 27.5%) and 50% (circle, 7.3%) are SHAPES, not sizes — they
+       are kept verbatim as named tokens rather than snapped onto a ladder. */
+    --royale-radius-0: 0px;
+    --royale-radius-1: 4px;
+    --royale-radius-2: 6px;
+    --royale-radius-3: 8px;
+    --royale-radius-4: 10px;
+    --royale-radius-5: 12px;
+    --royale-radius-6: 14px;
+    --royale-radius-7: 18px;
+    --royale-radius-8: 24px;
+    --royale-radius-circle: 50%;
+    --royale-radius-pill: 999px;
+
+    /* ------------------------------------------------------------ DURATION
+       82 distinct durations over 716 declarations collapse to 11.
+       120ms alone is 17.6% of every duration in the product, and the 120–280ms
+       band holds 14 distinct values the audit calls "perceptually
+       indistinguishable" — rungs 1–4 absorb that band.
+
+       Rungs 9–11 exist because the tail above 1600ms is real reveal-cinema
+       choreography and ambient loops (up to 60s), not UI transitions. Flattening
+       them onto a UI rung would be a category error.
+
+       NOT TOKENISED: 11 declarations below 10ms. Those are kill-switch
+       sentinels (`1e-06s` from the reduced-motion blanket, `1ms` from
+       "effectively off" overrides), not durations. Finding B7 is about that
+       blanket killing a FUNCTIONAL tween — do not give it a token, fix it with a
+       carve-out. */
+    --royale-dur-1: 120ms;
+    --royale-dur-2: 160ms;
+    --royale-dur-3: 220ms;
+    --royale-dur-4: 300ms;
+    --royale-dur-5: 500ms;
+    --royale-dur-6: 700ms;
+    --royale-dur-7: 900ms;
+    --royale-dur-8: 1600ms;
+    --royale-dur-9: 2600ms;
+    --royale-dur-10: 4000ms;
+    --royale-dur-11: 6000ms;
+
+    /* ----------------------------------------------------------- ELEVATION
+       The audit published an honest zero here: "shadows collapsible by
+       aggressive normalisation: exactly 0 of 463". That is CORRECT and is not
+       contradicted. Normalisation asks "are these two values the same after
+       tidying?" — and they genuinely are not.
+
+       The question that does have an answer is a different one: is this value an
+       ELEVATION at all? Classifying the 768 shadow layers in the product by what
+       they actually DO:
+
+         elevation (has a light direction)   251   32.7%
+         ring      (0 0 0 Npx — a border)    218   28.4%
+         inset     (inner shading)           208   27.1%
+         glow      (0 0 Npx — decoration)     91   11.8%
+
+       Three unrelated jobs share one property. THAT is why a single
+       normalisation pass over the whole population found no structure — it was
+       averaging borders against drop shadows. Only the elevation population can
+       have a height scale, and 237 of its 251 layers fit the six rungs below
+       (nearest dy, blur within 0.4x–2.5x). The 14 that do not are listed in the
+       mapping doc — mostly upward shadows (negative dy), which are a different
+       thing again.
+
+       Rings and glows deliberately get NO tokens here. A ring is a border and
+       should be reviewed against the focus-ring work (B12/FS-6); a glow is
+       decoration and belongs to the surface that owns it. Giving them elevation
+       tokens would repeat the original category error in a new file. */
+    --royale-elev-1: 0 1px 2px rgb(0 0 0 / 12%);
+    --royale-elev-2: 0 2px 6px rgb(0 0 0 / 14%);
+    --royale-elev-3: 0 4px 12px rgb(0 0 0 / 16%);
+    --royale-elev-4: 0 8px 24px rgb(0 0 0 / 18%);
+    --royale-elev-5: 0 14px 38px rgb(0 0 0 / 22%);
+    --royale-elev-6: 0 24px 64px rgb(0 0 0 / 28%);
+
+    /* ---- FOCUS RING ------------------------------------------------------
+       This is the "reviewed against the focus-ring work (B12/FS-6)" the
+       elevation note above defers to. It is the ONE exception to this file's
+       no-colour rule, and it earns it: a focus ring is not decoration, it is
+       the only thing that tells a keyboard player where they are.
+
+       MEASURED before this existed — a real Tab walk of the board at desktop
+       1440, 44 stops, onboarding gate + tour asserted down:
+
+         ring                        offset   stops  owners
+         #8a6f2b                     3px      11     the global button/a default
+         Chromium `auto` blue        0px       3     every <summary>
+         #e6c766                     2px       9     the majority convention
+         #eccb7e                     2px       6     surface nav links
+         rgb(230,192,105)            2px       2     header gears
+         #e6c766                     1px       2     chat buttons
+         #d8b45c                     1px       1     strategy info
+         rgba(230,199,102,0.8)       4px       1     brand mark
+         NOTHING                      —        9     7 board tiles + tag info
+
+       Seven ring styles across five offsets, three adjacent header gears
+       drawing two different rings, and nine stops where a keyboard player
+       simply cannot see where they are. The blue is also off-palette and
+       measures 2.98:1 — under the 3:1 WCAG 2.4.11 floor.
+
+       One ring. Consumers say `outline: var(--royale-focus-width) solid
+       var(--royale-focus-color); outline-offset: var(--royale-focus-offset);`
+       and keep the literal as the var() fallback, because the global default in
+       styles.css also serves the legacy landing page, which never loads this
+       file. */
+    --royale-focus-color: #e6c766;
+    --royale-focus-width: 2px;
+    --royale-focus-offset: 2px;
+  }
+
+  /* ------------------------------------------------- COARSE-POINTER TYPE FLOOR
+     `--royale-type-min` is the smallest type this product sets on a phone.
+     10px, and NOT a new number: it is the floor royaleLandscapeBoard.css already
+     declares, with the reasoning that picked 10 over 11 (11px costs ~83px of
+     header width the nav row does not have). Consumers spell it
+     `font-size: max(<the size the surface already had>, var(--royale-type-min, 0px))`
+     so a fine pointer resolves the token to 0px and desktop is byte-identical.
+
+     WHY IT IS DECLARED HERE AND NOT ONLY THERE (design-audit-2026-08-pages B9).
+     B9 reads: "`--royale-type-min: 10px` is live on `:root` at all three of these
+     viewports and this page never reads it." MEASURED on the shipped build at
+     844x280, iPhone UA, `(pointer: coarse)` matching, reading
+     `getComputedStyle(document.documentElement)`:
+
+         /lab/royale              --royale-type-min: 10px
+         /lab/royale/results      --royale-type-min: (unset)
+         /lab/royale/collection   --royale-type-min: (unset)
+
+     The token is NOT live on the audited pages. royaleLandscapeBoard.css is the
+     only file that declares it and only the board route imports it, so on the
+     other five surfaces `var(--royale-type-min, 0px)` had always resolved to the
+     0px fallback — a floor applied there would have been a silent no-op. This
+     file is @import-ed by royaleStyles.css, which every royale route loads, so
+     declaring it here is what puts the floor in scope where B9 measured 6px.
+
+     The board's own unlayered declaration is deliberately LEFT IN PLACE and is
+     unchanged: unlayered beats layered always, so the board keeps resolving its
+     own copy, at the same 10px, and cannot move. Both are pinned by CSS_CONTRACT
+     (`royaleViewportCertify.mjs`) so neither can be dropped silently. Unifying
+     them means moving `--royale-touch-min`/`--royale-touch-floor` too, and those
+     going live on five more surfaces is a measurable change this change has not
+     measured — that is B8's lane, not B9's. */
+  @media (pointer: coarse) {
+    :root {
+      --royale-type-min: 10px;
+    }
+  }
+}

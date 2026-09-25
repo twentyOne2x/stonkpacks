@@ -1,0 +1,347 @@
+/* =============================================================================
+   PACK ROYALE DOCS (/docs). Onboarding FAQ: an ELI5 "How it works"
+   tab plus a "Technical" tab sourced straight from the engine. Same tab idiom as
+   the RANKINGS page (royaleLadderPage.css .royaleRankTab*), scoped to its own
+   classnames here so the two pages stay decoupled. Dark/gold vault language,
+   tokens fall back to the theme values so the page reads correctly even if
+   --pr-* is out of scope.
+
+   TYPE SCALE (owner directive 2026-07-29: "bigger font across the page"). Every
+   size in this file went up one step: the page is long-form prose a brand-new
+   player reads front to back, and it was set two steps below anything else on
+   the site. Question 14 -> 16, answer 13 -> 15, technical title 13.5 -> 16,
+   technical body 12.5 -> 14.5, intro 12.5 -> 14.5, tab 12.5 -> 14. Line-height
+   went with it where the measure needed the air. `max-width: 62ch` on the intro
+   is UNCHANGED on purpose: it is a character measure, so it tracks the new size
+   automatically and the column stays the same readable length.
+
+   The `.royaleDocsTechRow code` rule (the per-source-file citation chip) was
+   REMOVED here, not just unstyled: the owner directive of the same date
+   ("i dont understand why we refer to each file? lets not do that") deleted the
+   `<code>` element from RoyaleDocsRoute.tsx, so the rule had no element left to
+   style.
+   ========================================================================== */
+
+.royaleDocsRoute {
+  padding-bottom: 72px;
+}
+
+/* --- tabs (How it works | Technical) ----------------------------------------- */
+.royaleDocsTabs {
+  display: inline-flex;
+  gap: 2px;
+  margin: 14px 0 18px;
+  padding: 3px;
+  border: 1px solid color-mix(in srgb, var(--pr-ink, #f4f1ea) 10%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, #000 22%, transparent);
+}
+.royaleDocsTab {
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--pr-ink-2, #a7afc2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+.royaleDocsTab:hover {
+  color: var(--pr-ink, #f4f1ea);
+}
+.royaleDocsTab[data-active] {
+  background: color-mix(in srgb, var(--pr-gold, #d8b45c) 22%, transparent);
+  color: var(--pr-gold-active, #e6c766);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pr-gold, #d8b45c) 42%, transparent);
+}
+.royaleDocsTab:focus-visible {
+  outline: 2px solid var(--pr-gold-active, #e6c766);
+  outline-offset: 2px;
+}
+
+.royaleDocsIntro {
+  margin: 0 0 16px;
+  max-width: 62ch;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--pr-ink-2, #a7afc2);
+}
+
+/* --- How it works: plain Q&A rows ------------------------------------------- */
+.royaleDocsFaq {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.royaleDocsFaqRow {
+  border: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+  border-radius: 14px;
+  background: var(--pr-panel-solid, #171a24);
+  padding: 16px 20px;
+}
+.royaleDocsFaqRow dt {
+  margin: 0 0 7px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--pr-gold-ink, #eccb7e);
+}
+.royaleDocsFaqRow dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--pr-ink, #eef1f8);
+}
+.royaleDocsFaqRow dd b {
+  color: var(--pr-gold-ink, #eccb7e);
+  font-weight: 800;
+}
+
+/* --- Technical: sourced fact cards ------------------------------------------- */
+.royaleDocsTechList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.royaleDocsTechRow {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+  border-radius: 14px;
+  background: var(--pr-panel-solid, #171a24);
+  /* Even padding now that the source-file chip below the body is gone. */
+  padding: 16px 20px;
+}
+.royaleDocsTechRow::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--pr-gold-ink, #eccb7e);
+  opacity: 0.85;
+}
+.royaleDocsTechRow h2 {
+  margin: 0 0 7px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--pr-ink, #eef1f8);
+}
+.royaleDocsTechRow p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--pr-ink-2, #a7afc2);
+}
+.royaleDocsTechRow p b {
+  color: var(--pr-gold-ink, #eccb7e);
+  font-weight: 800;
+}
+
+@media (max-width: 560px) {
+  .royaleDocsFaqRow,
+  .royaleDocsTechRow {
+    padding: 14px 16px;
+  }
+}
+
+/* =============================================================================
+   DESKTOP DOCS LAYOUT (>=1024px) - the 2026-07-29 restructure ("make them like
+   real docs"): persistent left sidebar (ordered sections, page links, gold
+   you-are-here), a one-topic content pane reusing the SAME card rules above,
+   and a prev/next pager. The component only renders this markup at >=1024px
+   (matchMedia); the media query here is belt-and-suspenders so a mid-resize
+   frame can never show desktop chrome squeezed into a phone column. The tab
+   view's rules above are untouched: mobile keeps those views exactly.
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+  .royaleDocsShell {
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr);
+    gap: 30px;
+    align-items: start;
+    margin-top: 16px;
+  }
+
+  /* --- sidebar ------------------------------------------------------------ */
+  .royaleDocsSidebar {
+    position: sticky;
+    top: 14px;
+    max-height: calc(100vh - 28px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding: 6px 18px 24px 2px;
+    border-right: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+    display: grid;
+    gap: 18px;
+    align-content: start;
+  }
+  .royaleDocsSidebarOverview {
+    justify-self: start;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--pr-ink, #eef1f8);
+    text-decoration: none;
+    padding: 5px 10px;
+    margin-left: -10px;
+    border-radius: 8px;
+  }
+  .royaleDocsSidebarSection h2 {
+    margin: 0 0 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pr-gold-ink, #eccb7e);
+  }
+  .royaleDocsSidebarSection ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+  }
+  .royaleDocsSidebarSection a {
+    display: block;
+    padding: 5px 10px;
+    margin-left: -10px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    font-weight: 650;
+    color: var(--pr-ink-2, #a7afc2);
+    text-decoration: none;
+  }
+  .royaleDocsSidebarSection a:hover,
+  .royaleDocsSidebarOverview:hover {
+    color: var(--pr-ink, #eef1f8);
+    background: color-mix(in srgb, var(--pr-ink, #f4f1ea) 6%, transparent);
+  }
+  .royaleDocsSidebarSection a[data-active],
+  .royaleDocsSidebarOverview[data-active] {
+    color: var(--pr-gold-active, #e6c766);
+    background: color-mix(in srgb, var(--pr-gold, #d8b45c) 14%, transparent);
+  }
+  .royaleDocsSidebarSection a:focus-visible,
+  .royaleDocsSidebarOverview:focus-visible {
+    outline: 2px solid var(--pr-gold-active, #e6c766);
+    outline-offset: 2px;
+  }
+
+  /* --- content pane ------------------------------------------------------- */
+  .royaleDocsContent {
+    min-width: 0;
+    max-width: 860px;
+    display: grid;
+    gap: 22px;
+  }
+  .royaleDocsCrumb {
+    margin: 0 0 4px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pr-gold-ink, #eccb7e);
+  }
+  .royaleDocsPageTitle {
+    margin: 0 0 16px;
+    font-size: 27px;
+    line-height: 1.2;
+    font-weight: 850;
+    letter-spacing: -0.01em;
+  }
+  /* Two same-kind runs on one page (Q&A rows then Technical cards) breathe. */
+  .royaleDocsContent .royaleDocsFaq + .royaleDocsTechList,
+  .royaleDocsContent .royaleDocsTechList + .royaleDocsFaq {
+    margin-top: 10px;
+  }
+
+  /* --- landing-page directory --------------------------------------------- */
+  .royaleDocsDirectory {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .royaleDocsDirectorySection {
+    border: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+    border-radius: 14px;
+    background: var(--pr-panel-solid, #171a24);
+    padding: 16px 20px;
+  }
+  .royaleDocsDirectorySection h2 {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pr-gold-ink, #eccb7e);
+  }
+  .royaleDocsDirectorySection ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .royaleDocsDirectorySection a {
+    font-size: 14.5px;
+    font-weight: 650;
+    color: var(--pr-ink, #eef1f8);
+    text-decoration: none;
+  }
+  .royaleDocsDirectorySection a:hover {
+    color: var(--pr-gold-active, #e6c766);
+  }
+
+  /* --- prev/next pager ----------------------------------------------------- */
+  .royaleDocsPager {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 6px;
+    padding-top: 18px;
+    border-top: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+  }
+  .royaleDocsPagerLink {
+    display: grid;
+    gap: 2px;
+    max-width: 46%;
+    padding: 12px 16px;
+    border: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+    border-radius: 12px;
+    background: var(--pr-panel-solid, #171a24);
+    text-decoration: none;
+  }
+  .royaleDocsPagerNext {
+    text-align: right;
+  }
+  .royaleDocsPagerLink span {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pr-ink-2, #a7afc2);
+  }
+  .royaleDocsPagerLink strong {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--pr-ink, #eef1f8);
+  }
+  .royaleDocsPagerLink:hover {
+    border-color: color-mix(in srgb, var(--pr-gold, #d8b45c) 42%, transparent);
+  }
+  .royaleDocsPagerLink:hover strong {
+    color: var(--pr-gold-active, #e6c766);
+  }
+  .royaleDocsPagerSpacer {
+    flex: 0 0 1px;
+  }
+}

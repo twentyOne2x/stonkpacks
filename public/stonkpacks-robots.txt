@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /qa
+Disallow: /agents/
+Disallow: /creator/
+
+Sitemap: https://stonkpacks.xyz/sitemap.xml

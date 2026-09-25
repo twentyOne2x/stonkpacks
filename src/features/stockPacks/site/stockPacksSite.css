@@ -1,0 +1,49 @@
+/* Stock host (stonkpacks.xyz) account strip, site alerts and small status lines. */
+.stockPacksAccount {
+  box-sizing: border-box;
+  display: grid;
+  gap: 8px;
+  width: min(100%, 420px);
+  margin: 0 auto 12px;
+  padding: 12px 14px;
+  color: var(--pr-ink, #f3f8f8);
+  background: rgb(255 255 255 / 3.5%);
+  border: 1px solid var(--pr-line-2, rgb(105 170 193 / 40%));
+  border-radius: 12px;
+  text-align: left;
+}
+.stockPacksAccount strong { font-size: 15px; }
+.stockPacksAccount small,
+.stockPacksAccount__label,
+.stockPacksAccount__note { color: var(--pr-ink-2, #a4c5cf); font-size: 13px; }
+.stockPacksAccount__address {
+  display: block;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+}
+.stockPacksAccount__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.stockPacksAccount__button {
+  min-height: 40px;
+  padding: 8px 12px;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid var(--pr-line-2, rgb(105 170 193 / 40%));
+  border-radius: 10px;
+  cursor: pointer;
+}
+.stockPacksAccount__note { display: block; margin-top: 6px; }
+
+.stockPacksSiteAlert {
+  box-sizing: border-box;
+  width: min(100%, 420px);
+  margin: 0 auto 12px;
+  padding: 10px 14px;
+  color: #ffd2cc;
+  background: rgb(255 95 80 / 12%);
+  border: 1px solid rgb(255 95 80 / 45%);
+  border-radius: 12px;
+  font-size: 14px;
+}

@@ -1,0 +1,928 @@
+/* =============================================================================
+   PACK ROYALE — standalone-surface chrome (nav, winnings summary, withdraw).
+   Tokens fall back to the dark/gold values so these read correctly even if the
+   --pr-* theme block is out of scope. CAPS labels, plain neutral copy.
+   ========================================================================== */
+
+/* Inline cross-surface nav. It lives INSIDE a header row now (the board's
+   account bar, or a standalone page's header), so it carries no panel chrome of
+   its own — no border, background, or block margin that would make it read as a
+   second level of header. It stays on ONE line and scrolls horizontally when the
+   row is tight (owner wants a single-line header), rather than wrapping the
+   header to several rows. */
+.royaleSurfaceNav {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+  align-items: center;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  /* Thin, unobtrusive scroll affordance; the links never wrap. */
+  scrollbar-width: thin;
+}
+.royaleSurfaceNav::-webkit-scrollbar {
+  height: 4px;
+}
+.royaleSurfaceNavLink {
+  flex: 0 0 auto;
+}
+
+.royaleSurfaceNavLink {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--pr-ink-2, #a7afc2);
+  text-decoration: none;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+/* Every link renders BOTH a full and a short label span (RoyaleSurfaceNav.tsx);
+   default everywhere is the full word. Only the board header's tight 641-1279px
+   band swaps to the short word (royaleHeaderSingleLine.css) — standalone page
+   headers always show full labels. */
+.royaleSurfaceNavLabelShort {
+  display: none;
+}
+
+.royaleSurfaceNavLink:hover {
+  color: var(--pr-ink, #eef1f8);
+  border-color: var(--pr-line-2, rgba(158, 176, 214, 0.22));
+}
+
+/* Visible keyboard focus ring on every nav link (was relying on the UA outline,
+   which the pill radius clipped). */
+.royaleSurfaceNavLink:focus-visible {
+  outline: var(--royale-focus-width, 2px) solid var(--royale-focus-color, #e6c766);
+  outline-offset: var(--royale-focus-offset, 2px);
+}
+
+/* Touch tap target: at phone/tablet widths the pills must clear ~40px so they
+   are comfortably tappable (audit: the merged nav links fell short at 390). */
+@media (max-width: 900px) {
+  .royaleSurfaceNavLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 4px 12px;
+  }
+}
+
+/* Sit the nav neatly within the standalone page header (a baseline-aligned
+   flex row); keep it centered and let it shrink/scroll instead of forcing the
+   header to overflow. */
+.royaleResultsHead .royaleSurfaceNav {
+  align-self: center;
+  min-width: 0;
+}
+
+/* --- withdraw panel ---------------------------------------------------------- */
+.royaleWithdrawPanel {
+  border: 1px solid var(--pr-line-2, rgba(158, 176, 214, 0.22));
+  border-radius: 16px;
+  background: var(--pr-panel-solid, #171a24);
+  /* Bigger, more legible (owner 2026-07-15: "make that component bigger its
+     hard to see"): roomier padding + wider cap so the fields breathe. */
+  padding: 22px 24px;
+  margin: 0 0 20px;
+  max-width: 620px;
+  /* WRAP RESET (QA round 10). This panel renders in TWO places: the standalone
+     Winnings page (where nothing sets white-space, so it wrapped) and the
+     header rail's withdraw popover, which is a child of
+     .royaleHeaderAccountActions — a header layout rule whose
+     `white-space: nowrap` INHERITS all the way down here. Inside the ~380px
+     popover that clipped both prose lines mid-word: the subtitle sat 8px over
+     its box and the signature note was cut at "...and your USD" (scrollWidth
+     602 vs clientWidth 318). Longer locales clip harder, so this is a wrap
+     reset, not a width bump. */
+  white-space: normal;
+}
+
+/* The app-shell light-theme rule (.routeShell h1,h2,h3 { color:#171915 }) bleeds
+   into these dark standalone royale routes and blackens their headings. These
+   pages carry BOTH .royaleV2Route and .royaleV2Route--simplified, so this (0,2,1)
+   rule wins and restores legible light ink on every standalone-page heading. */
+.royaleV2Route.royaleV2Route--simplified h1,
+.royaleV2Route.royaleV2Route--simplified h2,
+.royaleV2Route.royaleV2Route--simplified h3 {
+  color: var(--pr-ink, #eef1f8);
+}
+
+/* Results "card allocation" expand toggle (top 10 shown, rest on expand). */
+.royaleResultsAllocToggle {
+  margin: 8px 0 0;
+  align-self: flex-start;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--pr-gold-ink, #eccb7e);
+  background: rgba(230, 199, 102, 0.08);
+  border: 1px solid rgba(230, 199, 102, 0.35);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.royaleResultsAllocToggle:hover {
+  background: rgba(230, 199, 102, 0.16);
+  border-color: rgba(230, 199, 102, 0.55);
+}
+
+.royaleWithdrawPanel h2 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--pr-ink, #eef1f8);
+}
+
+.royaleWithdrawPanel .royaleWithdrawSub {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--pr-ink-2, #a7afc2);
+}
+
+.royaleWithdrawAvail {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.royaleWithdrawAvail .rwsLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pr-ink-2, #a7afc2);
+}
+
+.royaleWithdrawAvail b {
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--pr-gold-ink, #eccb7e);
+}
+
+/* Quick-fraction row (25% / 50% / 100%) under the amount input. */
+.royaleWithdrawQuick {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.royaleWithdrawPanel button.royaleWithdrawQuickBtn {
+  flex: 1 1 0;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.royaleWithdrawPanel button.royaleWithdrawQuickBtn:hover:not(:disabled) {
+  border-color: var(--pr-gold-ink, #eccb7e);
+  background: rgba(230, 199, 102, 0.1);
+  color: var(--pr-gold-ink, #eccb7e);
+}
+.royaleWithdrawPanel button.royaleWithdrawQuickBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.royaleWithdrawField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 12px;
+}
+
+.royaleWithdrawField label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pr-ink-2, #a7afc2);
+}
+
+.royaleWithdrawAmountRow {
+  display: flex;
+  gap: 8px;
+}
+
+.royaleWithdrawPanel input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 13px;
+  border-radius: 10px;
+  border: 1px solid var(--pr-line-2, rgba(158, 176, 214, 0.22));
+  background: var(--pr-bg, #0b0d13);
+  color: var(--pr-ink, #eef1f8);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  font-family: inherit;
+}
+
+.royaleWithdrawPanel input:focus {
+  outline: none;
+  border-color: var(--pr-gold-ink, #eccb7e);
+}
+
+/* Visible keyboard focus (a11y loop 2026-07-25). The rule above swaps a 1px
+   border to gold — a real cue with a mouse, but the withdraw amount and
+   destination are the two highest-stakes fields on the profile and a hairline
+   recolour is a weak keyboard indicator on this near-black ground. Add the
+   standard gold ring for keyboard focus only; mouse focus keeps the quiet
+   border-only treatment. */
+.royaleWithdrawPanel input:focus-visible {
+  outline: 2px solid var(--pr-gold, #e3c574);
+  outline-offset: 2px;
+}
+
+.royaleWithdrawPanel button {
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 9px;
+  border: 1px solid var(--pr-line-2, rgba(158, 176, 214, 0.22));
+  background: transparent;
+  color: var(--pr-ink, #eef1f8);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+.royaleWithdrawPanel button.royaleWithdrawAll {
+  white-space: nowrap;
+}
+
+/* Withdraw is a MONEY-OUT action: mint, per the board-wide action language
+   (mint = Withdraw / red = Sell). Gold stays reserved for nav/CTA chrome. */
+.royaleWithdrawPanel button.royaleWithdrawSubmit {
+  width: 100%;
+  margin-top: 2px;
+  background: var(--pr-mint, #1cb27f);
+  border-color: var(--pr-mint, #1cb27f);
+  color: #06130d;
+}
+
+.royaleWithdrawPanel button.royaleWithdrawSubmit:not(:disabled):hover {
+  border-color: var(--pr-mint, #1cb27f);
+  filter: brightness(1.08);
+}
+
+.royaleWithdrawPanel button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* The Submit button is disabled by DEFAULT (empty amount/destination on
+   first load) - the profile page's steady state, not an edge case. The
+   generic opacity:0.45 above blends the near-black ink toward the mint fill,
+   dropping it to 2.41:1 (F8). Mint must stay the fill (owner: mint = the
+   Withdraw action, board-wide) and the ink is already correct at full
+   strength (~7:1) - so this button keeps full opacity and signals "not
+   ready yet" with desaturation instead, which does not touch either color's
+   actual RGB value. */
+.royaleWithdrawPanel button.royaleWithdrawSubmit:disabled {
+  opacity: 1;
+  filter: saturate(0.4);
+}
+
+.royaleWithdrawPanel button:not(:disabled):hover {
+  border-color: var(--pr-gold-ink, #eccb7e);
+}
+
+.royaleWithdrawStatus {
+  margin: 10px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pr-ink, #eef1f8);
+}
+
+.royaleWithdrawStatus[data-kind="error"] {
+  color: #f0a3a3;
+}
+
+.royaleWithdrawStatus[data-kind="done"] {
+  color: var(--pr-gold-ink, #eccb7e);
+}
+
+.royaleWithdrawNote {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--pr-ink-2, #a7afc2);
+}
+
+.royaleLadderStandalone {
+  margin-top: 6px;
+}
+
+/* =============================================================================
+   STANDALONE-PAGE HEADER — FULL-WIDTH, single line, NEVER a scroll pane.
+   Owner: "the header can be full length it doesnt have to be the same width as
+   the betting panel and tiles panel" + "dont make [these] pages scrollable on
+   pane". The standalone routes are already full-bleed (route width is not the
+   panel cap), so the header spans the whole viewport; we make that explicit
+   here and, crucially, DROP the horizontal scroll on the surface nav so it uses
+   that full width instead of scrolling inside a narrow pane. Fits one line at
+   every width by shrinking the pills at phone widths; wrap is a last-resort
+   fallback so it can NEVER overflow or scroll. Scoped to `.royaleResultsHead`,
+   so the board's own account-bar nav (also `.royaleSurfaceNav`) is untouched.
+   ========================================================================== */
+
+/* Belt-and-suspenders full width: the header must not inherit a panel cap even
+   if the route's full-bleed rule (royaleStyles.css) is ever narrowed. */
+.royaleV2Route--simplified .royaleResultsHead {
+  width: 100%;
+  max-width: none;
+}
+
+.royaleV2Route--simplified .royaleResultsHead > .royaleResultsEyebrow,
+.royaleV2Route--simplified .royaleResultsHead > strong,
+.royaleV2Route--simplified .royaleResultsHead > h1,
+.royaleV2Route--simplified .royaleResultsHead > a {
+  white-space: nowrap;
+}
+
+/* THE FIX: the surface nav uses the header's full width — no scroll pane. The
+   base `.royaleSurfaceNav` (royalePages.css, shared with the board) sets
+   `overflow-x: auto`; here we override to visible and let the row wrap only as
+   a genuine last resort, never scroll. */
+.royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNav {
+  flex-wrap: wrap;
+  overflow: visible;
+  scrollbar-width: none;
+  row-gap: 6px;
+}
+.royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNav::-webkit-scrollbar {
+  display: none;
+}
+
+/* NAV BREATHING ROOM (owner 2026-07-22: "make the navigator for the acrd
+   arena nicer its cramped right now"). Standalone-page band only — the
+   board's tight single-line header keeps the compact base styles. Real pills:
+   visible hairline, roomier padding, wider gap, and a gold you-are-here pill
+   (`.royaleSurfaceNavCurrent`, rendered inert by RoyaleSurfaceNav when the
+   page opts in with `showCurrent`). One clean line at desktop widths; wraps
+   at mid widths; compact word swap at phone widths (below). */
+.royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNav {
+  gap: 8px;
+}
+.royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNavLink {
+  font-size: 11px;
+  letter-spacing: 0.11em;
+  padding: 7px 15px;
+  border-color: var(--pr-line, rgba(148, 166, 208, 0.14));
+}
+.royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNavLink:hover {
+  border-color: var(--pr-line-2, rgba(158, 176, 214, 0.3));
+  background: rgba(158, 176, 214, 0.07);
+}
+.royaleSurfaceNavCurrent,
+.royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNavCurrent {
+  color: var(--pr-gold-ink, #eccb7e);
+  border-color: color-mix(in srgb, var(--pr-gold-ink, #eccb7e) 55%, transparent);
+  background: color-mix(in srgb, var(--pr-gold-ink, #eccb7e) 12%, transparent);
+  cursor: default;
+}
+
+/* Screen-reader-only text (a11y loop 2026-07-25). The you-are-here pill is an
+   inert <span>, and BOTH of its visible label spans are aria-hidden (the
+   compact-band word swap), so an aria-label was the only name it had — but
+   aria-label is PROHIBITED on a generic span and assistive tech drops it,
+   leaving the current surface announced as nothing. Real text in this class
+   names it at every width without changing a pixel. Clip-rect idiom (not
+   display:none / visibility:hidden, which would remove it from the a11y tree
+   too). Deliberately NOT named `.srOnly`: that class is used once in main.tsx
+   and has no definition anywhere, so defining it would newly HIDE currently
+   visible markup on the legacy roulette surface. */
+.royaleSrOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* CRAMPED INLINE BAND (2026-07-24, finding #10, RE-FIX same day): between
+   901px and the width where the header stops wrapping, the title + nav +
+   "Back to the board" link share ONE row, so the nav only gets a fraction of
+   its ~497px max-content. The first pass tried to squeeze the pills
+   (gap/padding trim) to fit that shared row, tuned against /lab/royale/results
+   alone at 926 — re-checked live (a per-route sweep, 980-1300px, counting the
+   nav's own row count) against every standalone page sharing this header and
+   the true "fits inline" width is title/pill-count dependent, NOT a flat
+   ~980px: /ladder + /profile ~1070px, /results + /collection ~1150px,
+   /arena ~1160px (its `showCurrent` pill adds a 7th token). No fixed
+   padding/gap trim can fit every page's title. Padding/gap tweak removed; the
+   max-width rule below (which gives the nav its OWN full-width row,
+   title-length-independent — the same shape landscape 844 already renders
+   clean) now covers this whole band with margin over the widest measured
+   case. */
+
+/* Phone widths: all pills share one line via the flex 1 1 0 rule below; the
+   compact word (RANKS/CARDS) swaps in so six pills never mid-cut at 390. */
+@media (max-width: 640px) {
+  .royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNavLabelFull {
+    display: none;
+  }
+  .royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNavLabelShort {
+    display: inline;
+  }
+}
+
+/* Round/entry count chip beside the page title. */
+.royalePageCount {
+  align-self: center;
+  padding: 3px 9px;
+  border: 1px solid var(--pr-line-2, rgba(158, 176, 214, 0.22));
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--pr-ink-2, #a7afc2);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Widened from 900px to 1199.98px (2026-07-24, finding #10 re-fix above,
+   comment at :379): this is the ONLY reliable fix for the cramped band above
+   900px too — the nav drops to its own full-width row regardless of how long
+   the page's own title happens to render, so every standalone page sharing
+   this header (measured worst case ~1160px, /arena's 7-pill nav) gets the
+   same clean two-row shape landscape 844 already has, instead of a
+   title/pill-count-dependent squeeze that only ever worked for one page. */
+@media (max-width: 1199.98px) {
+  .royaleV2Route--simplified .royaleResultsHead {
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 6px;
+  }
+  .royaleV2Route--simplified .royaleResultsHead > strong,
+  .royaleV2Route--simplified .royaleResultsHead > h1 {
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* The nav takes the whole (full-width) second line and fits on it — it does
+     NOT scroll. Pills shrink below to keep all five on that one line. */
+  .royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNav {
+    order: 10;
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
+  .royaleV2Route--simplified .royaleResultsHead > a {
+    font-size: 11.5px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Round-4 QA finding #3: the old reasoning ("BOARD is the nav's first pill,
+     the long back link is redundant") hid the link outright at portrait, but
+     that leaves Rankings (and every other page sharing this header) as the
+     one surface where the desktop/landscape "back to the board" affordance
+     visibly disappears on a straight comp check. Keep it, stacked in its own
+     full-width row directly under the title (the nav already claims its own
+     row the same way at this width via `order: 10` above) instead of
+     squeezing it back onto the cramped title line. */
+  .royaleV2Route--simplified .royaleResultsHead > a {
+    display: block;
+    order: 9;
+    flex: 1 1 100%;
+    margin-left: 0;
+    text-align: left;
+  }
+  .royalePageCount {
+    display: none;
+  }
+  /* FOUR nav links (self-link dropped, 2026-07-10 — RoyaleSurfaceNav never
+     renders the current page) fit a single 390px row: an even flex line,
+     every pill the same width, no second row, no horizontal scroll. flex:1 1 0
+     below balances whatever count is actually rendered, so this keeps working
+     if a surface is ever added/removed again. */
+  .royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNav {
+    display: flex;
+    /* WRAP, not nowrap (round-9 QA loop, 2026-07-25). Paired with the
+       min-width below: the equal-width line is kept whenever the labels fit,
+       and only breaks to a second row when they genuinely cannot - which is
+       exactly what this file's own header comment always promised ("wrap is a
+       last-resort fallback so it can NEVER overflow or scroll"). */
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .royaleV2Route--simplified .royaleResultsHead .royaleSurfaceNavLink {
+    flex: 1 1 0;
+    /* max-content, NOT 0. `min-width: 0` let this equal-width flex line shrink
+       a pill below its own label; the label is `white-space: nowrap` and this
+       header's nav is `overflow: visible` (it deliberately drops the base
+       scroll pane), so the text simply ESCAPED its pill, collided with the
+       neighbouring pill and ran off the right edge - unreachable, because
+       there is no scroll here to reach it with.
+       en never showed it: BOARD/ARENA/RESULTS/RANKS/CARDS/PROFILE/DOCS all fit
+       the equal share at 390. ja ("プロフィール"/"ドキュメント") and de
+       ("SPIELFELD"/"ERGEBNISSE") do not - see r2-zoom/ja-arena-nav-390.png and
+       r2-zoom/de-arena-nav-390.png. Worst on /arena, whose `showCurrent` pill
+       makes it 7 tokens instead of 6. */
+    min-width: max-content;
+    justify-content: center;
+    padding: 4px 2px;
+    font-size: 9.5px;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* =============================================================================
+   DESIGNED EMPTY STATE — shared by every standalone page (no blank voids, no
+   bare one-line <p>). Dashed panel, CAPS headline, one gold CTA to the board.
+   ========================================================================== */
+.royalePageEmpty {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 40px 24px;
+}
+.royalePageEmpty b {
+  font-size: 12.5px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  color: var(--pr-ink, #eef1f8);
+}
+.royalePageEmpty p {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--pr-ink-2, #a7afc2);
+}
+.royalePageEmptyCta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: var(--pr-gold-ink, #eccb7e);
+  color: #0b0d13;
+  font-size: 11.5px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: filter 120ms ease;
+}
+.royalePageEmptyCta:hover {
+  filter: brightness(1.08);
+}
+.royalePageEmptyCta:focus-visible {
+  outline: 2px solid var(--pr-gold-ink, #eccb7e);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   PROFILE HISTORY LEDGER (was the winnings page's) — no cramped inner 420px
+   scrollbox: SHOW MORE pagination bounds the DOM instead.
+   ========================================================================== */
+.royaleProfileRoute .royaleLedger {
+  max-height: none;
+  overflow-y: visible;
+}
+
+/* --- ledger rows: dark-theme overrides (base styles hardcode light fills) --- */
+.royaleProfileRoute .royaleLedgerRound {
+  background: rgba(255, 255, 255, 0.04);
+}
+.royaleProfileRoute .royaleLedgerRound[data-you-won="true"] {
+  border-color: rgba(28, 178, 127, 0.38);
+}
+.royaleProfileRoute .royaleLedgerTile {
+  background: color-mix(in srgb, var(--tile-accent) 16%, var(--pr-panel-solid, #1b1712));
+}
+.royaleProfileRoute .royaleLedgerTile.empty {
+  background: transparent;
+}
+.royaleProfileRoute .royaleLedgerChase {
+  color: #e08bab;
+}
+
+/* SHOW MORE — appends the older rows; full-width, honest count, ≥44px tap. */
+.royaleLedgerMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 2px;
+  padding: 0 16px;
+  border: 1px dashed rgba(230, 199, 102, 0.4);
+  border-radius: 10px;
+  background: rgba(230, 199, 102, 0.06);
+  color: var(--pr-gold-ink, #eccb7e);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.royaleLedgerMore:hover {
+  background: rgba(230, 199, 102, 0.13);
+  border-color: rgba(230, 199, 102, 0.6);
+}
+.royaleLedgerMore:focus-visible {
+  outline: 2px solid var(--pr-gold-ink, #eccb7e);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   PERFORMANCE PANELS (chart / form / leaderboard — the retired analytics
+   page's, now sections of the merged profile). Chart colors #18a375 (win) /
+   #e0656e (loss) validated against the dark panel: CVD ΔE 13.8 (pass),
+   contrast ≥3:1 (pass); polarity is redundantly encoded by bar direction,
+   never color alone. The --pr-win/--pr-loss tokens live on .royaleProfileRoute
+   (royaleProfilePage.css).
+   ========================================================================== */
+.royaleAnaGrid {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+@media (min-width: 980px) {
+  .royaleAnaGrid {
+    grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+    align-items: start;
+  }
+}
+
+.royaleAnaPanel {
+  border: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+  border-radius: 14px;
+  background: var(--pr-panel-solid, #171a24);
+  padding: 14px 16px;
+  margin-top: 14px;
+}
+.royaleAnaGrid .royaleAnaPanel {
+  margin-top: 0;
+}
+.royaleAnaPanelHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin-bottom: 12px;
+}
+.royaleAnaPanelHead small {
+  color: var(--pr-ink-2, #a7afc2);
+  font-size: 11px;
+}
+
+/* --- public leaderboard: metric + window selectors -------------------------- */
+.royaleLbControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 12px;
+}
+.royaleLbChips {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.royaleLbChip {
+  border: 0;
+  border-radius: 999px;
+  padding: 5px 12px;
+  background: transparent;
+  color: var(--pr-ink-2, #a7afc2);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.royaleLbChip:hover {
+  color: var(--pr-ink, #eef1f8);
+}
+.royaleLbChip--on {
+  background: var(--pr-accent, #7dd3fc);
+  color: #0b0e16;
+}
+.royaleLbChip:focus-visible {
+  outline: 2px solid var(--pr-accent, #7dd3fc);
+  outline-offset: 2px;
+}
+
+/* --- diverging columns ------------------------------------------------------ */
+.royaleAnaChart {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  height: 190px;
+}
+.royaleAnaChartScale {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+}
+.royaleAnaChartScale em {
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--pr-ink-2, #a7afc2);
+  font-variant-numeric: tabular-nums;
+}
+.royaleAnaChartCols {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 2px; /* the surface gap between adjacent bars */
+}
+/* Zero baseline: recessive 1px hairline. */
+.royaleAnaChartCols::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  border-top: 1px solid var(--pr-line-2, rgba(158, 176, 214, 0.22));
+}
+.royaleAnaCol {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 24px; /* thin marks — never fill a wide slot */
+  min-width: 0;
+}
+/* The inline height is authored as a % of the HALF-axis (component emits
+   frac×50 of the box), so a max-magnitude bar exactly reaches the edge. */
+.royaleAnaCol i {
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+  left: 0;
+  background: var(--pr-win);
+  border-radius: 4px 4px 0 0; /* rounded data end, square baseline */
+}
+.royaleAnaCol[data-neg] i {
+  top: 50%;
+  bottom: auto;
+  background: var(--pr-loss);
+  border-radius: 0 0 4px 4px;
+}
+.royaleAnaCol:hover i {
+  filter: brightness(1.15);
+}
+/* Per-bar hover tooltip (custom — no native title bubbles). */
+.royaleAnaColTip {
+  position: absolute;
+  bottom: calc(50% + 8px);
+  left: 50%;
+  z-index: 5;
+  padding: 4px 9px;
+  border: 1px solid var(--pr-line-2, rgba(158, 176, 214, 0.22));
+  border-radius: 7px;
+  background: var(--pr-bg, #0c0a09);
+  color: var(--pr-ink, #eef1f8);
+  font-size: 10px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 3px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+.royaleAnaCol[data-neg] .royaleAnaColTip {
+  bottom: auto;
+  top: calc(50% + 8px);
+  transform: translate(-50%, -3px);
+}
+.royaleAnaCol:hover .royaleAnaColTip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* --- recent form chips ------------------------------------------------------ */
+.royaleAnaForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.royaleAnaFormChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--pr-line-2, rgba(158, 176, 214, 0.22));
+  background: color-mix(in srgb, var(--pr-loss) 14%, var(--pr-panel-solid, #1b1712));
+  color: var(--pr-ink-2, #a7afc2);
+  font-size: 12px;
+  font-weight: 900;
+}
+.royaleAnaFormChip[data-won] {
+  border-color: color-mix(in srgb, var(--pr-win) 55%, transparent);
+  background: color-mix(in srgb, var(--pr-win) 20%, var(--pr-panel-solid, #1b1712));
+  color: #7be0bb;
+}
+
+/* --- leaderboard ------------------------------------------------------------ */
+.royaleAnaLbScroll {
+  overflow-x: auto;
+}
+.royaleAnaLbTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.royaleAnaLbTable th {
+  padding: 6px 10px;
+  text-align: right;
+  font-size: 9.5px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  color: var(--pr-ink-2, #a7afc2);
+  border-bottom: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+}
+.royaleAnaLbTable th:nth-child(-n + 2),
+.royaleAnaLbTable td:nth-child(-n + 2) {
+  text-align: left;
+}
+.royaleAnaLbTable td {
+  padding: 8px 10px;
+  text-align: right;
+  color: var(--pr-ink, #eef1f8);
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--pr-line, rgba(148, 166, 208, 0.11));
+}
+.royaleAnaLbTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+.royaleAnaLbTable td[data-tone="pos"] {
+  color: #4ecf9d;
+}
+.royaleAnaLbTable td[data-tone="neg"] {
+  color: var(--pr-loss);
+}
+/* Your own row: a quiet brass wash + a YOU chip, so rank reads at a glance. */
+.royaleAnaLbTable tr[data-you] td {
+  background: rgba(236, 203, 126, 0.07);
+}
+.royaleAnaLbYou {
+  margin-left: 6px;
+  padding: 1px 5px;
+  border: 1px solid rgba(236, 203, 126, 0.45);
+  border-radius: 999px;
+  font-style: normal;
+  font-size: 8.5px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  color: var(--pr-gold-ink, #eccb7e);
+}
+.royaleAnaMono {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+}
+.royaleAnaQuietEmpty {
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed var(--pr-line-2, rgba(158, 176, 214, 0.22));
+  border-radius: 10px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--pr-ink-2, #a7afc2);
+}
+.royaleAnaLbSkeleton {
+  display: grid;
+  gap: 8px;
+}
+.royaleAnaLbSkeleton span {
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.04) 75%);
+  background-size: 200% 100%;
+  animation: royaleAnaShimmer 1.3s ease-in-out infinite;
+}
+@keyframes royaleAnaShimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .royaleAnaLbSkeleton span { animation: none; }
+}

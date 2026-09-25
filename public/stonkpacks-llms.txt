@@ -1,0 +1,9 @@
+# STONKPACKS
+
+Rip $25 Stock Packs for token rewards. Paid packs and eligible sponsored rewards send Solana stock tokens or community tokens to your wallet. StonkFun launches tokens. Privy connects your wallet.
+
+- [Play](https://stonkpacks.xyz/)
+- [Create](https://stonkpacks.xyz/stock-packs/create)
+- [Documentation](https://stonkpacks.xyz/docs)
+
+xStocks, PreStocks, Tessera, Sunrise, STONK, and some community tokens may qualify. Each exact mint needs approval and a verified market. Token labels alone are not enough. Prices are estimates. Get a verified quote before swap approval. Paid and sponsored reward receipts keep accepted token amounts. CollectorCrypt VRF is used when configured and verified. Creator fee claims need rules and a server-confirmed amount.

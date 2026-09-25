@@ -1,0 +1,212 @@
+.stockPacksPlayer {
+  color: var(--pr-ink, #f7f2e8);
+  font-variant-numeric: tabular-nums;
+}
+
+.stockPacksPlayerRoute { min-height: 100%; }
+.stockPacksPlayerOpening { padding-bottom: clamp(24px, 5vw, 56px); }
+.stockPacksPlayerOpening .royaleNormalPackOpening__studio { padding-top: 28px; }
+.stockPacksPlayerOpening .royaleNormalPackOpening__experience {
+  width: min(100%, 1040px);
+  justify-self: center;
+}
+.stockPacksPlayerOpening .royaleNormalPackOpening__stageCopy { padding: 0 18px 22px; }
+.stockPacksPlayerStageTitle { max-width: 22ch; }
+
+.stockPacksCollection {
+  display: grid;
+  gap: 18px;
+  margin: 26px 0;
+  padding: clamp(18px, 3vw, 28px);
+  color: var(--pr-ink, #f7f2e8);
+  background: rgb(255 255 255 / 2.5%);
+  border: 1px solid rgb(255 255 255 / 9%);
+  border-radius: 16px;
+}
+.stockPacksCollection__head,
+.stockPacksCollection__meta {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.stockPacksCollection__head span {
+  color: var(--pr-gold-ink, #eccb7e);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.stockPacksCollection__head h2 { margin: 4px 0 0; font-size: clamp(1.25rem, 3vw, 1.8rem); }
+.stockPacksCollection__head small,
+.stockPacksCollection__meta time { color: var(--pr-ink-2, #aaa79f); }
+.stockPacksCollection__state { margin: 0; color: var(--pr-ink-2, #aaa79f); }
+.stockPacksCollection__connect { margin-top: 12px; width: auto; }
+.stockPacksCollection__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: 16px;
+}
+.stockPacksCollection__item { display: grid; align-content: start; gap: 10px; min-width: 0; }
+.stockPacksCollection__meta { align-items: center; font-size: 0.76rem; text-transform: capitalize; }
+
+.stockPacksPlayer button { font: inherit; }
+
+.stockPacksPlayer__campaigns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.stockPacksPlayer__campaign {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  color: var(--pr-ink, #f7f2e8);
+  text-align: left;
+  background: rgb(255 255 255 / 3.5%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 11px;
+  cursor: pointer;
+}
+.stockPacksPlayer__campaign[aria-pressed="true"] {
+  background: rgb(216 181 111 / 12%);
+  border-color: rgb(216 181 111 / 58%);
+}
+.stockPacksPlayer__campaign span { color: var(--pr-ink-2, #aaa79f); font-size: 0.78rem; }
+
+.stockPacksPlayer__summary {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background: rgb(255 255 255 / 3.5%);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 12px;
+}
+
+.stockPacksPlayer__summary > strong { color: var(--pr-gold-ink, #eccb7e); font-size: 24px; }
+.stockPacksPlayer__summary dl,
+.stockPacksPlayer__receipt dl,
+.stockPacksPlayer__review dl { margin: 0; }
+.stockPacksPlayer__summary dl { display: flex; flex-wrap: wrap; gap: 22px; min-width: 0; }
+.stockPacksPlayer__summary dl > div { min-width: 0; }
+.stockPacksPlayer__summary dt,
+.stockPacksPlayer__receipt dt,
+.stockPacksPlayer__review dt { color: var(--pr-ink-2, #aaa79f); font-size: 11px; }
+.stockPacksPlayer__summary dd,
+.stockPacksPlayer__receipt dd,
+.stockPacksPlayer__review dd { margin: 2px 0 0; }
+.stockPacksPlayer__summary dd { overflow-wrap: anywhere; }
+
+.stockPacksPlayer__receipt,
+.stockPacksPlayer__purchase,
+.stockPacksPlayer__savedOperation,
+.stockPacksPlayer__review { display: grid; gap: 12px; }
+.stockPacksPlayer__receipt dl,
+.stockPacksPlayer__review dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.stockPacksPlayer__receipt dl > div,
+.stockPacksPlayer__review dl > div {
+  padding: 12px;
+  background: rgb(255 255 255 / 3.5%);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 10px;
+}
+
+.stockPacksPlayer__actions,
+.stockPacksPlayer__history { display: flex; gap: 8px; flex-wrap: wrap; }
+.stockPacksPlayer__actions button,
+.stockPacksPlayer__savedOperation button,
+.stockPacksPlayer__keep,
+.stockPacksPlayer__openAnother,
+.stockPacksPlayer__history button {
+  color: inherit;
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 11%);
+  border-radius: 9px;
+  cursor: pointer;
+  padding: 10px 12px;
+}
+
+.stockPacksPlayer__purchase { margin-top: 16px; }
+.stockPacksPlayer__purchase > p { color: var(--pr-ink-2, #aaa79f); margin: 0; }
+.stockPacksPlayer__purchase > p strong { color: var(--pr-ink, #f7f2e8); }
+.stockPacksPlayer__primary {
+  width: 100%;
+  color: #171109;
+  background: linear-gradient(135deg, var(--pr-gold-ink, #eccb7e), #f2dda0);
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  font-weight: 900;
+  padding: 13px 16px;
+}
+
+.stockPacksPlayer__savedOperation {
+  padding: 13px;
+  background: rgb(216 181 111 / 8%);
+  border: 1px solid rgb(216 181 111 / 28%);
+  border-radius: 11px;
+}
+.stockPacksPlayer__savedOperation span { color: var(--pr-ink-2, #aaa79f); font-size: 0.9rem; }
+.stockPacksPlayer__keep,
+.stockPacksPlayer__openAnother { margin-top: 10px; width: 100%; }
+.stockPacksPlayer__history button { display: grid; min-width: 140px; text-align: left; }
+.stockPacksPlayer__history small { color: var(--pr-ink-2, #aaa79f); text-transform: capitalize; }
+.stockPacksPlayer__error { color: #ff9f94; margin: 12px 0 0; }
+.stockPacksPlayer button:disabled { cursor: not-allowed; opacity: 0.48; }
+
+.stockPacksPlayer__note { display: block; color: var(--pr-ink-2, #aaa79f); font-size: 0.9rem; }
+.stockPacksPlayer__risk { margin: 0; color: var(--pr-ink-2, #aaa79f); font-size: 0.9rem; }
+.stockPacksPlayer__risk a { color: inherit; text-decoration: underline; }
+.stockPacksPlayer__fund { display: grid; gap: 8px; }
+.stockPacksPlayer__fund span { color: var(--pr-ink-2, #aaa79f); font-size: 0.9rem; }
+.stockPacksPlayer__fund code { overflow-wrap: anywhere; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+.stockPacksPlayer__link { display: inline-block; box-sizing: border-box; text-align: center; text-decoration: none; }
+
+/* STONKPACKS home: readable status text on either scheme, one compact centered
+   column for the connect or closed card, and a larger pack stage. */
+html[data-brand="stonkpacks"] .stockPacksPlayer.royaleNormalPackContents__state strong,
+html[data-brand="stonkpacks"] .stockPacksPlayerStageTitle {
+  color: var(--pr-ink, #f3f8f8);
+}
+html[data-brand="stonkpacks"] .stockPacksPlayer.royaleNormalPackContents__state small {
+  color: var(--pr-ink-2, #a4c5cf);
+  font-size: 15px;
+}
+html[data-brand="stonkpacks"] .stockPacksPlayerOpening .stockPacksPlayer.royaleNormalPackContents__state {
+  box-sizing: border-box;
+  width: min(100%, 420px);
+  min-height: 0;
+  margin-inline: auto;
+  padding: 16px 16px 24px;
+}
+html[data-brand="stonkpacks"] .stockPacksPlayerOpening .stockPacksPlayer__purchase {
+  width: min(100%, 420px);
+  margin-inline: auto;
+}
+html[data-brand="stonkpacks"] .stockPacksPlayerOpening .royaleNormalPackOpening__stageCopy { padding-bottom: 8px; }
+html[data-brand="stonkpacks"] .stockPacksPlayerOpening .royaleNormalPackOpening__stageCopy small {
+  color: var(--pr-ink-2, #a4c5cf);
+  font-size: 15px;
+}
+html[data-brand="stonkpacks"] .stockPacksPlayerOpening .royaleNormalPackOpening__livePack {
+  --normal-pack-stage-height: clamp(300px, 46svh, 460px);
+}
+
+@media (max-width: 700px) {
+  .stockPacksPlayer__summary { align-items: flex-start; flex-direction: column; }
+  .stockPacksPlayer__summary dl { justify-content: space-between; width: 100%; }
+  .stockPacksPlayer__summary dl > div { flex: 1 1 120px; }
+  .stockPacksPlayer__receipt dl,
+  .stockPacksPlayer__review dl { grid-template-columns: 1fr; }
+  .stockPacksCollection__head { align-items: flex-start; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stockPacksPlayer *,
+  .stockPacksPlayer *::before,
+  .stockPacksPlayer *::after { animation: none; scroll-behavior: auto; transition: none; }
+}

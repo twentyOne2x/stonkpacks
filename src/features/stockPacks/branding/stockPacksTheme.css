@@ -1,0 +1,172 @@
+/* Applied only when the exact STONKPACKS brand profile is selected. */
+html[data-brand="stonkpacks"] {
+  color-scheme: dark;
+  font-family: Sora, Inter, system-ui, sans-serif;
+  background: #071013;
+}
+
+html[data-brand="stonkpacks"] body {
+  background: #071013;
+  color: #f3f8f8;
+}
+
+html[data-brand="stonkpacks"] .royaleV2Route.royaleV2Route--simplified {
+  --pr-bg: #071013;
+  --pr-panel: #102127;
+  --pr-panel-solid: #102127;
+  --pr-ink: #f3f8f8;
+  --pr-ink-2: #a4c5cf;
+  --pr-line: rgb(105 170 193 / 24%);
+  --pr-line-2: rgb(105 170 193 / 40%);
+  --pr-gold: #69aac1;
+  --pr-gold-ink: #a4c5cf;
+  --pr-gold-active: #69aac1;
+  --pr-mint: #3ce3ab;
+  background: #071013;
+  color: #f3f8f8;
+}
+
+html[data-brand="stonkpacks"] .royaleBrandMark {
+  color: #3ce3ab;
+  font-family: Sora, Inter, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: .025em;
+}
+
+html[data-brand="stonkpacks"] .royaleBrandMark i {
+  color: #3ce3ab;
+  -webkit-text-fill-color: #3ce3ab;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  font-family: Sora, Inter, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: .025em;
+}
+
+html[data-brand="stonkpacks"] .royaleResultsHead {
+  align-items: center;
+  gap: 12px 18px;
+  padding: 16px clamp(16px, 4vw, 52px);
+  border-bottom: 1px solid rgb(105 170 193 / 24%);
+}
+
+html[data-brand="stonkpacks"] .royaleResultsHead > strong {
+  color: #a4c5cf;
+  font-size: 14px;
+  letter-spacing: .015em;
+}
+
+html[data-brand="stonkpacks"] .royaleResultsHead > a:not(.royaleBrandMark) {
+  display: none;
+}
+
+html[data-brand="stonkpacks"] .royaleResultsHead .royaleSurfaceNav {
+  gap: 6px;
+}
+
+html[data-brand="stonkpacks"] .royaleResultsHead .royaleSurfaceNavLink {
+  color: #c4d6da;
+  border-color: rgb(105 170 193 / 30%);
+  background: rgb(16 33 39 / 72%);
+  letter-spacing: .045em;
+}
+
+html[data-brand="stonkpacks"] .royaleResultsHead .royaleSurfaceNavLink:hover {
+  color: #3ce3ab;
+  border-color: #3ce3ab;
+  background: rgb(60 227 171 / 8%);
+}
+
+html[data-brand="stonkpacks"] .stockPacksPlayer__primary,
+html[data-brand="stonkpacks"] .stock-sale__actions button,
+html[data-brand="stonkpacks"] .stockCreator button[type="submit"] {
+  background: #3ce3ab;
+  color: #071013;
+  border-radius: 12px;
+}
+
+html[data-brand="stonkpacks"] .stockPacksPlayer__campaign[aria-pressed="true"] {
+  background: rgb(60 227 171 / 12%);
+  border-color: #3ce3ab;
+}
+
+html[data-brand="stonkpacks"] .normalPackStage3D__posterFallback {
+  background: linear-gradient(145deg, #102127, #071013);
+  border: 2px solid #69aac1;
+  border-radius: 18px;
+  color: #f3f8f8;
+}
+
+html[data-brand="stonkpacks"] .stockPacksFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px 24px;
+  margin-top: 28px;
+  padding: 22px clamp(16px, 4vw, 52px) max(22px, env(safe-area-inset-bottom));
+  border-top: 1px solid rgb(105 170 193 / 24%);
+  background: #09161a;
+  color: #a4c5cf;
+  font-size: 13px;
+}
+
+html[data-brand="stonkpacks"] .stockPacksFooter__brand {
+  color: #3ce3ab;
+  font-size: 14px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+
+html[data-brand="stonkpacks"] .stockPacksFooter p {
+  grid-column: 1;
+  margin: 0;
+}
+
+html[data-brand="stonkpacks"] .stockPacksFooter nav {
+  display: flex;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 18px;
+}
+
+html[data-brand="stonkpacks"] .stockPacksFooter nav a {
+  color: #c4d6da;
+  text-decoration: none;
+}
+
+html[data-brand="stonkpacks"] .stockPacksFooter nav a:hover {
+  color: #3ce3ab;
+}
+
+@media (max-width: 640px) {
+  html[data-brand="stonkpacks"] .royaleResultsHead {
+    gap: 8px 12px;
+    padding-block: 12px;
+  }
+
+  html[data-brand="stonkpacks"] .royaleResultsHead .royaleSurfaceNav {
+    row-gap: 6px;
+  }
+
+  html[data-brand="stonkpacks"] .royaleResultsHead .royaleSurfaceNavLink {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  html[data-brand="stonkpacks"] .stockPacksFooter {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  html[data-brand="stonkpacks"] .stockPacksFooter nav {
+    grid-column: 1;
+    grid-row: auto;
+    justify-content: flex-start;
+    gap: 10px 16px;
+  }
+}

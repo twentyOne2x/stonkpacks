@@ -1,0 +1,529 @@
+/* STONKPACKS direction F lower page (VITE_STOCK_PACKS_THEME=stonks, Stock host only).
+   Every section is a board module in the hero band's material: the royal-blue radial,
+   the band's own ticker tile at low opacity, a vignette and a hairline blue edge.
+   Chrome stays teal and mint; orange appears only on wins. */
+
+/* The meme words ("stonks", "not stonks"): Nunito 900 subset to those letters,
+   SIL OFL (public/pack3d/stonkpacks/OFL-nunito.txt). Distinct family name so no
+   other stack changes. */
+@font-face {
+  font-family: "STONKPACKS Nunito";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/pack3d/stonkpacks/nunito-900-meme.c677eb2764.woff2") format("woff2");
+  unicode-range: U+20, U+4B, U+4E-4F, U+53-54, U+6B, U+6E-6F, U+73-74;
+}
+
+.stonksLower,
+.stonksFacts {
+  --stonks-sora: "STONKPACKS Sora", Sora, Inter, system-ui, sans-serif;
+  --stonks-grot: "STONKPACKS Space Grotesk", "Space Grotesk", Inter, system-ui, sans-serif;
+  --stonks-meme: "STONKPACKS Nunito", "Arial Rounded MT Bold", ui-rounded, var(--stonks-sora);
+  --stonks-ink: #f3f8f8;
+  --stonks-ink-2: #a4c5cf;
+  --stonks-accent: #69aac1;
+  --stonks-mint: #3ce3ab;
+  --stonks-b-ink-2: #bcd0f6;
+  --stonks-b-ink-3: #7f97cc;
+  --stonks-b-line: rgb(140 180 255 / 16%);
+  --stonks-b-line-2: rgb(160 200 255 / 32%);
+  --stonks-glow: 0 0 14px rgb(110 165 255 / 55%);
+  --stonks-hot-glow: 0 0 14px rgb(255 120 40 / 55%), 0 0 34px rgb(255 90 30 / 30%);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Facts row under the rip button. */
+.stonksFacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  box-sizing: border-box;
+  width: min(100%, 420px);
+  margin: 4px auto 0;
+  overflow: hidden;
+  background: #0b181c;
+  border: 1px solid rgb(105 170 193 / 24%);
+  border-radius: 14px;
+}
+
+.stonksFacts > div {
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.stonksFacts > div + div { border-left: 1px solid rgb(105 170 193 / 24%); }
+.stonksFacts dt { color: #6f8e97; font: 700 10px/1 var(--stonks-sora); letter-spacing: .12em; }
+.stonksFacts dd { margin: 0; color: var(--stonks-ink); font: 700 17px/1 var(--stonks-sora); }
+
+/* Page structure. */
+.stonksLower { color: var(--stonks-ink); font-family: var(--stonks-sora); }
+.stonksLower__sec { padding-block: 72px 0; }
+.stonksLower__col { box-sizing: border-box; width: min(1040px, 100%); margin: 0 auto; padding-inline: 16px; }
+@media (min-width: 1072px) { .stonksLower__col { padding-inline: 0; } }
+
+.stonksLower__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 24px;
+  margin-bottom: 22px;
+}
+
+.stonksLower__kicker {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--stonks-accent);
+  font: 700 11px/1 var(--stonks-sora);
+  letter-spacing: .16em;
+}
+
+.stonksLower__head h2 {
+  margin: 0;
+  color: var(--stonks-ink);
+  font: 800 clamp(30px, 3.2vw, 40px)/1.05 var(--stonks-sora);
+  letter-spacing: -.025em;
+}
+
+.stonksLower__head p { margin: 8px 0 0; color: var(--stonks-ink-2); font-size: 16px; }
+
+.stonksLower__chip {
+  padding: 7px 10px;
+  color: var(--stonks-b-ink-2);
+  font: 700 10.5px/1 var(--stonks-sora);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: rgb(4 16 63 / 50%);
+  border: 1px solid var(--stonks-b-line-2);
+  border-radius: 999px;
+}
+
+/* Board module: the hero band's material, reused. */
+.stonksModule {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background: radial-gradient(110% 85% at 50% 0%, #1238b0 0%, #0b2586 32%, #071a62 62%, #040e3a 100%);
+  border-radius: 24px;
+  box-shadow: 0 0 0 1px rgb(120 170 255 / 26%), 0 40px 80px -40px rgb(10 40 160 / 55%), inset 0 1px 0 rgb(255 255 255 / 10%);
+}
+
+.stonksModule::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  opacity: .3;
+  background-image: var(--stonks-tile-far, none);
+  background-size: 1200px 720px;
+  -webkit-mask-image: radial-gradient(90% 80% at 50% 25%, #000 25%, transparent 100%);
+  mask-image: radial-gradient(90% 80% at 50% 25%, #000 25%, transparent 100%);
+}
+
+.stonksModule::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgb(2 8 34 / 60%) 100%);
+}
+
+.stonksOdds::before { opacity: .1; }
+.stonksSell::before { opacity: .16; }
+
+.stonksMeme {
+  position: relative;
+  margin: 0;
+  z-index: 2;
+  color: #fff;
+  font-family: var(--stonks-meme);
+  font-weight: 900;
+  line-height: .86;
+  letter-spacing: -.015em;
+  text-transform: lowercase;
+  -webkit-text-stroke: .1em #000;
+  paint-order: stroke fill;
+  text-shadow: 0 0 .1em rgb(255 255 255 / 30%), 0 0 .4em rgb(120 170 255 / 45%);
+}
+
+.stonksModule .stonksHot { color: #ffb45a; text-shadow: var(--stonks-hot-glow); }
+
+.stonksTierTag {
+  justify-self: start;
+  padding: 6px 9px;
+  color: var(--stonks-b-ink-2);
+  font: 700 10.5px/1 var(--stonks-sora);
+  letter-spacing: .12em;
+  white-space: nowrap;
+  border: 1px solid var(--stonks-b-line-2);
+  border-radius: 999px;
+}
+
+.stonksTierTag--hot {
+  color: #1a0700;
+  background: linear-gradient(180deg, #ffc25a, #f0401a);
+  border-color: transparent;
+}
+
+/* Example pulls: real D4 renders with depth and foil. */
+.stonksLower__reveal { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; }
+.stonksPullCard { display: grid; align-content: start; }
+
+.stonksPullCard__art,
+.stonksSell__art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 400px;
+  perspective: 1100px;
+}
+
+.stonksPullCard__art::before,
+.stonksSell__art::before {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: 72%;
+  height: 82%;
+  transform: translate(-50%, -50%);
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(90 150 255 / 50%), rgb(50 100 255 / 15%) 60%, transparent 80%);
+}
+
+.stonksPullCard--win .stonksPullCard__art::before {
+  background: radial-gradient(closest-side, rgb(110 160 255 / 50%), rgb(255 120 50 / 14%) 62%, transparent 82%);
+}
+
+.stonksPullCard__arrow {
+  position: absolute;
+  top: 7%;
+  left: 8%;
+  width: 84%;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 0 14px rgb(255 110 40 / 65%)) drop-shadow(0 0 40px rgb(255 90 30 / 35%));
+}
+
+.stonksCard__float { position: relative; animation: stonksCardFloat 6.5s ease-in-out infinite; }
+
+.stonksCard {
+  position: relative;
+  height: 320px;
+  aspect-ratio: 582 / 880;
+  transform: rotateX(var(--stonks-rx, 0deg)) rotateY(var(--stonks-ry, 0deg));
+  transition: transform .25s ease-out;
+  filter: drop-shadow(0 34px 30px rgb(0 5 30 / 70%)) drop-shadow(0 0 26px rgb(90 150 255 / 35%));
+}
+
+.stonksCard img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.stonksCard__foil,
+.stonksCard__sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  -webkit-mask-image: var(--stonks-mask);
+  mask-image: var(--stonks-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.stonksCard__foil {
+  background: linear-gradient(115deg, transparent 32%, rgb(255 255 255 / 24%) 46%, rgb(170 210 255 / 20%) 50%, rgb(255 196 130 / 14%) 54%, transparent 66%);
+  background-position: var(--stonks-sx, 30%) var(--stonks-sy, 40%);
+  background-size: 260% 260%;
+  transition: background-position .25s ease-out;
+}
+
+.stonksCard__sweep {
+  background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / 20%) 50%, transparent 60%);
+  background-position: 120% 0;
+  background-size: 300% 100%;
+  animation: stonksCardSweep 7s ease-in-out infinite;
+}
+
+@keyframes stonksCardSweep {
+  0%, 55% { background-position: 120% 0; }
+  100% { background-position: -40% 0; }
+}
+
+@keyframes stonksCardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.stonksCard__floor {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 38%;
+  height: 16px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(0 4 24 / 80%), transparent);
+  filter: blur(4px);
+}
+
+.stonksPullCard__info { position: relative; display: grid; gap: 14px; padding: 0 26px 26px; }
+.stonksPullCard__info .stonksMeme { margin-top: -44px; font-size: clamp(64px, 6.4vw, 92px); }
+.stonksPullCard--loss .stonksPullCard__info .stonksMeme { margin-top: -34px; font-size: clamp(50px, 5vw, 72px); }
+.stonksPullCard__id { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.stonksPullCard__id b { font: 800 24px/1 var(--stonks-sora); }
+.stonksPullCard__id i,
+.stonksOdds__ticker i,
+.stonksQuote i { color: #8fbcff; font-style: normal; }
+
+.stonksPullCard__nums {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 8px 34px;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--stonks-b-line);
+}
+
+.stonksPullCard__nums div { display: grid; gap: 6px; }
+.stonksPullCard__nums dt { color: var(--stonks-b-ink-3); font: 700 10px/1 var(--stonks-sora); letter-spacing: .14em; }
+.stonksPullCard__nums dd { margin: 0; font: 700 26px/1 var(--stonks-sora); text-shadow: var(--stonks-glow); }
+.stonksPullCard--win .stonksPullCard__nums .stonksHot { font-size: 36px; }
+.stonksPullCard__info p { margin: 0; color: var(--stonks-b-ink-2); }
+.stonksPullCard__info p b { color: #fff; font-weight: 600; }
+
+/* Every possible pull: the board-table. */
+.stonksOdds__tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--stonks-b-line); }
+.stonksOdds__tiers > div { display: grid; gap: 7px; padding: 26px 24px 22px; }
+.stonksOdds__tiers > div + div { border-left: 1px solid var(--stonks-b-line); }
+
+.stonksOdds__tiers b {
+  font: 700 clamp(42px, 4.4vw, 58px)/.9 var(--stonks-sora);
+  letter-spacing: -.03em;
+  text-shadow: 0 0 18px rgb(110 165 255 / 60%);
+}
+
+.stonksOdds__tiers small { margin-left: 2px; font-size: .45em; }
+.stonksOdds__tiers span { font: 700 12px/1 var(--stonks-sora); letter-spacing: .14em; }
+.stonksOdds__tiers em { color: var(--stonks-b-ink-2); font-size: 14px; font-style: normal; }
+
+.stonksOdds__head,
+.stonksOdds__row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1.2fr) minmax(0, .9fr) minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, .65fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding-inline: 24px;
+}
+
+.stonksOdds__head { padding-block: 16px 10px; color: var(--stonks-b-ink-3); font: 700 10px/1 var(--stonks-sora); letter-spacing: .14em; }
+.stonksOdds__r { text-align: right; }
+.stonksOdds__rows { margin: 0; padding: 0; list-style: none; }
+
+.stonksOdds__row {
+  min-height: 76px;
+  padding-block: 10px;
+  border-top: 1px solid var(--stonks-b-line);
+  transition: background .2s ease;
+}
+
+.stonksOdds__row:hover { background: rgb(120 170 255 / 7%); }
+.stonksOdds__thumb { width: 40px; height: 56px; object-fit: contain; filter: drop-shadow(0 6px 10px rgb(0 5 30 / 60%)); }
+.stonksOdds__ticker { display: grid; gap: 4px; font: 800 20px/1.1 var(--stonks-sora); }
+.stonksOdds__ticker small { color: var(--stonks-b-ink-3); font: 500 12.5px/1 var(--stonks-sora); }
+.stonksOdds__odds { display: grid; grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 12px; }
+.stonksOdds__odds b { font: 600 17px/1 var(--stonks-sora); }
+.stonksOdds__bar { height: 6px; overflow: hidden; background: rgb(140 180 255 / 12%); border-radius: 99px; }
+
+.stonksOdds__bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #4f86ff, #9cc4ff);
+  border-radius: inherit;
+  box-shadow: 0 0 10px rgb(110 165 255 / 70%);
+}
+
+.stonksOdds__row--up .stonksOdds__bar i { background: linear-gradient(90deg, #ff7a2a, #ffc25a); box-shadow: 0 0 10px rgb(255 120 40 / 70%); }
+.stonksOdds__value { font: 700 24px/1 var(--stonks-sora); text-shadow: var(--stonks-glow); }
+.stonksOdds__row--up .stonksOdds__value { color: #ffb45a; text-shadow: var(--stonks-hot-glow); }
+.stonksOdds__mult { color: var(--stonks-b-ink-2); font: 600 17px/1 var(--stonks-sora); }
+.stonksOdds__vs { color: #8fbcff; font: 600 15px/1 var(--stonks-sora); }
+.stonksOdds__row--up .stonksOdds__vs { color: #ffb45a; }
+
+.stonksOdds__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding: 16px 24px;
+  color: var(--stonks-b-ink-2);
+  font-size: 13px;
+  border-top: 1px solid var(--stonks-b-line);
+}
+
+.stonksOdds__verify {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 20px;
+  padding: 18px 24px 22px;
+  background: rgb(3 10 44 / 45%);
+  border-top: 1px solid var(--stonks-b-line);
+}
+
+.stonksOdds__verify svg { flex: none; width: 38px; height: 38px; }
+.stonksOdds__verify p { margin: 0 auto 0 0; }
+.stonksOdds__verify p b { display: block; font-size: 17px; font-weight: 700; }
+.stonksOdds__verify p span { color: var(--stonks-b-ink-2); font-size: 14px; }
+
+.stonksPillMint {
+  padding: 12px 16px;
+  color: var(--stonks-mint);
+  font: 700 12px/1 var(--stonks-sora);
+  letter-spacing: .06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: rgb(60 227 171 / 8%);
+  border: 1px solid rgb(60 227 171 / 60%);
+  border-radius: 999px;
+}
+
+.stonksPillMint:hover { background: rgb(60 227 171 / 16%); }
+.stonksPillMint:focus-visible { outline: 2px solid var(--stonks-mint); outline-offset: 3px; }
+
+/* Keep it or sell it. */
+.stonksSell { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }
+.stonksSell__art { height: 470px; }
+.stonksSell__art .stonksCard { height: 360px; }
+.stonksSell__body { display: grid; justify-items: start; gap: 18px; padding: 40px 44px 40px 8px; }
+.stonksSell__body .stonksLower__kicker { margin: 0; }
+.stonksSell__body h2 { margin: 0; font: 800 clamp(32px, 3.4vw, 44px)/1.02 var(--stonks-sora); letter-spacing: -.025em; }
+.stonksSell__body > p { max-width: 42ch; margin: -6px 0 0; color: var(--stonks-b-ink-2); font-size: 16px; }
+
+.stonksQuote {
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  background: rgb(2 8 36 / 72%);
+  border: 1px solid var(--stonks-b-line-2);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 6%), inset 0 0 40px rgb(40 90 255 / 12%);
+}
+
+.stonksQuote__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--stonks-b-line);
+}
+
+.stonksQuote__row span,
+.stonksQuote__live > span { color: var(--stonks-b-ink-3); font: 700 10px/1 var(--stonks-sora); letter-spacing: .14em; white-space: nowrap; }
+.stonksQuote__row b { font: 700 18px/1 var(--stonks-sora); white-space: nowrap; }
+.stonksQuote__live { display: grid; gap: 10px; padding: 16px 18px 18px; }
+.stonksQuote__digits { display: flex; align-items: center; gap: 12px; }
+.stonksQuote__digits em { color: var(--stonks-b-ink-2); font: 600 15px/1 var(--stonks-sora); font-style: normal; }
+.stonksQuote__live small { color: var(--stonks-b-ink-3); font-size: 12.5px; }
+
+.stonksShimmer {
+  display: inline-block;
+  width: 180px;
+  height: 30px;
+  background: linear-gradient(90deg, rgb(120 170 255 / 12%), rgb(170 205 255 / 42%), rgb(120 170 255 / 12%));
+  background-size: 200% 100%;
+  border-radius: 8px;
+  animation: stonksShimmer 1.6s linear infinite;
+}
+
+@keyframes stonksShimmer { to { background-position: -200% 0; } }
+
+.stonksSell__cta { display: grid; gap: 12px; width: 100%; pointer-events: none; user-select: none; }
+
+.stonksPrimary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 16px;
+  color: #071013;
+  font: 700 18px/1 var(--stonks-grot);
+  letter-spacing: .01em;
+  background: var(--stonks-mint);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px -12px rgb(60 227 171 / 60%);
+}
+
+.stonksSell__keep {
+  justify-self: center;
+  padding-bottom: 2px;
+  color: var(--stonks-b-ink-2);
+  font-size: 14px;
+  border-bottom: 1px solid var(--stonks-b-line-2);
+}
+
+@media (max-width: 900px) {
+  .stonksLower__reveal,
+  .stonksSell { grid-template-columns: minmax(0, 1fr); }
+
+  .stonksSell__art { height: 400px; }
+  .stonksSell__body { padding: 0 22px 28px; }
+  .stonksOdds__tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stonksOdds__tiers > div:nth-child(3) { border-left: 0; }
+  .stonksOdds__tiers > div:nth-child(n + 3) { border-top: 1px solid var(--stonks-b-line); }
+  .stonksOdds__head { display: none; }
+
+  .stonksOdds__row {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    grid-template-areas: "thumb ticker value" "thumb odds vs" "thumb tier mult";
+    row-gap: 9px;
+    padding: 14px 18px;
+  }
+
+  .stonksOdds__thumb { grid-area: thumb; align-self: start; width: 34px; height: 48px; }
+  .stonksOdds__ticker { grid-area: ticker; }
+  .stonksOdds__value { grid-area: value; }
+  .stonksOdds__odds { grid-area: odds; }
+  .stonksOdds__vs { grid-area: vs; }
+  .stonksOdds__row .stonksTierTag { grid-area: tier; }
+  .stonksOdds__mult { grid-area: mult; }
+}
+
+@media (max-width: 640px) {
+  .stonksLower__sec { padding-block: 56px 0; }
+  .stonksPullCard__art { height: 340px; }
+  .stonksCard,
+  .stonksSell__art .stonksCard { height: 270px; }
+  .stonksSell__art { height: 340px; }
+  .stonksPullCard__info { padding: 0 18px 20px; }
+  .stonksPullCard__nums { grid-template-columns: repeat(2, auto); gap: 12px 26px; }
+  .stonksShimmer { width: 130px; }
+  .stonksQuote__row b { font-size: 15px; }
+  .stonksOdds__tiers > div { padding: 20px 18px 18px; }
+  .stonksOdds__verify { padding: 16px 18px 20px; }
+  .stonksOdds__foot { padding-inline: 18px; }
+  .stonksFacts dd { font-size: 15px; }
+}
+
+.stonksLower[data-motion="reduced"] .stonksCard__float,
+.stonksLower[data-motion="reduced"] .stonksCard__sweep,
+.stonksLower[data-motion="reduced"] .stonksShimmer { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stonksCard__float,
+  .stonksCard__sweep,
+  .stonksShimmer { animation: none; }
+
+  .stonksCard,
+  .stonksCard__foil { transition: none; }
+}

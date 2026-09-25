@@ -1,0 +1,119 @@
+/* RTL override layer for Pack Royale (ar / he locales, 2026-07-31 RTL lane).
+ *
+ * ACTIVATION: royaleI18n.ts stamps <html dir="rtl"> for locales whose registry
+ * entry carries dir: "rtl" (Arabic, Hebrew). Everything else in this file keys
+ * off that attribute; under dir="ltr" this file is inert.
+ *
+ * WHAT LIVES WHERE
+ *   - Physical->logical property conversions live IN THE BASE FILES (the
+ *     2026-07-31 sweep converted margin/padding/border-left|right, physical
+ *     text-align, corner radii and side-pinned offsets to their logical
+ *     equivalents; those mirror by themselves and need nothing here).
+ *   - This file carries only the overrides CSS cannot express logically
+ *     (transform-origin has no start/end keyword) plus the deliberate
+ *     PHYSICAL pins.
+ *   - Lines in base files tagged `rtl:physical` are deliberate keeps:
+ *     pack/slab visual objects, JS-computed coordinates, safe-area anchors,
+ *     vault scene composition. Decorative sweep/shine keyframes also stay
+ *     physical on purpose.
+ *
+ * GAME DIRECTION DECISIONS (owner-lane rulings, documented here)
+ *   1. THE 3x3 BOARD GRID STAYS PHYSICAL. Tile 1 is top-left for every player
+ *      on Earth: round chat and cross-locale table talk ("all in on tile 7")
+ *      must point at the same square in Riyadh and in Reykjavik, and the
+ *      server's tile indices, replays and results walls are position-coded.
+ *      The grid container pins direction:ltr; tile INTERIOR text flows RTL
+ *      again via the child reset below.
+ *   2. THE VAULT WHEEL / DRAW TRACK STAYS PHYSICAL. Rotation transforms are
+ *      physical by nature (no mirroring under dir), and the winner-draw sweep
+ *      (.royaleCoreDrawTrack) reads as a machine, not as text: it keeps its
+ *      clockwise/light-to-dark build in every locale.
+ *   3. CHROME MIRRORS. Header, nav, chat panel, docs sidebar, settings/gear,
+ *      collection, results: these are flex/grid text surfaces and mirror
+ *      automatically under dir="rtl" plus the logical-property sweep. Close
+ *      buttons, toasts, popover pins and tooltip arrows were converted to
+ *      inset-inline-* so they follow.
+ *   4. METERS MIRROR. Progress fills (clock, backer bars, payout/share bars,
+ *      ladder rows) grow from the reading start: right-to-left in ar/he.
+ *      scaleX() fills anchor with transform-origin, which has no logical
+ *      keyword, hence the override block below.
+ *
+ * LTR ISLANDS: dollar amounts, tier names, wordmarks and numerals inside RTL
+ * sentences are bidi-isolated at the t() layer (royaleI18n.ts wraps every
+ * interpolated {token} in FSI/PDI for RTL locales). The .royaleLtrIsland
+ * utility below is the equivalent for JSX-composed money/figures runs.
+ */
+
+/* 1. Board grid: physical tile order, RTL text inside the tiles. */
+[dir="rtl"] .royaleBoardV2Grid {
+  direction: ltr;
+}
+[dir="rtl"] .royaleBoardV2Grid > * {
+  direction: rtl;
+}
+
+/* 4. Meter fills: grow from the inline start (visual right in RTL). Every
+ *    selector here is a scaleX() progress fill whose base rule anchors
+ *    transform-origin: left center. */
+[dir="rtl"] .royaleClock .royaleClockFill,
+[dir="rtl"] .royaleClockFill,
+[dir="rtl"] .royaleV2Route--simplified .royaleClockFill,
+[dir="rtl"] .lbBar,
+[dir="rtl"] .royaleResultsPayoutBar i,
+[dir="rtl"] [data-pick-nudge] .royaleStakePackChips,
+[dir="rtl"] .royalePackProgress i,
+[dir="rtl"] .royaleShareBar i,
+[dir="rtl"] .royaleTheatreCard .royaleShareBar i,
+[dir="rtl"] .royaleHistoryShareBar i,
+[dir="rtl"] .royaleLedgerSplit li i b,
+[dir="rtl"] .royaleV2Shell--boardv2 .royaleT2Track i,
+[dir="rtl"] .royaleCoreMapTrack i,
+[dir="rtl"] .royaleV2Shell--boardv2 .royaleBackerBar i,
+[dir="rtl"] .royaleResultsBar i,
+[dir="rtl"] .rwlRowBar {
+  transform-origin: right center;
+}
+
+/* Directional glyphs: "forward" arrows (link arrows, the evolve CTA's
+ * amount->tier arrow) and the chat send plane point in the READING direction,
+ * so they flip in RTL. ChevronDown/Up, the rake ▾ and sort carets are
+ * vertical and stay put. */
+[dir="rtl"] .royaleDirArrow,
+[dir="rtl"] .royaleEvolveArrow,
+[dir="rtl"] .royaleChatSendBtn svg {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+/* The welcome tour's Next arrow (lucide ArrowRight svg) points in reading
+ * direction. Its "N / M" step counter is dir="ltr" in the JSX. */
+[dir="rtl"] .royaleTourNext svg {
+  transform: scaleX(-1);
+}
+
+/* Scroll-position cues ("← 3/12 →", useScrollCueRef): the digits stay one
+ * LTR run; formatScrollCuePos swaps the physical arrows itself under RTL.
+ * Isolate so the leading/trailing arrows cannot reorder around the digits. */
+[dir="rtl"] .royaleT2RailCue,
+[dir="rtl"] .royaleCinemaMore {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Card carousel: a physical card-deck stage (cards fan with physical
+ * translateX transforms; ChevronLeft/Right buttons flank it). The deck and
+ * its buttons keep physical order; the caption text flows RTL again. */
+[dir="rtl"] .royaleCardCarousel {
+  direction: ltr;
+}
+[dir="rtl"] .royaleCardCarousel figcaption {
+  direction: rtl;
+}
+
+/* LTR island: a run that must keep visual LTR order inside RTL text
+ * ("$25 x10", wordmarks, tx signatures). Isolated so it never reorders the
+ * surrounding sentence. */
+.royaleLtrIsland {
+  direction: ltr;
+  unicode-bidi: isolate;
+}

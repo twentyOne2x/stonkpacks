@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["vite/client", "node"],
+    "noEmit": true,
+    "paths": {
+      "@attn-packs/pack-network": ["./src/vendor/pack-network/index.d.ts"],
+      "@attn-packs/pack-network/zod-runtime": ["./src/vendor/pack-network/zodRuntime.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "stockPacksBrandArtifact.ts", "stockPacksChunkNames.ts"]
+}

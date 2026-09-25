@@ -1,0 +1,603 @@
+// French (Français): reviewed and re-edited by a native-speaker editorial
+// pass (i18n epic, fr pages segment). Register is FORMAL throughout
+// (vouvoiement, never tutoiement). Same key set as en/pages.ts. See
+// royaleI18n.ts for the {token} interpolation convention and the
+// "no em dash" rule.
+//
+// Segment: pages. Covers the standalone-route surfaces owned by this
+// segment: RoyaleProfileRoute, RoyaleLadderRoute, RoyaleRoundResultsRoute,
+// RoyaleCollectionRoute, RoyaleWinningsStrip, RoyaleSessionHistory, plus
+// pages/RoyaleWithdrawPanel.tsx, RoyaleSellBackPanel.tsx (+ royaleSellBack.ts's
+// error copy), pages/RoyaleLadderCardViewer.tsx, RoyaleStatsPanel.tsx,
+// pages/RoyaleArenaResultsRoute.tsx and routes/RoyaleCardDetailRoute.tsx.
+//
+// Terminology: matches the core/board/cinema/arena/docs/chat/misc segments
+// already shipped for this locale ("manche" = round, "cagnotte" = the round's
+// pot, "parieurs" = backers, "tirage" = pull/draw, "revendre/revente" = sell
+// back, "garder/gardée" = keep/kept, matching the Garder button). The short
+// "R{n}" round abbreviation is rendered "M{n}" (Manche) to stay consistent
+// with "manche" everywhere else. pages.ladder.*'s "pool" is a CollectorCrypt
+// machine's card inventory (not the round's cash pot), so it renders as
+// "réserve" there instead of "cagnotte" to keep the two concepts apart.
+// "P&L" renders as "gain net", matching misc.nameStats.netPnl. The stat
+// micro-labels under pages.stats.* / pages.results.* mirror
+// misc.nameStats.*'s short forms ("% VICTOIRES", "MEILLEUR TIRAGE",
+// "AVOIRS", "AUCUN") so the two dashboards read as one. Pack-tier brand
+// names (Starter, Elite, Legendary, Grail, Mythic), USDC, X, Solana and
+// CollectorCrypt stay in English. Digits and currency stay exactly as
+// authored: no comma-for-dot swap inside a number, no localized symbol.
+export default {
+  // ===== pages.common.* : reused across 2+ files in this segment ===========
+  "pages.common.goToBoard": "ALLER AU PLATEAU",
+  "pages.common.backToBoard": "← Retour au plateau",
+  "pages.common.replay": "REJOUER",
+  "pages.common.replayTitle": "Revoir la manche {n}, de la première mise à la révélation",
+  "pages.common.you": "Vous",
+  "pages.common.cancel": "Annuler",
+  "pages.common.close": "×",
+  "pages.common.withdrawToWallet": "Retirer vers le portefeuille",
+  "pages.common.withdrawnToWallet": "Retirée vers le portefeuille",
+  "pages.common.chase": "CHASSE",
+  "pages.common.roundNumber": "Manche #{n}",
+  "pages.common.share": "Partager",
+  "pages.common.noCardsKeptTitle": "AUCUNE CARTE GARDÉE",
+  "pages.common.noCardsKeptBody": "Gardez un tirage gagnant au lieu de le revendre, et il atterrit ici sous forme de carte gradée.",
+
+  // ===== pages.sessionHistory.* (RoyaleSessionHistory.tsx) ==================
+  "pages.sessionHistory.log.ariaLabel": "Historique de session",
+  "pages.sessionHistory.log.title": "Historique de session",
+  "pages.sessionHistory.log.emptyHint": "Vos reçus apparaissent ici",
+  "pages.sessionHistory.log.hint": "Vos reçus et vos actions",
+
+  "pages.sessionHistory.ledger.ariaLabel": "Historique des manches et des tuiles",
+  "pages.sessionHistory.ledger.title": "Manches et tuiles",
+  "pages.sessionHistory.ledger.empty": "Les manches passées arrivent ici",
+  "pages.sessionHistory.ledger.summaryOne": "{n} manche réglée · cliquez sur une ligne pour le détail",
+  "pages.sessionHistory.ledger.summaryOther": "{n} manches réglées · cliquez sur une ligne pour le détail",
+  "pages.sessionHistory.ledger.emptyBody":
+    "Aucune manche terminée pour l'instant. La première révélation atterrira ici avec toutes les tuiles, la tuile gagnante et le partage.",
+  "pages.sessionHistory.ledger.showMore": "AFFICHER {n} DE PLUS · {hidden} PLUS ANCIENNES",
+
+  "pages.sessionHistory.row.noWinner": "-",
+  "pages.sessionHistory.row.wonSuffix": "{label} a gagné",
+  "pages.sessionHistory.row.pull": "{name} · {amount}",
+  "pages.sessionHistory.row.poolSuffix": "cagnotte {amount}",
+  "pages.sessionHistory.row.noPull": "sans tirage",
+  "pages.sessionHistory.row.youWon": "vous +{amount}",
+  "pages.sessionHistory.row.noWin": "aucun gain",
+
+  "pages.sessionHistory.detail.splitAria": "Répartition du versement",
+  "pages.sessionHistory.detail.splitOf": "Partage de {amount}",
+  "pages.sessionHistory.detail.yourStake": "Votre mise {amount}",
+  "pages.sessionHistory.detail.noStakeFromYou": "Vous n'avez pas misé",
+  "pages.sessionHistory.detail.cardKeptGrail": "Carte → {name} (Grail gardé)",
+  "pages.sessionHistory.detail.cardSoldBack": "Carte → {name} · revendue",
+  "pages.sessionHistory.detail.cardKept": "Carte → {name} · gardée",
+  "pages.sessionHistory.detail.grailSoldSplit": "Grail revendu → partage ci-dessus",
+
+  "pages.sessionHistory.tile.labelAmount": "{label} · {amount}",
+  "pages.sessionHistory.tile.grailPrefix": "GRAIL · ",
+  "pages.sessionHistory.tile.topPrefix": "TOP · ",
+  "pages.sessionHistory.tile.wonSuffix": " · GAGNÉ",
+  "pages.sessionHistory.tile.lostSuffix": " · a perdu au tirage",
+
+  // ===== pages.winningsStrip.* (RoyaleWinningsStrip.tsx) ====================
+  "pages.winningsStrip.ariaLabel": "Vos gains",
+  "pages.winningsStrip.title": "Vos gains",
+  "pages.winningsStrip.decisionClock": "{n} s pour décider",
+  "pages.winningsStrip.withdrawBalance": "Retirer le solde {amount}",
+  "pages.winningsStrip.howItWorks": "Comment fonctionne le jeu : chances, VRF, cartes →",
+  "pages.winningsStrip.decisionOpen": "Votre décision de carte est ouverte",
+  "pages.winningsStrip.decisionNoActionKeep": "sans action, elle vous reste (vendez quand vous voulez depuis vos cartes)",
+  "pages.winningsStrip.decisionNoActionSell": "sans action, vente automatique au prochain verrouillage",
+  "pages.winningsStrip.keep": "Garder ({amount})",
+  "pages.winningsStrip.sell": "Vendre {amount}",
+  "pages.winningsStrip.sellWithPct": "Vendre {amount} · {pct}%",
+  "pages.winningsStrip.yourCards": "Vos cartes",
+  "pages.winningsStrip.heldValue": "{amount} détenus",
+  "pages.winningsStrip.keptByDefault": "Gardée par défaut",
+  "pages.winningsStrip.withdrawAllOne": "Tout retirer : {n} carte · {amount}",
+  "pages.winningsStrip.withdrawAllOther": "Tout retirer : {n} cartes · {amount}",
+  "pages.winningsStrip.withdrawAllConfirm": "Sûr ? Retirer {n} cartes",
+  "pages.winningsStrip.selectToWithdraw": "Sélectionner pour retirer",
+  "pages.winningsStrip.sellAll": "Tout vendre {amount} · {pct}%",
+  "pages.winningsStrip.selectedForWithdrawal": "Sélectionnée pour le retrait",
+  "pages.winningsStrip.tapCardToSelect": "Touchez pour sélectionner",
+  "pages.winningsStrip.selectCardsToWithdraw": "Sélectionnez les cartes à retirer",
+  "pages.winningsStrip.selectedSummaryOne": "{n} carte sélectionnée · {amount}",
+  "pages.winningsStrip.selectedSummaryOther": "{n} cartes sélectionnées · {amount}",
+  "pages.winningsStrip.withdrawSelectedOne": "Retirer {n} carte · {amount}",
+  "pages.winningsStrip.withdrawSelectedOther": "Retirer {n} cartes · {amount}",
+  "pages.winningsStrip.withdrawBalanceDialogAria": "Retirer le solde",
+  "pages.winningsStrip.closeWithdrawAria": "Fermer le retrait",
+  "pages.winningsStrip.pastRounds": "Manches passées",
+  "pages.winningsStrip.shareLastWin": "Partager ce gain",
+  "pages.winningsStrip.roundId": "M{n}",
+  "pages.winningsStrip.tileTook": "La tuile {n} a raflé la table · {amount}",
+  "pages.winningsStrip.chaseAward": "Chasse +{amount}",
+  "pages.winningsStrip.noRound": "aucune manche",
+  "pages.winningsStrip.roundNetWin": "+{amount}",
+  "pages.winningsStrip.roundNetLost": "Perdu",
+  "pages.winningsStrip.kept": "Gardée",
+  "pages.winningsStrip.sold": "Vendue",
+  "pages.winningsStrip.activity": "Activité",
+
+  // ===== pages.sellConfirm.* (RoyaleSellCardConfirm.tsx) ====================
+  // First confirmation in front of the per-card sell back in "Your cards"
+  // (owner 2026-08-15). {value} is the card's face value, {amount}/{pct} the
+  // HONORED buyback quote the sale actually pays.
+  "pages.sellConfirm.dialogAria": "Confirmer la revente de la carte",
+  "pages.sellConfirm.eyebrow": "Revente",
+  "pages.sellConfirm.title": "Vendre {name} ?",
+  "pages.sellConfirm.payoutLabel": "Vous recevez",
+  "pages.sellConfirm.rateNote": "{pct}% de {value}",
+  "pages.sellConfirm.irreversible": "La carte quitte votre collection. Cette action est définitive.",
+  "pages.sellConfirm.keep": "Garder la carte",
+  "pages.sellConfirm.confirm": "Vendre pour {amount}",
+
+  // ===== pages.collection.* (RoyaleCollectionRoute.tsx) =====================
+  "pages.collection.title": "Votre collection",
+  "pages.collection.summaryCardOne": "carte",
+  "pages.collection.summaryCardOther": "cartes",
+  "pages.collection.totalValueSuffix": "valeur totale",
+  "pages.collection.tierGrail": "GRAIL",
+  "pages.collection.tierTop": "TOP",
+  "pages.collection.tierCommon": "COMMUNE",
+  "pages.collection.viaKept": "GARDÉE",
+  "pages.collection.viaWon": "GAGNÉE",
+  "pages.collection.cardAriaLabel": "{name}, {amount}. Entrée ouvre les détails de la carte.",
+
+  // ===== pages.ladder.* (RoyaleLadderRoute.tsx) ==============================
+  "pages.ladder.title": "Classements",
+  "pages.ladder.tabAriaLabel": "Vue des classements",
+  "pages.ladder.tabBetters": "Top parieurs",
+  "pages.ladder.tabPacks": "Chances packs",
+  "pages.ladder.tabCollectors": "Collectors",
+  "pages.ladder.sectionAriaLabel": "Classement des packs",
+  "pages.ladder.intro":
+    "Chaque dollar remplit le plus gros pack possible. Chaque palier est une vraie machine CollectorCrypt : jetez un œil aux meilleures cartes, puis ouvrez toute la réserve.",
+  "pages.ladder.sourceLive": "Réserves CollectorCrypt en direct ({count}/{total} machines) · actualisées {age}{backlogNote}",
+  "pages.ladder.sourceBundled": "Réserves de référence : cartes CollectorCrypt groupées, vraies valeurs assurées (pas des annonces en direct)",
+  "pages.ladder.sourceFixtures": "Exemples de référence : jeux de données groupés",
+  "pages.ladder.footNote": "Les chances, les fourchettes de valeur et le rachat reprennent les spécifications publiées des machines gacha de CollectorCrypt (instantané du {date}).",
+  "pages.ladder.footNoteLive":
+    "Les cartes sont l'inventaire du marché en direct, dans les fourchettes de chaque machine, actualisé toutes les 5 minutes entre les manches.",
+  "pages.ladder.footNoteBundled": "Les cartes affichées sont un ensemble groupé de vraies cartes gradées CollectorCrypt, pas des annonces en direct.",
+  "pages.ladder.stepUp": "Cran au-dessus",
+  "pages.ladder.stepUpFromPrefix": "depuis {name}",
+  "pages.ladder.stepUpEntryPrefix": "palier d'entrée, la monnaie sous",
+  "pages.ladder.stepUpEntrySuffix": "reste en monnaie",
+  "pages.ladder.valueRange": "Fourchette",
+  "pages.ladder.ceiling": "plafond",
+  "pages.ladder.floor": "plancher",
+  "pages.ladder.machineOdds": "Chances machine",
+  "pages.ladder.buybackPrefix": "rachat",
+  "pages.ladder.grailOddsPrefix": "Grail",
+  "pages.ladder.poolLoading": "Chargement…",
+  "pages.ladder.viewMore": "Voir {n} de plus",
+  "pages.ladder.cardPool": "{n} cartes en réserve",
+  "pages.ladder.priciestFirst": "les plus chères d'abord",
+  "pages.ladder.machineCardsOnly": "{n} cartes",
+  "pages.ladder.machineNameCards": "{shortName} · {n} cartes",
+  "pages.ladder.collector.ariaLabel": "Collector leaderboard",
+  "pages.ladder.collector.title": "Collector leaderboard",
+  "pages.ladder.collector.description": "Collection value leads. Hold more cards, chase Grails, and show your best pull.",
+  "pages.ladder.collector.playerCount.one": "{n} collector",
+  "pages.ladder.collector.playerCount.other": "{n} collectors",
+  "pages.ladder.collector.cardCount.one": "{n} card held",
+  "pages.ladder.collector.cardCount.other": "{n} cards held",
+  "pages.ladder.collector.tableAriaLabel": "Collector standings by collection value",
+  "pages.ladder.collector.collectionValue": "Collection value",
+  "pages.ladder.collector.cardsHeld": "Cards held",
+  "pages.ladder.collector.cardsShort": "cards",
+  "pages.ladder.collector.grailsPulled": "Grails pulled",
+  "pages.ladder.collector.grailsShort": "Grails",
+  "pages.ladder.collector.bestPull": "Best pull",
+  "pages.ladder.collector.noPull": "None yet",
+  "pages.ladder.collector.youRankTag": "YOU · #{n}",
+  "pages.ladder.collector.viewCollection": "View collection",
+  "pages.ladder.collector.empty": "No cards are held yet.",
+  "pages.ladder.collector.emptyCta": "Open a pack to enter the standings",
+  "pages.ladder.collector.footnote": "Collection value is the sum of cards still held on this device. Rankings refresh as rounds settle.",
+  "pages.ladder.collector.rowAria": "Rank {rank}, {name}, collection value {value}, {cards} cards held, {grails} Grails pulled",
+
+  // ===== pages.ladder.leaderboard.* (RoyaleLeaderboard.tsx) =================
+  "pages.ladder.leaderboard.ariaLabel": "Classement des meilleurs parieurs",
+  "pages.ladder.leaderboard.title": "Top parieurs",
+  "pages.ladder.leaderboard.emptyNoSettled": "Aucune manche réglée",
+  "pages.ladder.leaderboard.emptyNoBetsToday": "Aucun pari réglé aujourd'hui pour l'instant.",
+  "pages.ladder.leaderboard.emptyNoBetsAll": "Aucun pari réglé pour l'instant.",
+  "pages.ladder.leaderboard.emptyCta": "Misez sur le plateau pour y figurer",
+  "pages.ladder.leaderboard.timeframeAriaLabel": "Période",
+  "pages.ladder.leaderboard.today": "Aujourd'hui",
+  "pages.ladder.leaderboard.allTime": "Tous les temps",
+
+  // ===== pages.ladderViewer.* (pages/RoyaleLadderCardViewer.tsx, the modal a
+  // ladder row's "Voir {n} de plus" button opens over the full machine pool).
+  // Counts arrive pre-formatted, digits stay as authored. =====================
+  "pages.ladderViewer.eyebrow": "Réserve du pack",
+  "pages.ladderViewer.showing": "{n} sur {total} affichées",
+  "pages.ladderViewer.closeAria": "Fermer la réserve du pack",
+  "pages.ladderViewer.remainingFoot": "{n} encore à voir · plancher {amount}",
+  "pages.ladderViewer.wholePool": "Voilà toute la réserve de {n} cartes.",
+
+  // ===== pages.results.* (RoyaleRoundResultsRoute.tsx) ======================
+  "pages.results.title": "Résultats des manches",
+  "pages.results.count.one": "{n} MANCHE",
+  "pages.results.count.other": "{n} MANCHES",
+  "pages.results.emptyTitle": "AUCUNE MANCHE RÉGLÉE",
+  "pages.results.emptyBody": "Jouez une manche sur le plateau et chaque carte qu'elle ouvre atterrit ici, manche par manche.",
+  "pages.results.tileWins": "{winner} remporte {amount}",
+  "pages.results.tileFallback": "Tuile",
+  "pages.results.youWon": "vous gagnez {amount}",
+  "pages.results.noWinForYou": "aucun gain pour vous",
+  "pages.results.replayLink": "Revoir",
+  "pages.results.payoutSplitLabel": "Répartition du versement",
+  "pages.results.payoutSplit": "Répartition du versement · cagnotte {amount}",
+  "pages.results.yourPullPrefix": "Votre tirage ·",
+  "pages.results.noPull": "aucun",
+  "pages.results.youKeptIt": "vous l'avez gardée",
+  "pages.results.youSoldItForCash": "vous l'avez vendue en cash",
+  "pages.results.chaseAward": "CHASSE +{amount}",
+  "pages.results.potLedgerFull": "{amount} de cagnotte versés intégralement",
+  "pages.results.pool": "cagnotte",
+  "pages.results.potLedgerWithheld": "retenus",
+  "pages.results.potLedgerPaidIn": "versés",
+  "pages.results.potLedgerCashToBackers": "cash aux parieurs",
+  "pages.results.theChase": "La Chasse",
+  "pages.results.protocol": "protocole",
+  "pages.results.jackpot": "jackpot",
+  "pages.results.cardTrades": "ventes de cartes",
+  "pages.results.statsAriaLabel": "Totaux de la session",
+  "pages.results.roundsPlayed": "MANCHES JOUÉES",
+  "pages.results.winRate": "% VICTOIRES",
+  "pages.results.cashWon": "CASH GAGNÉ",
+  "pages.results.biggestPackPull": "MEILLEUR TIRAGE",
+  "pages.results.noneYet": "AUCUN",
+
+  // --- ROUNDS-LIST UI WAVE (owner burst 2026-07-29): the winning tile's draw
+  // odds, the per-round collapse toggle, and the "other participants" disclosure.
+  "pages.results.tileOdds": "{pct} de chances",
+  "pages.results.oddsUnavailable": "chances indisponibles",
+  "pages.results.collapseRoundAria": "Réduire la manche {n}",
+  "pages.results.expandRoundAria": "Développer la manche {n}",
+  "pages.results.playersTitle": "AUTRES JOUEURS",
+  "pages.results.playersCount.one": "{n} joueur",
+  "pages.results.playersCount.other": "{n} joueurs",
+  "pages.results.playersShow": "Afficher",
+  "pages.results.playersHide": "Masquer",
+  "pages.results.playerBid": "MISE",
+  "pages.results.playerResult": "RÉSULTAT",
+  "pages.results.playerCash": "{amount} en cash",
+  "pages.results.playerNoCards": "aucune carte",
+
+  // ===== pages.sellBack.* (RoyaleSellBackPanel.tsx header banner) ===========
+  "pages.sellBack.ariaLabel": "Revendre vos cartes",
+  "pages.sellBack.title": "Revente",
+  "pages.sellBack.hint": "Prix figé au moment de votre gain, jamais réévalué.",
+  "pages.sellBack.quietState": "La revente s'ouvre avec les manches en direct.",
+
+  // --- royaleSellBack.ts: the quote countdown (formatSellBackCountdown). The
+  // {d}/{h}/{m} tokens are already-formatted integers, a locale reorders the
+  // sentence around them, it never re-formats the digits.
+  "pages.sellBack.countdownExpired": "Expirée",
+  "pages.sellBack.countdownDaysHours": "reste {d} j {h} h",
+  "pages.sellBack.countdownHoursMinutes": "reste {h} h {m} min",
+  "pages.sellBack.countdownMinutes": "reste {m} min",
+  "pages.sellBack.countdownSubMinute": "reste <1 min",
+
+  // --- royaleSellBack.ts: custody badges (sellBackCustodyBadge). Informational
+  // only, sell-back stays allowed in both states.
+  "pages.sellBack.badgeDeliveryPending": "Livraison en cours",
+  "pages.sellBack.badgeNeedsWallet": "Portefeuille requis",
+
+  // --- royaleSellBack.ts: player-facing copy for every domain error code
+  // (sellBackErrorCopy). Each pair is a title + the detail rendered under it.
+  "pages.sellBack.error.quoteExpired.title": "Cette offre a expiré",
+  "pages.sellBack.error.quoteExpired.detail":
+    "La fenêtre de revente est passée. La carte reste à vous. C'est le marché libre qui sert de sortie maintenant.",
+  "pages.sellBack.error.alreadyExercised.title": "Déjà revendue",
+  "pages.sellBack.error.alreadyExercised.detail": "Cette carte a déjà été revendue. Voici le reçu de cette vente.",
+  "pages.sellBack.error.quoteVoid.title": "Offre retirée",
+  "pages.sellBack.error.quoteVoid.detail":
+    "Cette offre de revente a été retirée par l'exploitation. Contactez le support si vous attendiez un versement.",
+  "pages.sellBack.error.notQuoteOwner.title": "Pas votre carte",
+  "pages.sellBack.error.notQuoteOwner.detail": "Cette offre de revente appartient à un autre compte.",
+  "pages.sellBack.error.cardNotDelivered.title": "Carte encore en transit",
+  "pages.sellBack.error.cardNotDelivered.detail":
+    "La carte n'est pas encore arrivée dans votre portefeuille. Réessayez dans un instant.",
+  "pages.sellBack.error.cardNotHeld.title": "Carte absente du portefeuille",
+  "pages.sellBack.error.cardNotHeld.detail":
+    "Votre portefeuille ne détient plus cette carte précise. Seule la carte d'origine active cette offre.",
+  "pages.sellBack.error.returnTxRequired.title": "Signature requise",
+  "pages.sellBack.error.returnTxRequired.detail":
+    "Cette revente demande votre signature pour renvoyer la carte. Signez, puis réessayez.",
+  "pages.sellBack.error.returnNotConfirmed.title": "Renvoi non confirmé",
+  "pages.sellBack.error.returnNotConfirmed.detail":
+    "Le renvoi de la carte n'a pas été confirmé sur la chaîne. L'offre reste active. Relancez quand vous voulez.",
+  "pages.sellBack.error.rateLimited.title": "Trop de tentatives",
+  "pages.sellBack.error.rateLimited.detail": "Levez le pied un instant, puis réessayez.",
+  "pages.sellBack.error.accountRequired.title": "Connexion requise",
+  "pages.sellBack.error.accountRequired.detail": "Connectez votre compte pour revendre une carte.",
+  "pages.sellBack.error.quoteNotFound.title": "Offre introuvable",
+  "pages.sellBack.error.quoteNotFound.detail": "Cette offre de revente n'existe plus.",
+  "pages.sellBack.error.quoteIdRequired.title": "Requête incomplète",
+  "pages.sellBack.error.quoteIdRequired.detail": "Il manquait des informations obligatoires à la demande de revente.",
+  "pages.sellBack.error.unknown.title": "La revente a échoué",
+  "pages.sellBack.error.unknown.detail": "Le problème vient de chez nous. Réessayez dans un instant.",
+
+  // --- RoyaleSellBackPanel.tsx: load/empty states.
+  "pages.sellBack.syncNote": "La synchro en direct se relance toute seule. Les offres figées gardent leur prix.",
+  "pages.sellBack.offlineTitle": "Vous êtes hors ligne",
+  "pages.sellBack.offlineBody": "Reconnectez-vous, vos offres figées vous attendent ici.",
+  "pages.sellBack.loadFailedTitle": "Offres non chargées",
+  "pages.sellBack.loadFailedBody": "Les offres figées gardent leur prix. Rappelez-les dans un instant.",
+  "pages.sellBack.tryAgain": "Réessayer",
+  "pages.sellBack.emptyTitle": "Aucune carte à revendre",
+  "pages.sellBack.emptyBody": "Gagnez un pack et son offre de rachat arrive ici dès que la manche est réglée.",
+  "pages.sellBack.pastSellBacks": "Reventes passées",
+
+  // --- RoyaleSellBackPanel.tsx: one ticket, from offer to receipt.
+  "pages.sellBack.localOffer": "Offre locale",
+  "pages.sellBack.noExpiry": "Sans expiration",
+  "pages.sellBack.preparing": "Préparation…",
+  "pages.sellBack.sellBackAmount": "Revendre {amount}",
+  "pages.sellBack.waitingSignature": "En attente de votre signature…",
+  "pages.sellBack.signatureUnwired": "Revendre cette carte demande une signature de portefeuille. Votre offre figée reste active.",
+  "pages.sellBack.confirmInWallet": "Confirmez dans votre portefeuille…",
+  "pages.sellBack.sellingBack": "Revente en cours…",
+  "pages.sellBack.receiptAlreadySold": "Déjà revendue",
+  "pages.sellBack.receiptSoldBack": "Revendue",
+  // {rail} is either "USDC" (a brand term, English everywhere) or
+  // pages.sellBack.railGameBalance below.
+  "pages.sellBack.receiptPaid": "{amount} versés · {rail}",
+  "pages.sellBack.railGameBalance": "solde de jeu",
+
+  // --- RoyaleSellBackPanel.tsx: the "Reventes passées" history rows.
+  "pages.sellBack.historySoldBack": "Revendue · {amount}",
+  "pages.sellBack.historyExpired": "Offre expirée",
+  "pages.sellBack.historyWithdrawn": "Offre retirée",
+
+  // ===== pages.profile.* (RoyaleProfileRoute.tsx) ============================
+  "pages.profile.relTime.never": "jamais",
+  "pages.profile.relTime.justNow": "à l'instant",
+  "pages.profile.relTime.minutesAgo": "il y a {n} min",
+  "pages.profile.relTime.hoursAgo": "il y a {n} h",
+  "pages.profile.relTime.daysAgo": "il y a {n} j",
+  "pages.profile.relTime.monthsAgo": "il y a {n} mois",
+  "pages.profile.noDate": "–",
+
+  "pages.profile.count.settledRoundOne": "{n} manche réglée",
+  "pages.profile.count.settledRoundOther": "{n} manches réglées",
+  "pages.profile.count.roundOne": "{n} manche",
+  "pages.profile.count.roundOther": "{n} manches",
+  "pages.profile.count.settledOutcomeOne": "{n} résultat réglé",
+  "pages.profile.count.settledOutcomeOther": "{n} résultats réglés",
+  "pages.profile.xOfRoundsOne": "{x} sur {n} manche",
+  "pages.profile.xOfRoundsOther": "{x} sur {n} manches",
+
+  "pages.profile.follow": "Suivre",
+  "pages.profile.following": "Abonné",
+  "pages.profile.linkCopied": "Lien copié",
+  "pages.profile.headlineStatsAria": "Statistiques principales",
+
+  "pages.profile.chartWindow7d": "7J",
+  "pages.profile.chartWindow30d": "30J",
+  "pages.profile.chartWindowAll": "Tout",
+  "pages.profile.chartValueAria": "Valeur de la collection de {from} à {to} sur cette période",
+  // Right-hand end of the value chart's x-axis caption (the left end is a date).
+  "pages.profile.chartFootNow": "auj.",
+  "pages.profile.viewRoundResultsAria": "Voir les résultats de la manche #{n}",
+
+  "pages.profile.collectionViewAll": "Toutes",
+  "pages.profile.collectionViewVault": "Au coffre",
+  "pages.profile.collectionViewOffers": "Offres",
+  "pages.profile.collectionViewHistory": "Historique",
+  "pages.profile.collectionStateAria": "État de la collection",
+  "pages.profile.openCollection": "Ouvrir la collection ↗",
+  "pages.profile.collectionEmptyHistoryTitle": "AUCUNE REVENTE",
+  "pages.profile.collectionEmptyHistoryBody": "Revendez une carte gardée et le reçu atterrit ici.",
+  "pages.profile.inVault": "Au coffre · Manche #{n}",
+  "pages.profile.sellBackOffer": "Offre de rachat · {amount}",
+  "pages.profile.soldBack": "Revendue",
+  "pages.profile.soldAtSettlement": "Vendue au règlement",
+  "pages.profile.soldFooter": "{via} · {amount} · {rel}",
+  "pages.profile.sellBackNote": "Les actions de revente et les offres en direct se passent sur la page collection.",
+
+  "pages.profile.pnlByRound": "GAIN NET PAR MANCHE",
+  "pages.profile.pnlSubtitle": "{n} dernières manches misées · gains en haut, pertes en bas · {wins}G {losses}P",
+  "pages.profile.pnlAria": "Résultat net par manche, {n} dernières manches",
+  "pages.profile.pnlColAria": "Manche {n} : {signed}",
+  "pages.profile.pnlTooltip": "M{n} · {signed}",
+
+  "pages.profile.recentForm": "FORME RÉCENTE",
+  "pages.profile.recentFormSubtitle": "{n} dernières manches misées, les plus anciennes d'abord",
+  "pages.profile.formColAria": "Manche {n} : {result} {amount}",
+  "pages.profile.won": "gagné",
+  "pages.profile.lost": "perdu",
+  "pages.profile.formW": "G",
+  "pages.profile.formL": "P",
+
+  "pages.profile.leaderboardEyebrow": "CLASSEMENT · {mode}",
+  "pages.profile.modeMostProfitable": "PLUS RENTABLES",
+  "pages.profile.modeHighestVolume": "PLUS GROS VOLUME",
+  "pages.profile.topPlayers": "top {n} joueurs",
+  "pages.profile.metricProfit": "PROFIT",
+  "pages.profile.metricVolume": "VOLUME",
+  "pages.profile.metricNetPnl": "GAIN NET",
+  "pages.profile.filtersAria": "Filtres du classement",
+  "pages.profile.metricFilterAria": "Mesure",
+  "pages.profile.windowFilterAria": "Période",
+  "pages.profile.window1d": "1J",
+  "pages.profile.window7d": "7J",
+  "pages.profile.window30d": "30J",
+  "pages.profile.windowAll": "TOUT",
+  "pages.profile.thRank": "#",
+  "pages.profile.thPlayer": "JOUEUR",
+  "pages.profile.thRounds": "MANCHES",
+  "pages.profile.you": "VOUS",
+  "pages.profile.leaderboardEmpty": "AUCUN JOUEUR SUR CETTE PÉRIODE POUR L'INSTANT. Le tableau se remplit à mesure que les mises et les versements sont enregistrés.",
+
+  "pages.profile.notFoundTitle": "AUCUNE MANCHE INDEXÉE",
+  "pages.profile.notFoundBody": "{wallet} n'a pas encore réglé de manche indexée par le serveur.",
+  "pages.profile.offlineTitle": "PROFIL INACCESSIBLE",
+  "pages.profile.offlineBody": "La recherche de joueur demande une connexion active. Réessayez pour récupérer cette fiche.",
+  "pages.profile.retry": "RÉESSAYER",
+
+  "pages.profile.collectorSince": "Collectionneur depuis {month}",
+  "pages.profile.lastActive": "dernière activité {rel}",
+  "pages.profile.rankAllTime": "Rang #{n} · tous les temps",
+  "pages.profile.netPnl": "Gain net",
+  "pages.profile.lifetime": "au total",
+  "pages.profile.bidWinRate": "Mises gagnantes",
+  "pages.profile.cardsWon": "Cartes gagnées",
+  "pages.profile.grailsOne": "{n} Grail",
+  "pages.profile.grailsOther": "{n} Grails",
+  "pages.profile.totalStaked": "Total misé",
+  "pages.profile.betsCount": "{n} mises",
+  "pages.profile.biggestRound": "Plus grosse manche",
+  "pages.profile.singleRoundSwing": "variation en une manche",
+  "pages.profile.playerStatsAria": "Statistiques du joueur",
+  "pages.profile.winsLosses": "GAGNÉES / PERDUES",
+  "pages.profile.roundsPlayed": "MANCHES JOUÉES",
+  "pages.profile.betsPlaced": "MISES PLACÉES",
+  "pages.profile.voidedRounds": "MANCHES ANNULÉES",
+
+  "pages.profile.tablePlayer": "Joueur de table",
+  "pages.profile.playerFallback": "Joueur",
+  "pages.profile.localEmptyTitle": "AUCUNE MANCHE CETTE SESSION",
+  "pages.profile.localEmptyBody": "{name} n'a pas encore misé sur une tuile cette session.",
+  "pages.profile.sessionNet": "Net de session",
+  "pages.profile.cashSplitsOnly": "cash uniquement",
+  "pages.profile.thisSession": "cette session",
+  "pages.profile.packsOpened": "Packs ouverts",
+  "pages.profile.onBackedTiles": "sur les tuiles misées",
+  "pages.profile.biggestPull": "Meilleur tirage",
+  "pages.profile.noneYet": "Aucun",
+  "pages.profile.recentActivity": "Activité récente",
+  "pages.profile.noSettledOutcomesPlayer": "Aucun résultat réglé pour ce joueur cette session.",
+
+  "pages.profile.pageTitle": "Profil",
+  "pages.profile.followingCount": "{n} abonnements",
+  "pages.profile.collectionValue": "Valeur de la collection",
+  "pages.profile.updatedAgo": "mis à jour {rel}",
+  "pages.profile.noCardsYet": "aucune carte",
+  "pages.profile.change30d": "Variation 30 j",
+  "pages.profile.allNewIn30": "tout acquis en 30 jours",
+  "pages.profile.noChange": "stable",
+  "pages.profile.cardsOwned": "Cartes détenues",
+  "pages.profile.realizedProceeds": "Produits réalisés",
+  "pages.profile.sellBackOne": "{n} revente",
+  "pages.profile.sellBackOther": "{n} reventes",
+  "pages.profile.tabHighlights": "Temps forts",
+  "pages.profile.tabCollection": "Collection",
+  "pages.profile.tabActivity": "Activité",
+  "pages.profile.tabStats": "Stats",
+  "pages.profile.tabsAria": "Sections du profil",
+  "pages.profile.emptyHighlightsTitle": "AUCUNE MANCHE ENREGISTRÉE",
+  "pages.profile.emptyHighlightsBody":
+    "Misez sur une tuile du plateau et votre passeport se remplit : courbe de valeur, activité, collection et rang.",
+  "pages.profile.collectionPerformance": "Performance de la collection",
+  "pages.profile.chartWindowAria": "Période du graphique",
+  "pages.profile.chartEmpty": "Aucune valeur de collection pour l'instant. Gardez un tirage gagnant et la courbe démarre ici.",
+  "pages.profile.thisWindow": "cette période",
+  "pages.profile.chartNoChanges": "Aucun changement dans la collection sur cette période.",
+  "pages.profile.viewAll": "Voir les {n}",
+  "pages.profile.collectionHighlights": "Temps forts de la collection",
+  "pages.profile.seeAll": "Voir les {n}",
+  "pages.profile.noCardsInVault": "Aucune carte au coffre pour l'instant. Gardez un tirage et il apparaît ici sous forme de carte gradée.",
+  "pages.profile.activityAria": "Activité",
+  "pages.profile.roundHistoryAria": "Historique des manches",
+  "pages.profile.onThisDevice": "{count} sur cet appareil",
+  "pages.profile.noActivityYet": "Aucune activité pour l'instant. Les manches que vous misez et les cartes que vous gardez ou vendez atterrissent ici.",
+  "pages.profile.performanceAria": "Performance",
+  "pages.profile.walletAria": "Portefeuille",
+  "pages.profile.walletEyebrow": "PORTEFEUILLE",
+  "pages.profile.emptyStatsBody": "Misez sur une tuile du plateau et votre gain net, votre taux de victoire et votre historique de manches se construisent ici.",
+  "pages.profile.findPlayerAria": "Trouver un joueur",
+  "pages.profile.lookUpWallet": "CHERCHER UN PORTEFEUILLE",
+  "pages.profile.walletPlaceholder": "Collez une adresse de portefeuille ou un id invité",
+  "pages.profile.view": "VOIR",
+  "pages.profile.myProfile": "MON PROFIL",
+
+  // ===== pages.profile.withdraw.* (pages/RoyaleWithdrawPanel.tsx) ===========
+  // Digits stay exactly as authored in en: no comma-for-dot swap.
+  "pages.profile.withdraw.ariaLabel": "Retirer vos gains",
+  "pages.profile.withdraw.title": "Retirer",
+  "pages.profile.withdraw.subtitle": "Encaissez tout ou partie de votre solde vers un portefeuille Solana.",
+  "pages.profile.withdraw.available": "Disponible",
+  "pages.profile.withdraw.amountLabel": "Montant (USDC)",
+  "pages.profile.withdraw.presetsAriaLabel": "Montants de retrait rapides",
+  "pages.profile.withdraw.destinationLabel": "Destination",
+  "pages.profile.withdraw.destinationPlaceholder": "Adresse Solana",
+  "pages.profile.withdraw.submit": "Retirer",
+  "pages.profile.withdraw.submitBusy": "Demande...",
+  "pages.profile.withdraw.note":
+    "Vous approuvez chaque retrait par une signature de portefeuille, et votre USDC part vers l'adresse Solana que vous indiquez.",
+  "pages.profile.withdraw.errorInvalidAmount": "SAISISSEZ UN MONTANT VALIDE (0.01 À 10,000).",
+  "pages.profile.withdraw.errorInvalidDestination": "SAISISSEZ UNE ADRESSE SOLANA DE DESTINATION VALIDE.",
+  "pages.profile.withdraw.requesting": "DEMANDE DE RETRAIT DE {amount} EN COURS...",
+  "pages.profile.withdraw.sent": "RETRAIT ENVOYÉ - {amount} VERS {destShort}...",
+  "pages.profile.withdraw.signatureRequired":
+    "SIGNATURE DE PORTEFEUILLE REQUISE - SIGNEZ LE NONCE DE RETRAIT AVEC VOTRE PORTEFEUILLE (UN JETON PRIVY SEUL EST REFUSÉ).",
+  "pages.profile.withdraw.refused": "RETRAIT REFUSÉ ({error}).",
+
+  // ===== pages.stats.* (RoyaleStatsPanel.tsx, the collapsible PLAYER STATS
+  // dashboard mounted by the profile route's Stats tab). CAPS micro-labels are
+  // a deliberate house style and stay capitalised here too. Short forms match
+  // misc.nameStats.* so the two dashboards read as one. ======================
+  "pages.stats.title": "STATS DU JOUEUR",
+  "pages.stats.summaryMeta": "{rounds} MANCHES · {packs} PACKS",
+  "pages.stats.noRoundsYet": "AUCUNE MANCHE",
+  "pages.stats.emptyBody": "AUCUNE MANCHE. Misez sur une tuile pour commencer à suivre votre gain net, votre taux de victoire et vos tirages.",
+  "pages.stats.netPnl": "GAIN NET",
+  "pages.stats.roi": "ROI",
+  "pages.stats.winRate": "% VICTOIRES",
+  "pages.stats.totalStaked": "TOTAL MISÉ",
+  "pages.stats.totalWon": "TOTAL GAGNÉ",
+  "pages.stats.holdings": "AVOIRS",
+  "pages.stats.cardsHeld.one": "{n} carte",
+  "pages.stats.cardsHeld.other": "{n} cartes",
+  "pages.stats.packsOpened": "PACKS OUVERTS",
+  "pages.stats.chaseHits": "CHASSES TOMBÉES",
+  "pages.stats.bestRound": "MEILLEURE MANCHE",
+  "pages.stats.worstRound": "PIRE MANCHE",
+  "pages.stats.biggestPackPull": "MEILLEUR TIRAGE",
+  "pages.stats.noneYet": "AUCUN",
+  "pages.stats.perTierHits": "TIRAGES PAR PALIER",
+  "pages.stats.tierTop": "TOP",
+  "pages.stats.tierCommon": "COMMUNE",
+
+  // ===== pages.arenaResults.* (pages/RoyaleArenaResultsRoute.tsx, the CARD
+  // ARENA's "see last round results" record page). Wording mirrors the arena
+  // segment's own cinema copy. ===============================================
+  "pages.arenaResults.title": "Résultats de l'arène",
+  "pages.arenaResults.backToArena": "← Retour à l'arène",
+  "pages.arenaResults.emptyBody": "Aucune manche d'arène n'a encore été réglée.",
+  "pages.arenaResults.enterArena": "Entrer dans l'arène →",
+  "pages.arenaResults.matchNumber": "MATCH #{n}",
+  // The headline reads "<player name> rafle la cagnotte"; the self view uses
+  // the second-person verb. The name itself is rendered as a separate node.
+  "pages.arenaResults.youTakeThePot": "raflez la cagnotte",
+  "pages.arenaResults.takesThePot": "rafle la cagnotte",
+  "pages.arenaResults.potCards.one": "cagnotte · {n} carte",
+  "pages.arenaResults.potCards.other": "cagnotte · {n} cartes",
+  "pages.arenaResults.winner": "GAGNANT",
+  "pages.arenaResults.theChase": "LA CHASSE",
+  "pages.arenaResults.protocol": "PROTOCOLE",
+  "pages.arenaResults.cardsValue.one": "{n} carte · {amount}",
+  "pages.arenaResults.cardsValue.other": "{n} cartes · {amount}",
+  "pages.arenaResults.cardsWonAria": "Cartes gagnées",
+  "pages.arenaResults.toTheWinner": "AU GAGNANT",
+  "pages.arenaResults.smallPot": "Cagnotte de moins de {n} cartes : le gagnant a tout raflé. Les étagères de la Chasse et du protocole n'ont rien pris.",
+
+  // ===== pages.cardDetailRoute.* (routes/RoyaleCardDetailRoute.tsx) =========
+  "pages.cardDetailRoute.title": "Dossier carte",
+  "pages.cardDetailRoute.notFoundTitle": "CARTE INTROUVABLE",
+  "pages.cardDetailRoute.notFoundBody":
+    "Ce lien pointe vers une carte que ce navigateur n'a pas encore vue. Les cartes se résolvent depuis vos propres manches et l'instantané actuel de la réserve CollectorCrypt.",
+  "pages.collection.viewRound": "Voir la manche ↗",
+  "pages.sellBack.showAllOffers": "Afficher les {n} offres",
+  "pages.sellBack.showFewerOffers": "Afficher moins d'offres",
+  "pages.common.shareCard": "Partager la carte",
+} as Record<string, string>;
