@@ -82,7 +82,65 @@ repository is not connected to any Vercel project yet.
 
 ## Build
 
-BUILD_PROOF_PLACEHOLDER
+The repository builds on its own: no workspace links, no access to the
+source monorepo, no private registry and no secrets. Every dependency comes
+from the public npm registry at the versions pinned in `pnpm-lock.yaml`.
+
+```sh
+git clone https://github.com/twentyOne2x/stonkpacks.git
+cd stonkpacks
+pnpm install --frozen-lockfile
+pnpm typecheck
+pnpm test
+pnpm build      # output in dist/
+```
+
+Clean-clone proof, 2026-09-25, on a Linux build box (WSL Ubuntu, Node 20),
+in a new temp directory with an empty pnpm store and no `.env` file, cloning
+commit `5c6c6343b5a6ca8a11c54a9d0260d610e96bcf25` (output verbatim, trimmed to
+the summary lines):
+
+```text
+$ node --version
+v20.20.2
+$ pnpm --version
+9.15.4
+$ pnpm install --frozen-lockfile --store-dir <fresh temp store>
++ vite 6.4.3
+
+The following dependencies have build scripts that were ignored: @reown/appkit, bigint-buffer
+To allow the execution of build scripts for these packages, add their names to "pnpm.onlyBuiltDependencies" in your "package.json", then run "pnpm rebuild"
+
+Done in 12s
+$ pnpm typecheck
+> stonkpacks@0.1.0 typecheck /tmp/sp-clean-5R2F/stonkpacks
+> tsc -p tsconfig.json --noEmit
+
+exit 0
+$ pnpm test
+# tests 126
+# pass 126
+# fail 0
+$ pnpm build
+vite v6.4.3 building for production...
+✓ 7608 modules transformed.
+dist/index.html                                     2.87 kB │ gzip:     0.90 kB
+✓ built in 20.99s
+$ ls dist
+apple-touch-icon.png
+assets
+favicon-16x16.png
+favicon-32x32.png
+favicon-48x48.png
+favicon.ico
+favicon.svg
+index.html
+16M
+```
+
+The two skipped install scripts are optional native speedups; the build does
+not need them. The same steps run in GitHub Actions on every push and pull
+request (`.github/workflows/ci.yml`, ubuntu-latest, no secrets).
 
 ## Repository layout
 
